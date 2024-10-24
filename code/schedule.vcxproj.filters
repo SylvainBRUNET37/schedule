@@ -34,10 +34,25 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ressources\cours\CM1 Intro.pdf" />
-    <None Include="ressources\cours\CM2 Méthode exacte.pdf" />
-    <None Include="ressources\cours\CM3 Méthode approchee.pdf" />
-    <None Include="ressources\cours\CM4 Compléments.pdf" />
-    <None Include="ressources\cours\Deroulement_et_Evaluation.pdf" />
+    <Text Include="data\data.txt" />
+    <Text Include="data\Inst1.txt" />
+    <Text Include="data\Inst2.txt" />
+    <Text Include="data\Inst3.txt" />
+    <Text Include="data\Inst4.txt" />
+    <Text Include="data\Inst5.txt" />
+    <Text Include="data\Inst6.txt" />
+    <Text Include="data\Inst7.txt" />
+    <Text Include="data\Inst8.txt" />
+    <Text Include="data\Inst9.txt" />
+    <Text Include="data\Inst10.txt" />
+    <Text Include="data\Inst11.txt" />
+    <Text Include="data\Inst12.txt" />
+    <Text Include="data\Inst13.txt" />
+    <Text Include="data\Inst14.txt" />
+    <Text Include="data\Inst15.txt" />
+    <Text Include="data\Inst16.txt" />
+    <Text Include="data\Inst17.txt" />
+    <Text Include="data\Inst18.txt" />
+    <Text Include="data\sortie.txt" />
   </ItemGroup>
 </Project>
