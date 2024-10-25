@@ -82,7 +82,7 @@ int Resolution(Instance * instance)
     int i_val_Retour_Fct_obj=0;
     Solution * uneSolution = new Solution();
     
-/* EXEMPLE D UNE SOLUTION POUR L'INSTANCE 8 : */
+    /* EXEMPLE D UNE SOLUTION POUR L'INSTANCE 8 : */
     uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,1,3,-1,-1,-1,-1,-1,1,1,3,3,-1,-1,1,1,3,-1,-1,1,1,1,1,1,-1,-1,1,3});
     uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={3,3,3,-1,-1,0,0,2,2,-1,-1,0,0,2,-1,-1,0,0,3,-1,-1,-1,0,2,3,3,-1,-1});
     uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={3,3,-1,-1,3,3,3,3,3,-1,-1,-1,-1,-1,0,0,0,3,3,-1,-1,0,3,-1,-1,0,0,0});
