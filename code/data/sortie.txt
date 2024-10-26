@@ -18,3 +18,5 @@ Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst8.txt	0.0004328	4631
 Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst8.txt	0.0022155	4631
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	0.0024757	4631
