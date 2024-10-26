@@ -20,14 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\algorithm\GeneticAlgorithm.cpp" />
-    <ClCompile Include="src\algorithm\HeuristicAglorithm.cpp" />
+    <ClCompile Include="src\algorithm\HeuristicAlgorithm.cpp" />
     <ClCompile Include="src\algorithm\ResolutionAlgorithm.cpp" />
     <ClCompile Include="src\calculation\CompleteObjectiveCalculator.cpp" />
     <ClCompile Include="src\calculation\HeuristicObjectiveCalculator.cpp" />
     <ClCompile Include="src\calculation\ObjectiveCalculator.cpp" />
-    <ClCompile Include="src\config\AlgorithmConfig.cpp" />
     <ClCompile Include="src\config\GeneticAlgorithmConfig.cpp" />
-    <ClCompile Include="src\config\HeuristicAglorithmConfig.cpp" />
     <ClCompile Include="src\crossover\CrossoverStrategy.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mutation\MutationStrategy.cpp" />
@@ -38,14 +36,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\algorithm\GeneticAlgorithm.h" />
-    <ClInclude Include="headers\algorithm\HeuristicAglorithm.h" />
+    <ClInclude Include="headers\algorithm\HeuristicAlgorithm.h" />
     <ClInclude Include="headers\algorithm\ResolutionAlgorithm.h" />
     <ClInclude Include="headers\calculation\CompleteObjectiveCalculator.h" />
     <ClInclude Include="headers\calculation\HeuristicObjectiveCalculator.h" />
     <ClInclude Include="headers\calculation\ObjectiveCalculator.h" />
-    <ClInclude Include="headers\config\AlgorithmConfig.h" />
     <ClInclude Include="headers\config\GeneticAlgorithmConfig.h" />
-    <ClInclude Include="headers\config\HeuristicAglorithmConfig.h" />
     <ClInclude Include="headers\crossover\CrossoverStrategy.h" />
     <ClInclude Include="headers\Instance.hpp" />
     <ClInclude Include="headers\mutation\MutationStrategy.h" />

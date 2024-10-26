@@ -2,6 +2,9 @@
 #define NOM_FICHIER_LISTE_FICHIER_DONNEES "data.txt"
 #define NOM_FICHIER_LISTE_SORTIE "sortie.txt"
 
+#define RELEASE
+//#define TEST
+
 #include <iostream>
 #include <fstream>
 #include <chrono>
@@ -11,6 +14,8 @@
 #include "../headers/solution/Solution.hpp"
 
 using namespace std;
+
+#ifdef RELEASE
 
 int Resolution(Instance * instance);
 
@@ -83,7 +88,7 @@ int Resolution(Instance * instance)
     int i_val_Retour_Fct_obj=0;
     Solution * uneSolution = new Solution();
     
-    /* EXEMPLE D UNE SOLUTION POUR L'INSTANCE 8 : */
+    // EXEMPLE D UNE SOLUTION POUR L'INSTANCE 8 :
     uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,1,3,-1,-1,-1,-1,-1,1,1,3,3,-1,-1,1,1,3,-1,-1,1,1,1,1,1,-1,-1,1,3});
     uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={3,3,3,-1,-1,0,0,2,2,-1,-1,0,0,2,-1,-1,0,0,3,-1,-1,-1,0,2,3,3,-1,-1});
     uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={3,3,-1,-1,3,3,3,3,3,-1,-1,-1,-1,-1,0,0,0,3,3,-1,-1,0,3,-1,-1,0,0,0});
@@ -126,14 +131,29 @@ int Resolution(Instance * instance)
     uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={2,2,2,-1,-1,0,1,-1,-1,-1,2,3,3,3,-1,-1,2,2,1,-1,-1,0,0,0,0,2,-1,-1});
     
     uneSolution->i_valeur_fonction_objectif=4631;
- /* * * * * * * * * * * * */
     
     
     
     uneSolution->Verification_Solution(instance);
+
+    std::cout << instance->get_Shift_Duree(0) << endl;
     
     i_val_Retour_Fct_obj=uneSolution->i_valeur_fonction_objectif;
     delete uneSolution;
     return i_val_Retour_Fct_obj;
 }
+#endif
 
+#ifdef TEST
+
+#include "../headers/algorithm/HeuristicAlgorithm.h"
+
+int main()
+{
+    Instance instance;
+    HeuristicAlgorithm algo(instance);
+
+    return 0;
+}
+
+#endif

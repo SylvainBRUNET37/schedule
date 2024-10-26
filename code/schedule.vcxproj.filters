@@ -15,19 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Instance.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Solution.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\algorithm\GeneticAlgorithm.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\algorithm\HeuristicAglorithm.cpp">
+    <ClCompile Include="src\algorithm\HeuristicAlgorithm.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\algorithm\ResolutionAlgorithm.cpp">
@@ -42,13 +36,7 @@
     <ClCompile Include="src\calculation\ObjectiveCalculator.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\config\AlgorithmConfig.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="src\config\GeneticAlgorithmConfig.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\config\HeuristicAglorithmConfig.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\crossover\CrossoverStrategy.cpp">
@@ -80,7 +68,7 @@
     <ClInclude Include="headers\algorithm\GeneticAlgorithm.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="headers\algorithm\HeuristicAglorithm.h">
+    <ClInclude Include="headers\algorithm\HeuristicAlgorithm.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\algorithm\ResolutionAlgorithm.h">
@@ -95,13 +83,7 @@
     <ClInclude Include="headers\calculation\ObjectiveCalculator.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="headers\config\AlgorithmConfig.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="headers\config\GeneticAlgorithmConfig.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\config\HeuristicAglorithmConfig.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\crossover\CrossoverStrategy.h">
