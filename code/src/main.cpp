@@ -12,6 +12,7 @@
 
 #include "../headers/solution/Instance.hpp"
 #include "../headers/solution/Solution.hpp"
+#include "../headers/algorithm/HeuristicAlgorithm.h"
 
 using namespace std;
 
@@ -83,70 +84,31 @@ int main(int argc, const char * argv[])
     return 0;
 }
 
+void displayMatrix(const std::vector<std::vector<int>>& matrix) {
+    for (const auto& row : matrix) { // Parcourir chaque ligne
+        for (int value : row) {       // Parcourir chaque élément de la ligne
+            std::cout << value << " "; // Afficher l'élément
+        }
+        std::cout << std::endl;         // Nouvelle ligne après chaque ligne de la matrice
+    }
+}
+
 int Resolution(Instance * instance)
 {
+    HeuristicAlgorithm algo(*instance);
+
     int i_val_Retour_Fct_obj=0;
-    Solution * uneSolution = new Solution();
-    
-    // EXEMPLE D UNE SOLUTION POUR L'INSTANCE 8 :
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,1,3,-1,-1,-1,-1,-1,1,1,3,3,-1,-1,1,1,3,-1,-1,1,1,1,1,1,-1,-1,1,3});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={3,3,3,-1,-1,0,0,2,2,-1,-1,0,0,2,-1,-1,0,0,3,-1,-1,-1,0,2,3,3,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={3,3,-1,-1,3,3,3,3,3,-1,-1,-1,-1,-1,0,0,0,3,3,-1,-1,0,3,-1,-1,0,0,0});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,-1,-1,4,4,4,4,-1,-1,2,3,-1,-1,-1,1,2,1,1,3,-1,-1,1,3,-1,-1,1,1,2});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,-1,-1,0,0,-1,-1,3,3,3,3,3,-1,-1,3,3,-1,-1,-1,3,3,3,4,4,-1,-1,4,4});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={3,-1,-1,-1,4,4,4,4,4,-1,-1,-1,1,1,1,1,1,-1,-1,-1,-1,3,3,3,3,3,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={0,-1,-1,-1,2,2,2,2,4,-1,-1,-1,2,2,2,-1,-1,3,3,-1,-1,3,3,3,3,3,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,1,1,1,2,-1,-1,1,1,-1,-1,-1,2,1,2,-1,-1,1,1,-1,-1,2,1,2,-1,-1,2,1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,0,1,1,1,-1,-1,-1,0,0,0,4,-1,-1,-1,0,0,-1,-1,1,1,-1,-1,-1,0,1,1,1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={3,3,4,-1,-1,1,1,1,-1,-1,1,1,-1,-1,4,4,4,-1,-1,1,3,3,-1,-1,1,4,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,1,1,-1,-1,-1,-1,-1,1,1,1,1,-1,-1,-1,-1,4,4,4,4,4,-1,-1,1,1,1,1,1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={2,4,4,-1,-1,-1,-1,-1,-1,0,0,0,-1,-1,0,0,0,-1,-1,2,2,2,2,2,-1,-1,1,1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={0,3,3,-1,-1,-1,-1,0,0,3,-1,-1,3,3,3,3,3,-1,-1,0,0,0,0,1,-1,-1,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,-1,3,3,3,3,3,-1,-1,3,3,3,-1,-1,3,3,3,3,-1,-1,-1,-1,-1,-1,3,3,3,3});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={3,3,3,3,3,-1,-1,-1,-1,0,0,2,2,2,-1,-1,0,0,2,-1,-1,2,2,2,-1,-1,0,0});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={4,-1,-1,3,3,-1,-1,-1,2,3,4,-1,-1,-1,0,0,2,-1,-1,1,1,1,1,2,-1,-1,0,0});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={0,0,0,0,0,-1,-1,0,0,0,-1,-1,3,3,3,3,3,-1,-1,-1,-1,-1,0,3,-1,-1,0,0});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={1,2,2,2,-1,-1,-1,0,0,-1,-1,0,1,2,1,1,-1,-1,0,0,0,0,1,-1,-1,-1,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={2,2,2,-1,-1,3,3,3,3,-1,-1,-1,2,1,1,1,1,-1,-1,-1,-1,1,2,3,3,4,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,2,2,-1,-1,2,2,-1,-1,-1,2,2,3,3,3,-1,-1,2,2,-1,-1,3,3,3,3,3,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,-1,-1,3,3,-1,-1,3,3,3,3,3,-1,-1,-1,-1,2,2,2,2,2,-1,-1,-1,0,0,2,2});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={2,-1,-1,3,3,3,3,3,-1,-1,1,1,-1,-1,2,2,2,2,1,-1,-1,2,2,-1,-1,2,3,3});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,-1,0,4,4,4,4,-1,-1,-1,-1,-1,1,1,1,2,4,-1,-1,-1,-1,2,1,2,2,1,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={0,0,1,1,-1,-1,-1,0,0,0,-1,-1,0,0,-1,-1,0,0,0,0,1,-1,-1,-1,0,0,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,2,3,3,-1,-1,-1,1,2,1,1,-1,-1,-1,0,1,-1,-1,0,2,2,3,-1,-1,0,2,3,3});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={3,-1,-1,-1,-1,2,1,2,3,4,-1,-1,-1,-1,0,0,0,0,0,-1,-1,3,4,-1,-1,2,1,1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={1,1,-1,-1,1,1,1,-1,-1,1,1,1,1,3,-1,-1,1,1,1,-1,-1,-1,1,1,1,3,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,0,0,0,0,-1,-1,4,4,-1,-1,2,2,4,-1,-1,2,2,2,2,2,-1,-1,1,2,-1,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={1,4,-1,-1,-1,0,0,0,0,1,-1,-1,-1,-1,3,3,-1,-1,1,4,4,-1,-1,0,0,1,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,-1,2,2,2,-1,-1,-1,0,2,2,2,-1,-1,3,3,-1,-1,0,0,0,0,0,-1,-1,0,0,0});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,1,1,3,-1,-1,-1,1,1,2,3,-1,-1,-1,-1,-1,3,3,3,3,3,-1,-1,2,2,2,2,2});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,-1,0,0,0,-1,-1,-1,0,0,2,3,-1,-1,2,2,-1,-1,2,2,2,2,2,-1,-1,0,0,0});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={0,0,0,0,0,-1,-1,-1,-1,-1,0,0,0,0,0,-1,-1,0,0,0,0,-1,-1,0,0,0,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={0,-1,-1,2,2,3,3,3,-1,-1,2,2,-1,-1,2,2,-1,-1,0,0,0,0,3,-1,-1,-1,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={0,-1,-1,1,1,-1,-1,0,4,-1,-1,0,3,3,-1,-1,3,3,3,3,3,-1,-1,3,3,3,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={2,-1,-1,-1,-1,1,2,1,2,-1,-1,0,3,3,-1,-1,0,1,3,-1,-1,4,4,4,4,-1,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={3,3,-1,-1,1,1,1,2,2,-1,-1,-1,-1,-1,0,0,3,3,-1,-1,-1,-1,-1,-1,0,0,2,1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={2,2,-1,-1,1,1,1,2,1,-1,-1,1,1,1,4,-1,-1,1,1,-1,-1,1,2,-1,-1,-1,-1,-1});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={-1,-1,0,0,0,0,0,-1,-1,-1,0,0,-1,-1,0,0,0,0,4,-1,-1,-1,0,0,-1,-1,0,0});
-    uneSolution->v_v_IdShift_Par_Personne_et_Jour.push_back(vector<int> ()={2,2,2,-1,-1,0,1,-1,-1,-1,2,3,3,3,-1,-1,2,2,1,-1,-1,0,0,0,0,2,-1,-1});
-    
-    uneSolution->i_valeur_fonction_objectif=4631;
-    
-    
-    
+    Solution* uneSolution = algo.run();
     uneSolution->Verification_Solution(instance);
 
-    std::cout << instance->get_Shift_Duree(0) << endl;
+    displayMatrix(uneSolution->v_v_IdShift_Par_Personne_et_Jour);
     
     i_val_Retour_Fct_obj=uneSolution->i_valeur_fonction_objectif;
-    delete uneSolution;
     return i_val_Retour_Fct_obj;
 }
 #endif
 
 #ifdef TEST
-
-#include "../headers/algorithm/HeuristicAlgorithm.h"
 
 int main()
 {
