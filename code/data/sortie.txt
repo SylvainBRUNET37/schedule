@@ -71,3 +71,94 @@ Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst1.txt	0.0420705	0
 Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst1.txt	0.0539451	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0534374	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0492639	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0871426	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0755576	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0715028	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0751969	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0761176	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0868523	0
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0290196	0
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0330852	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.040826	0
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.001591	0
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0017744	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0017498	0
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0503858	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0323707	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0370602	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0317731	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0405987	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0414616	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.031936	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0309705	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0338043	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0335543	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0330929	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0323904	0
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0469002	0
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0420625	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0501676	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0359186	0
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0402189	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0366425	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0457549	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.0349544	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.036182	0

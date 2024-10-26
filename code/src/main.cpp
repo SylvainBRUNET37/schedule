@@ -98,12 +98,15 @@ int Resolution(Instance * instance)
     HeuristicAlgorithm algo(*instance);
 
     int i_val_Retour_Fct_obj=0;
+
     Solution* uneSolution = algo.run();
-    uneSolution->Verification_Solution(instance);
 
     displayMatrix(uneSolution->v_v_IdShift_Par_Personne_et_Jour);
+
+    uneSolution->Verification_Solution(instance);
     
     i_val_Retour_Fct_obj=uneSolution->i_valeur_fonction_objectif;
+
     return i_val_Retour_Fct_obj;
 }
 #endif
