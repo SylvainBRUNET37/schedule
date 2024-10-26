@@ -1,9 +1,10 @@
 #ifndef Solution_hpp
 #define Solution_hpp
 
-#include "Instance.hpp"
 #include <stdio.h>
 #include <vector>
+
+#include "Instance.hpp"
 
 using namespace std;
 

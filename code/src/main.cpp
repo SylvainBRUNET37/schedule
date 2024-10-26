@@ -6,8 +6,9 @@
 #include <fstream>
 #include <chrono>
 #include <algorithm>
-#include "../headers/Instance.hpp"
-#include "../headers/Solution.hpp"
+
+#include "../headers/solution/Instance.hpp"
+#include "../headers/solution/Solution.hpp"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include "../headers/Solution.hpp"
+#include "../../headers/solution/Solution.hpp"
 
 #include <iostream>
 #include <set>

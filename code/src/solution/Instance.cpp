@@ -1,4 +1,4 @@
-#include "../headers/Instance.hpp"
+#include "../../headers/solution/Instance.hpp"
 
 #include <iostream>
 #include <fstream>
