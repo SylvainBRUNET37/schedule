@@ -110,11 +110,6 @@ int Resolution(Instance * instance)
     displayMatrix(uneSolution->v_v_IdShift_Par_Personne_et_Jour);
 
     uneSolution->Verification_Solution(instance);
-
-    cout << "aaaa " << instance->get_Nombre_Shift() << endl;
-
-    for (unsigned int i = 0; i < instance->get_Nombre_Shift(); ++i)
-        displayArray(instance->get_vector_Shift_Suc_Interdit(i));
     
     i_val_Retour_Fct_obj=uneSolution->i_valeur_fonction_objectif;
 
