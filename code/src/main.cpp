@@ -107,9 +107,9 @@ int Resolution(Instance * instance)
 
     Solution* uneSolution = algo.run();
 
-    //displayMatrix(uneSolution->v_v_IdShift_Par_Personne_et_Jour);
+    displayMatrix(uneSolution->v_v_IdShift_Par_Personne_et_Jour);
 
-    //uneSolution->Verification_Solution(instance);
+    uneSolution->Verification_Solution(instance);
     
     i_val_Retour_Fct_obj=uneSolution->i_valeur_fonction_objectif;
 

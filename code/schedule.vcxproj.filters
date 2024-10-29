@@ -36,9 +36,6 @@
     <ClCompile Include="src\calculation\ObjectiveCalculator.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\config\GeneticAlgorithmConfig.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="src\crossover\CrossoverStrategy.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -81,9 +78,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\calculation\ObjectiveCalculator.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\config\GeneticAlgorithmConfig.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\crossover\CrossoverStrategy.h">

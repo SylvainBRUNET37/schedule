@@ -22,3 +22,23 @@ Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst18.txt	0.244475	0
 Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst18.txt	0.260861	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst18.txt	0.243219	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst18.txt	0.231834	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst18.txt	0.232229	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst18.txt	0.230851	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst18.txt	0.236062	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst18.txt	0.234404	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst18.txt	0.245875	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst18.txt	0.24465	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	0.314759	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	0.297131	0
