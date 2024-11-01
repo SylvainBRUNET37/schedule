@@ -13,6 +13,7 @@
 #include "../headers/solution/Instance.hpp"
 #include "../headers/solution/Solution.hpp"
 #include "../headers/algorithm/HeuristicAlgorithm.h"
+#include "../headers/calculation/ObjectiveCalculator.h"
 
 using namespace std;
 
@@ -99,21 +100,28 @@ void displayArray(const std::vector<int>& array) {
     std::cout << std::endl;
 }
 
-int Resolution(Instance * instance)
+int Resolution(Instance* instance)
 {
+    int objectiveFunctionValue = 0;
+
     HeuristicAlgorithm algo(*instance);
+    Solution* solution = algo.run();
+    ObjectiveCalculator objectiveCalculator(*instance, *solution);
 
-    int i_val_Retour_Fct_obj=0;
+    // Display the solution
+    displayMatrix(solution->v_v_IdShift_Par_Personne_et_Jour);
 
-    Solution* uneSolution = algo.run();
+    // Calculate objective function
+    objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction();
 
-    displayMatrix(uneSolution->v_v_IdShift_Par_Personne_et_Jour);
+    // Verify solution & objective function
+    solution->Verification_Solution(instance);
 
-    uneSolution->Verification_Solution(instance);
-    
-    i_val_Retour_Fct_obj=uneSolution->i_valeur_fonction_objectif;
+    // Display objective function
+    cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
 
-    return i_val_Retour_Fct_obj;
+    objectiveFunctionValue = solution->i_valeur_fonction_objectif;
+    return objectiveFunctionValue;
 }
 #endif
 
