@@ -94,6 +94,22 @@ void displayMatrix(const std::vector<std::vector<int>>& matrix) {
     }
 }
 
+void displayMatrix2(const std::vector<std::vector<int>>& matrix) {
+    if (matrix.empty()) return; // Vérifier si la matrice est vide
+
+    // Obtenez le nombre de lignes et de colonnes
+    unsigned int rowCount = matrix.size();
+    unsigned int colCount = matrix[0].size();
+
+    // Parcourez les colonnes de la matrice originale pour les afficher comme des lignes
+    for (unsigned int col = 0; col < colCount; ++col) {
+        for (unsigned int row = 0; row < rowCount; ++row) {
+            std::cout << matrix[row][col] << " "; // Afficher l'élément transposé
+        }
+        std::cout << std::endl; // Nouvelle ligne après chaque ligne transposée
+    }
+}
+
 void displayArray(const std::vector<int>& array) {
     for (const auto& value : array)
         std::cout << value << " ";
@@ -106,19 +122,25 @@ int Resolution(Instance* instance)
 
     HeuristicAlgorithm algo(*instance);
     Solution* solution = algo.run();
-    ObjectiveCalculator objectiveCalculator(*instance, *solution);
+    ObjectiveCalculator objectiveCalculator(*instance, *solution, algo.getMissingNursePerShift());
 
     // Display the solution
     displayMatrix(solution->v_v_IdShift_Par_Personne_et_Jour);
 
     // Calculate objective function
     objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction();
+    solution->i_valeur_fonction_objectif = objectiveFunctionValue;
 
     // Verify solution & objective function
     solution->Verification_Solution(instance);
 
     // Display objective function
     cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
+
+    // Display missing nurses
+    cout << endl;
+    displayMatrix2(algo.getMissingNursePerShift());
+    cout << endl;
 
     objectiveFunctionValue = solution->i_valeur_fonction_objectif;
     return objectiveFunctionValue;
