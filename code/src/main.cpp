@@ -94,7 +94,7 @@ void displayMatrix(const std::vector<std::vector<int>>& matrix) {
     }
 }
 
-void displayMatrix2(const std::vector<std::vector<int>>& matrix) {
+void displayMatrixAlenvers(const std::vector<std::vector<int>>& matrix) {
     if (matrix.empty()) return; // Vérifier si la matrice est vide
 
     // Obtenez le nombre de lignes et de colonnes
@@ -125,6 +125,7 @@ int Resolution(Instance* instance)
     ObjectiveCalculator objectiveCalculator(*instance, *solution, algo.getMissingNursePerShift());
 
     // Display the solution
+    cout << "Solution : " << endl;
     displayMatrix(solution->v_v_IdShift_Par_Personne_et_Jour);
 
     // Calculate objective function
@@ -138,8 +139,8 @@ int Resolution(Instance* instance)
     cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
 
     // Display missing nurses
-    cout << endl;
-    displayMatrix2(algo.getMissingNursePerShift());
+    cout << "Missing nurse (day = row, shifts = column) :" << endl;
+    displayMatrixAlenvers(algo.getMissingNursePerShift());
     cout << endl;
 
     objectiveFunctionValue = solution->i_valeur_fonction_objectif;
