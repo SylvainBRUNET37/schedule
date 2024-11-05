@@ -26,6 +26,7 @@
     <ClCompile Include="src\calculation\CompleteObjectiveCalculator.cpp" />
     <ClCompile Include="src\calculation\HeuristicObjectiveCalculator.cpp" />
     <ClCompile Include="src\calculation\ObjectiveCalculator.cpp" />
+    <ClCompile Include="src\crossover\Column.cpp" />
     <ClCompile Include="src\crossover\CrossoverStrategy.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mutation\MutationStrategy.cpp" />
@@ -43,10 +44,12 @@
     <ClInclude Include="headers\calculation\CompleteObjectiveCalculator.h" />
     <ClInclude Include="headers\calculation\HeuristicObjectiveCalculator.h" />
     <ClInclude Include="headers\calculation\ObjectiveCalculator.h" />
+    <ClInclude Include="headers\crossover\Column.h" />
     <ClInclude Include="headers\crossover\CrossoverStrategy.h" />
     <ClInclude Include="headers\Instance.hpp" />
     <ClInclude Include="headers\mutation\MutationStrategy.h" />
     <ClInclude Include="headers\mutation\SwapShiftMutation.h" />
+    <ClInclude Include="headers\repair\RepairStrategy.h" />
     <ClInclude Include="headers\selection\SelectionStrategy.h" />
     <ClInclude Include="headers\Solution.hpp" />
     <ClInclude Include="headers\solution\DetailedSolution.h" />

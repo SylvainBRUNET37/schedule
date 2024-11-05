@@ -121,19 +121,19 @@ int Resolution(Instance* instance)
     int objectiveFunctionValue = 0;
 
     HeuristicAlgorithm algo(*instance);
-    Solution* solution = algo.run();
-    ObjectiveCalculator objectiveCalculator(*instance, *solution, algo.getMissingNursePerShift());
+    Solution solution = algo.run();
+    ObjectiveCalculator objectiveCalculator(*instance, solution, algo.getMissingNursePerShift());
 
     // Display the solution
     cout << "Solution : " << endl;
-    displayMatrix(solution->v_v_IdShift_Par_Personne_et_Jour);
+    displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
 
     // Calculate objective function
     objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction();
-    solution->i_valeur_fonction_objectif = objectiveFunctionValue;
+    solution.i_valeur_fonction_objectif = objectiveFunctionValue;
 
     // Verify solution & objective function
-    solution->Verification_Solution(instance);
+    solution.Verification_Solution(instance);
 
     // Display objective function
     cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
@@ -143,7 +143,7 @@ int Resolution(Instance* instance)
     displayMatrixAlenvers(algo.getMissingNursePerShift());
     cout << endl;
 
-    objectiveFunctionValue = solution->i_valeur_fonction_objectif;
+    objectiveFunctionValue = solution.i_valeur_fonction_objectif;
     return objectiveFunctionValue;
 }
 #endif
