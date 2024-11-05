@@ -156,16 +156,18 @@ bool Solution::Verification_Solution(Instance *instance)
             }
         }
     }
+
     for(k=0;k<instance->get_Nombre_Shift();k++)
     {
         for(j=0;j<instance->get_Nombre_Jour();j++)
         {
             if(v_i_nb_personne_par_Shift_et_jour[k][j]<instance->get_Nbre_Personne_Requis_Jour_Shift(j, k))
                 i_fc_obj=i_fc_obj+instance->get_Poids_Personne_En_Moins_Jour_Shift(j, k)*(instance->get_Nbre_Personne_Requis_Jour_Shift(j, k)-v_i_nb_personne_par_Shift_et_jour[k][j]);
-                if(v_i_nb_personne_par_Shift_et_jour[k][j]>instance->get_Nbre_Personne_Requis_Jour_Shift(j, k))
-                    i_fc_obj=i_fc_obj+instance->get_Poids_Personne_En_Plus_Jour_Shift(j, k)*(v_i_nb_personne_par_Shift_et_jour[k][j]-instance->get_Nbre_Personne_Requis_Jour_Shift(j, k));
+            if(v_i_nb_personne_par_Shift_et_jour[k][j]>instance->get_Nbre_Personne_Requis_Jour_Shift(j, k))
+                i_fc_obj=i_fc_obj+instance->get_Poids_Personne_En_Plus_Jour_Shift(j, k)*(v_i_nb_personne_par_Shift_et_jour[k][j]-instance->get_Nbre_Personne_Requis_Jour_Shift(j, k));
         }
     }
+
     if(i_fc_obj!=i_valeur_fonction_objectif)
     {
         cout<< "Erreur : la fonction objectif est mal calculée, cela devrait être : "<< i_fc_obj<<"." <<endl;
