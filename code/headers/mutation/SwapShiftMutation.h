@@ -10,7 +10,7 @@ private:
 public:
 	SwapShiftMutation() {}
 
-	//void execute() override;
+	void execute(Solution& solution) override;
 };
 
 #endif
