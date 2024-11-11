@@ -10,6 +10,8 @@ class NurseSchedulingData
 private:
 
 public:
+	
+	// Attributs en public pour les chercher plus vite et pas se faire chier a utiliser des getters et des setters et autres conneries
 	vector<unsigned int> nurses; ///< IDs of all nurses.
 	vector<unsigned int> shifts; ///< IDs of all shift types.
 	vector<vector<unsigned int>> maxShiftsPerType; ///< Maximum shifts allowed per type for each nurse [nurseId][shiftId] (to decrement).
