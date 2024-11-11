@@ -4,12 +4,6 @@
 *                 GLOBAL VERIFICATION                *
 *****************************************************/
 
-// in header file
-
-/*****************************************************
-*             HARD CONDITION VERIFICATION            *
-*****************************************************/
-
 bool SolutionValidator::isAvailableThisDay(unsigned int nurseId, unsigned int dayId)
 {
     // Early exit if the nurse is on a day off
@@ -39,6 +33,10 @@ bool SolutionValidator::isAvailableForShift(unsigned int nurseId, unsigned int d
     // Check for the specific shift type's limits
     return !isAtMaxWorkedShift(nurseId, shiftId);  // Low frequency, return true if not at max
 }
+
+/*****************************************************
+*             HARD CONDITION VERIFICATION            *
+*****************************************************/
 
 bool SolutionValidator::isAtMaxConsecutiveWorkedDay(unsigned int nurseId, unsigned int actualDay)
 {

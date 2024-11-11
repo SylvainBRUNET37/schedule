@@ -21,7 +21,17 @@ public:
 	*              CONTRUCTORS / DESTRUCTOR              *
 	*****************************************************/
 
-	SolutionValidator(Instance& instance, Solution& solution, NurseSchedulingData& schedulingData) : instance(instance), solution(solution), schedulingData(schedulingData) {}
+	/**
+	 * @brief Constructor for the SolutionValidator class.
+	 *
+	 * Initializes the SolutionValidator object with an Instance, Solution, and NurseSchedulingData.
+	 *
+	 * @param instance Reference to the Instance object containing general scheduling data.
+	 * @param solution Reference to the Solution object representing the current schedule.
+	 * @param schedulingData Reference to the NurseSchedulingData object with nurse-specific data.
+	 */
+	SolutionValidator(Instance& instance, Solution& solution, NurseSchedulingData& schedulingData)
+		: instance(instance), solution(solution), schedulingData(schedulingData) {}
 
 	/*****************************************************
 	*                 GLOBAL VERIFICATION                *
@@ -59,10 +69,6 @@ public:
 			(dayId >= 6 && (dayId + 1) % DAYS_IN_WEEK == 0);
 	}
 
-	/*****************************************************
-	*             HARD CONDITION VERIFICATION            *
-	*****************************************************/
-
 	/**
 	 * @brief Checks if a nurse is available to work on a given day.
 	 *
@@ -89,6 +95,10 @@ public:
 	 */
 	bool isAvailableForShift(unsigned int nurseId, unsigned int dayId, unsigned int shiftId);
 
+	/*****************************************************
+	*             HARD CONDITION VERIFICATION            *
+	*****************************************************/
+
 	/**
 	 * @brief Checks if a nurse has a day off.
 	 *
@@ -97,7 +107,7 @@ public:
 	 *
 	 * @return True if the nurse has the day off; false otherwise.
 	 */
-	bool isOnDayOff(unsigned int nurseId, unsigned int dayId) 
+	bool isOnDayOff(unsigned int nurseId, unsigned int dayId)
 	{
 		vector<int> nursesDaysOff = instance.get_vector_Personne_Id_Jour_Conges(nurseId);
 		return binary_search(nursesDaysOff.begin(), nursesDaysOff.end(), dayId);
@@ -159,7 +169,6 @@ public:
 	 * @brief Checks if the nurse is able to work this weekend.
 	 *
 	 * @param nurseId ID of the nurse to check.
-	 * @param actualDay The current day in the scheduling instance.
 	 *
 	 * @return True if the nurse can work this weekend, false otherwise.
 	 *
@@ -171,14 +180,15 @@ public:
 	}
 
 	/**
-	 * @brief Checks if the nurse is able to work this weekend.
+	 * @brief Checks if a shift succession is forbidden for a nurse.
 	 *
-	 * @param nurseId ID of the nurse to check.
-	 * @param actualDay The current day in the scheduling instance.
+	 * @param previousShift ID of the previous shift worked by the nurse.
+	 * @param actualShift ID of the shift currently being considered.
 	 *
-	 * @return True if the nurse can work this weekend, false otherwise.
+	 * @return True if the specified succession is forbidden, false otherwise.
 	 *
-	 * This function verifies whether the nurse has reached the maximum allowed number of worked weekends.
+	 * This function verifies if a shift succession is restricted based on predefined rules for
+	 * consecutive shifts, to prevent certain sequences that may violate scheduling constraints.
 	 */
 	bool isSuccessionForbidden(unsigned int previousShift, unsigned int actualShift)
 	{
