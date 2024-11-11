@@ -120,9 +120,10 @@ int Resolution(Instance* instance)
 {
     int objectiveFunctionValue = 0;
 
-    HeuristicAlgorithm algo(*instance);
+    NurseSchedulingData data;
+    HeuristicAlgorithm algo(*instance, data);
     Solution solution = algo.run();
-    ObjectiveCalculator objectiveCalculator(*instance, solution, algo.getMissingNursePerShift());
+    ObjectiveCalculator objectiveCalculator(*instance, solution, data);
 
     // Display the solution
     cout << "Solution : " << endl;
@@ -140,7 +141,7 @@ int Resolution(Instance* instance)
 
     // Display missing nurses
     cout << "Missing nurse (day = row, shifts = column) :" << endl;
-    displayMatrixAlenvers(algo.getMissingNursePerShift());
+    displayMatrixAlenvers(data.missingNursePerShift);
     cout << endl;
 
     objectiveFunctionValue = solution.i_valeur_fonction_objectif;

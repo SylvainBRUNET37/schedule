@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\solution\NurseSchedulingData.cpp" />
+    <ClCompile Include="src\validator\SolutionValidator.cpp" />
     <ClCompile Include="src\calculation\LightObjectiveCalculator.cpp" />
     <ClCompile Include="src\algorithm\GeneticAlgorithm.cpp" />
     <ClCompile Include="src\algorithm\HeuristicAlgorithm.cpp" />
@@ -57,6 +59,8 @@
     <ClInclude Include="headers\solution\Solution.hpp" />
     <ClInclude Include="headers\selection\TournamentSelection.h" />
     <ClInclude Include="headers\calculation\LightObjectiveCalculator.h" />
+    <ClInclude Include="headers\validator\SolutionValidator.h" />
+    <ClInclude Include="headers\solution\NurseSchedulingData.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\data.txt" />
