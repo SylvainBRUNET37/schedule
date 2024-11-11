@@ -21,7 +21,7 @@ public:
 	*              CONTRUCTORS / DESTRUCTOR              *
 	*****************************************************/
 
-	SolutionValidator(Instance& instance, Solution& solution, NurseSchedulingData schedulingData) : instance(instance), solution(solution), schedulingData(schedulingData) {}
+	SolutionValidator(Instance& instance, Solution& solution, NurseSchedulingData& schedulingData) : instance(instance), solution(solution), schedulingData(schedulingData) {}
 
 	/*****************************************************
 	*                 GLOBAL VERIFICATION                *
