@@ -33,6 +33,11 @@ public:
 	SolutionValidator(Instance& instance, Solution& solution, NurseSchedulingData& schedulingData)
 		: instance(instance), solution(solution), schedulingData(schedulingData) {}
 
+
+
+	void setSchedulingData(NurseSchedulingData& data) { schedulingData = data; }
+
+
 	/*****************************************************
 	*                 GLOBAL VERIFICATION                *
 	*****************************************************/
