@@ -124,58 +124,29 @@ int Resolution(Instance* instance)
 {
     int objectiveFunctionValue = 0;
 
-    
-    HeuristicAlgorithm algoH(*instance);
-    Solution solutionH = algoH.run();
-    ObjectiveCalculator objectiveCalculator(*instance, solutionH, algoH.getSchedulingData());
-    
-    // Display the solution
-    cout << "Solution : " << endl;
-    displayMatrix(solutionH.v_v_IdShift_Par_Personne_et_Jour);
-
-    // Calculate objective function
-    objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction();
-    solutionH.i_valeur_fonction_objectif = objectiveFunctionValue;
-
-    // Verify solution & objective function
-    solutionH.Verification_Solution(instance);
-
-    // Display objective function
-    cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
-
-    // Display missing nurses
-    cout << "Missing nurse (day = row, shifts = column) :" << endl;
-    displayMatrixAlenvers(algoH.getSchedulingData().missingNursePerShift);
-    cout << endl;
-
-    //objectiveFunctionValue = solutionH.i_valeur_fonction_objectif;
-
     GeneticAlgorithm algo(*instance, 50);
     //set the differents strategies
     algo.setSelectionStrategy(make_unique<TournamentSelection>());
     algo.setCrossoverStrategy(make_unique<Column>());
     algo.setMutationStrategy(make_unique <SwapShiftMutation>());
+    algo.setObjectiveCalculator(make_unique <ObjectiveCalculator>());
     Solution solution = algo.run();
-    ObjectiveCalculator objectiveCalculator2(*instance, solution, algo.getSchedulingData());
+    ObjectiveCalculator objectiveCalculator;
 
     // Display the solution
     cout << "Solution : " << endl;
     displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
 
     // Calculate objective function
-    objectiveFunctionValue = objectiveCalculator2.calculateObjectiveFunction();
+    objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution, algo.getSchedulingData());
     solution.i_valeur_fonction_objectif = objectiveFunctionValue;
 
     // Verify solution & objective function
     solution.Verification_Solution(instance);
 
     // Display objective function
+    objectiveFunctionValue = algo.getBestSolution().i_valeur_fonction_objectif;
     cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
-
-    // Display missing nurses
-    cout << "Missing nurse (day = row, shifts = column) :" << endl;
-    displayMatrixAlenvers(algoH.getSchedulingData().missingNursePerShift);
-    cout << endl;
 
     return objectiveFunctionValue;
 }

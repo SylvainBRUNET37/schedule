@@ -27,3 +27,85 @@ Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst8.txt	0.374979	38082
 Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst8.txt	0.391292	38192
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	8.33787	69692
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	8.01256	0
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	9.73413	69679
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	9.9603	69691
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	9.97501	69687
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	10.0343	38066
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	1.21827	37872
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	1.92982	37882
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.04628	37770
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	1.9463	37874
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.05085	37884
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.28798	37872
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	13.1955	37873
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.03401	37967
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.05439	37873
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.04655	37689
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.09763	37888
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.13874	37785
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.0205	37798
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	10.1748	37778
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.12593	37773
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.14005	37771
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.21736	37785
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.75334	37866
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	2.67374	37769
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	4.29122	37885
+Fichier donnees	 Tps de resolution 	 Best solution
