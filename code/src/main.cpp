@@ -139,13 +139,13 @@ int Resolution(Instance* instance)
 
     // Calculate objective function
     objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution, algo.getSchedulingData());
-    solution.i_valeur_fonction_objectif = objectiveFunctionValue;
+    objectiveFunctionValue = algo.getBestSolution().i_valeur_fonction_objectif;
 
     // Verify solution & objective function
     solution.Verification_Solution(instance);
 
     // Display objective function
-    objectiveFunctionValue = algo.getBestSolution().i_valeur_fonction_objectif;
+    
     cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
 
     return objectiveFunctionValue;
