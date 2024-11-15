@@ -138,7 +138,7 @@ int Resolution(Instance* instance)
     displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
 
     // Calculate objective function
-    objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution, algo.getSchedulingData());
+    objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
     objectiveFunctionValue = algo.getBestSolution().i_valeur_fonction_objectif;
 
     // Verify solution & objective function

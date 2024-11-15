@@ -10,7 +10,7 @@ private:
 public:
 
 	// Fonction objectif sans les pénalités sur les refus d'affectations et les refus de repos
-	int calculateObjectiveFunction(Instance& instance, Solution& solution, NurseSchedulingData& schedulingData) override;
+	int calculateObjectiveFunction(Instance& instance, Solution& solution) override;
 
 };
 
