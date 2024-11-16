@@ -200,6 +200,37 @@ public:
 		vector<int> prohibitedShift = instance.get_vector_Shift_Suc_Interdit(actualShift);
 		return binary_search(prohibitedShift.begin(), prohibitedShift.end(), previousShift);
 	}
+
+	/**
+	 * @brief Checks if a nurse has worked the required minimum number of consecutive days.
+	 *
+	 * This method determines whether a nurse has fulfilled the minimum consecutive workday
+	 * requirement by evaluating the nurse's work schedule for the days preceding a specified day.
+	 *
+	 * @param nurseId The unique identifier of the nurse.
+	 * @param actualDay The current day for which the check is being performed.
+	 *
+	 * @return `true` if the nurse has worked at least the minimum number of consecutive days, `false` otherwise.
+	 *
+	 * @note This function assumes that the method `isWorkingThisDay` correctly determines whether
+	 *       the nurse worked on a specific day and that the schedule data is accessible and accurate.
+	 */
+	bool haveDoneMinConsecutiveWorkedDay(unsigned int nurseId, unsigned int actualDay);
+
+	/**
+	 * @brief Checks if a nurse has worked the required minimum total time.
+	 *
+	 * This method evaluates whether a nurse has accumulated the minimum required working time
+	 * in minutes, as specified for the nurse in the instance data.
+	 *
+	 * @param nurseId The unique identifier of the nurse.
+	 *
+	 * @return `true` if the nurse has worked at least the minimum required time, `false` otherwise.
+	 *
+	 * @note This function uses the `schedulingData.nbMinuteWorked` array for tracking worked minutes
+	 *       and the `instance.get_Personne_Duree_total_Min` method to retrieve the minimum time requirement.
+	 */
+	bool haveDoneMinWorkedTime(unsigned int nurseId) { return schedulingData.nbMinuteWorked[nurseId] >= instance.get_Personne_Duree_total_Min(nurseId);	}
 };
 
 #endif

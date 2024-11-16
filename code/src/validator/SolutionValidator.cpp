@@ -89,3 +89,27 @@ bool SolutionValidator::isAtEndOfConsecutiveDayOff(unsigned int nurseId, unsigne
     return false; // Return false if the nurse does not have the required consecutive days off by 'actualDay'
 }
 
+bool SolutionValidator::haveDoneMinConsecutiveWorkedDay(unsigned int nurseId, unsigned int actualDay)
+{
+    unsigned int minConsecutiveWorkedDay = instance.get_Personne_Nbre_Shift_Consecutif_Min(nurseId);
+
+    if (actualDay < minConsecutiveWorkedDay)
+        return false;
+
+    unsigned int nbConsecutiveWorkedDay = 0; // Counter for the number of consecutive days worked
+
+    // Iterate over the days preceding 'actualDay' to check if the nurse had the required consecutive worked day
+    unsigned int startDay = actualDay - minConsecutiveWorkedDay;
+    for (unsigned int dayId = startDay; dayId < actualDay; ++dayId)
+    {
+        // 
+        if (isWorkingThisDay(nurseId, dayId))
+            ++nbConsecutiveWorkedDay;
+
+        // 
+        if (nbConsecutiveWorkedDay == minConsecutiveWorkedDay)
+            return true;
+    }
+
+    return false; // Return false if 
+}
