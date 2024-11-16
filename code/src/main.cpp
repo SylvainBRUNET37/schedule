@@ -13,7 +13,7 @@
 #include "../headers/solution/Instance.hpp"
 #include "../headers/solution/Solution.hpp"
 #include "../headers/algorithm/HeuristicAlgorithm.h"
-#include "../headers/calculation/ObjectiveCalculator.h"
+#include "../headers/calculation/CompleteObjectiveCalculator.h"
 #include "../headers/algorithm/GeneticAlgorithm.h"
 #include "../headers/selection/TournamentSelection.h"
 #include "../headers/crossover/Column.h"
@@ -129,7 +129,7 @@ int Resolution(Instance* instance)
     algo.setSelectionStrategy(make_unique<TournamentSelection>());
     algo.setCrossoverStrategy(make_unique<Column>());
     algo.setMutationStrategy(make_unique <SwapShiftMutation>());
-    algo.setObjectiveCalculator(make_unique <ObjectiveCalculator>());
+    algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
     Solution solution = algo.run();
     ObjectiveCalculator objectiveCalculator;
 
