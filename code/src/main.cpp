@@ -3,7 +3,8 @@
 #define NOM_FICHIER_LISTE_SORTIE "sortie.txt"
 
 #define RELEASE
-//#define TEST
+//#define MAX_HEURISTIC_ALGORITHM
+//#define MIN_HEURISTIC_ALGORITHM
 
 #include <iostream>
 #include <fstream>
@@ -18,10 +19,9 @@
 #include "../headers/selection/TournamentSelection.h"
 #include "../headers/crossover/Column.h"
 #include "../headers/mutation/SwapShiftMutation.h"
+#include "../headers/algorithm/MinHeuristicAlgorithm.h"
 
 using namespace std;
-
-#ifdef RELEASE
 
 int Resolution(Instance * instance);
 
@@ -120,6 +120,8 @@ void displayArray(const std::vector<int>& array) {
     std::cout << std::endl;
 }
 
+#ifdef RELEASE
+
 int Resolution(Instance* instance)
 {
     int objectiveFunctionValue = 0;
@@ -139,27 +141,76 @@ int Resolution(Instance* instance)
 
     // Calculate objective function
     objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
-    objectiveFunctionValue = algo.getBestSolution().i_valeur_fonction_objectif;
 
     // Verify solution & objective function
     solution.Verification_Solution(instance);
 
     // Display objective function
-    
-    cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
+    cout << endl << "Objective function value (of the teacher) : " << objectiveFunctionValue << endl;
+    cout << endl << "Objective function value (with hard contraints weight) : " << algo.getBestSolution().i_valeur_fonction_objectif << endl << endl;
 
     return objectiveFunctionValue;
 }
 #endif
 
-#ifdef TEST
+#ifdef MAX_HEURISTIC_ALGORITHM
 
-int main()
+int Resolution(Instance* instance)
 {
-    Instance instance;
-    HeuristicAlgorithm algo(instance);
+    int objectiveFunctionValue = 0;
 
-    return 0;
+    HeuristicAlgorithm maxAlgo(*instance);
+
+    Solution& solution = maxAlgo.run();
+    ObjectiveCalculator objectiveCalculator;
+
+    // Display the solution
+    cout << "Solution : " << endl;
+    displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
+
+    // Calculate objective function
+    objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
+    objectiveFunctionValue = maxAlgo.getBestSolution().i_valeur_fonction_objectif;
+
+    // Verify solution & objective function
+    solution.Verification_Solution(instance);
+
+    // Display objective function
+
+    cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
+
+    return objectiveFunctionValue;
+}
+
+#endif
+
+#ifdef MIN_HEURISTIC_ALGORITHM
+
+int Resolution(Instance* instance)
+{
+    int objectiveFunctionValue = 0;
+
+    MinHeuristicAlgorithm minAlgo(*instance);
+
+    Solution& solution = minAlgo.run();
+    ObjectiveCalculator objectiveCalculator;
+
+    // Display the solution
+    cout << "Solution : " << endl;
+    displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
+
+    // Calculate objective function
+    objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
+    objectiveFunctionValue = minAlgo.getBestSolution().i_valeur_fonction_objectif;
+
+    // Verify solution & objective function
+    solution.Verification_Solution(instance);
+
+    // Display objective function
+
+    cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
+
+    return objectiveFunctionValue;
 }
 
 #endif
