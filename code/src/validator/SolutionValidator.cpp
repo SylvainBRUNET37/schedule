@@ -1,38 +1,6 @@
 #include "../../headers/validator/SolutionValidator.h"
 
-/*****************************************************
-*                 GLOBAL VERIFICATION                *
-*****************************************************/
-
-bool SolutionValidator::isAvailableThisDay(unsigned int nurseId, unsigned int dayId)
-{
-    // Early exit if the nurse is on a day off
-    if (isOnDayOff(nurseId, dayId)) return false;  // High frequency
-
-    // Early exit if at the end of consecutive days off
-    if (!isAtEndOfConsecutiveDayOff(nurseId, dayId)) return false;  // Medium frequency
-
-    // Check if the day is a weekend and if the nurse can work this weekend
-    if (isWeekendDay(dayId) && isAbleToWorkThisWeekend(nurseId)) return false; // Low to Medium frequency
-
-    // Check if the nurse has reached the max worked time
-    if (isAtMaxWorkedTime(nurseId)) return false;  // Medium frequency
-
-    // Check if at max consecutive worked days
-    if (isAtMaxConsecutiveWorkedDay(nurseId, dayId)) return false;  // Medium frequency
-
-    return true;
-}
-
-bool SolutionValidator::isAvailableForShift(unsigned int nurseId, unsigned int dayId, unsigned int shiftId)
-{
-    // Check if it's not the first day and if the nurse worked the previous day
-    if (dayId != 0 && isWorkingThisDay(nurseId, dayId - 1))
-        if (isSuccessionForbidden(shiftId, solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1])) return false;  // Medium frequency
-
-    // Check for the specific shift type's limits
-    return !isAtMaxWorkedShift(nurseId, shiftId);  // Low frequency, return true if not at max
-}
+#include <iostream>
 
 /*****************************************************
 *             HARD CONDITION VERIFICATION            *
@@ -71,22 +39,21 @@ bool SolutionValidator::isAtEndOfConsecutiveDayOff(unsigned int nurseId, unsigne
     if (actualDay < minConsecutiveDaysOff)
         return true; // Return true, indicating that the requirement for consecutive days off is met
 
-    unsigned int nbConsecutiveDayOff = 0; // Counter for the number of consecutive days off
+    // If the nurse was working yesterday, return true
+    if (isWorkingThisDay(nurseId, actualDay - 1))
+        return true;
 
     // Iterate over the days preceding 'actualDay' to check if the nurse had the required consecutive days off
     unsigned int startDay = actualDay - minConsecutiveDaysOff;
+
     for (unsigned int dayId = startDay; dayId < actualDay; ++dayId)
     {
         // Increment the counter if the nurse is not working on the current day
-        if (!isWorkingThisDay(nurseId, dayId))
-            ++nbConsecutiveDayOff;
-
-        // If the nurse has the required number of consecutive days off, return true
-        if (nbConsecutiveDayOff == minConsecutiveDaysOff)
-            return true;
+        if (isWorkingThisDay(nurseId, dayId))
+            return false;
     }
 
-    return false; // Return false if the nurse does not have the required consecutive days off by 'actualDay'
+    return true; // Return false if the nurse does not have the required consecutive days off by 'actualDay'
 }
 
 bool SolutionValidator::haveDoneMinConsecutiveWorkedDay(unsigned int nurseId, unsigned int actualDay)
@@ -96,20 +63,18 @@ bool SolutionValidator::haveDoneMinConsecutiveWorkedDay(unsigned int nurseId, un
     if (actualDay < minConsecutiveWorkedDay)
         return false;
 
-    unsigned int nbConsecutiveWorkedDay = 0; // Counter for the number of consecutive days worked
+	// If the nurse wasn't working yesterday, return true
+    if (!isWorkingThisDay(nurseId, actualDay - 1))
+        return true;
 
     // Iterate over the days preceding 'actualDay' to check if the nurse had the required consecutive worked day
     unsigned int startDay = actualDay - minConsecutiveWorkedDay;
     for (unsigned int dayId = startDay; dayId < actualDay; ++dayId)
     {
         // 
-        if (isWorkingThisDay(nurseId, dayId))
-            ++nbConsecutiveWorkedDay;
-
-        // 
-        if (nbConsecutiveWorkedDay == minConsecutiveWorkedDay)
-            return true;
+        if (!isWorkingThisDay(nurseId, dayId))
+            return false;
     }
 
-    return false; // Return false if 
+    return true; // 
 }

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\algorithm\MinHeuristicAlgorithm.cpp" />
     <ClCompile Include="src\solution\NurseSchedulingData.cpp" />
     <ClCompile Include="src\validator\SolutionValidator.cpp" />
     <ClCompile Include="src\calculation\LightObjectiveCalculator.cpp" />
@@ -61,6 +62,7 @@
     <ClInclude Include="headers\calculation\LightObjectiveCalculator.h" />
     <ClInclude Include="headers\validator\SolutionValidator.h" />
     <ClInclude Include="headers\solution\NurseSchedulingData.h" />
+    <ClInclude Include="headers\algorithm\MinHeuristicAlgorithm.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\data.txt" />
