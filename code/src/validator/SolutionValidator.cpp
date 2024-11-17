@@ -32,28 +32,25 @@ bool SolutionValidator::isAtMaxConsecutiveWorkedDay(unsigned int nurseId, unsign
 
 bool SolutionValidator::isAtEndOfConsecutiveDayOff(unsigned int nurseId, unsigned int actualDay)
 {
-    // Get the minimum number of consecutive days off required for the nurse
     unsigned int minConsecutiveDaysOff = instance.get_Personne_Jour_OFF_Consecutif_Min(nurseId);
 
-    // Check if the current day is less than the minimum required consecutive days off
     if (actualDay < minConsecutiveDaysOff)
-        return true; // Return true, indicating that the requirement for consecutive days off is met
-
-    // If the nurse was working yesterday, return true
-    if (isWorkingThisDay(nurseId, actualDay - 1))
         return true;
 
-    // Iterate over the days preceding 'actualDay' to check if the nurse had the required consecutive days off
-    unsigned int startDay = actualDay - minConsecutiveDaysOff;
+    unsigned int nbConsecutiveDayOff = 0;
+	int dayId = actualDay - 1;
+    int endDay = actualDay - minConsecutiveDaysOff;
 
-    for (unsigned int dayId = startDay; dayId < actualDay; ++dayId)
+    while (dayId >= endDay && !isWorkingThisDay(nurseId, dayId))
     {
-        // Increment the counter if the nurse is not working on the current day
-        if (isWorkingThisDay(nurseId, dayId))
-            return false;
+        ++nbConsecutiveDayOff;
+        --dayId;
     }
 
-    return true; // Return false if the nurse does not have the required consecutive days off by 'actualDay'
+    if (nbConsecutiveDayOff != 0 && nbConsecutiveDayOff <= minConsecutiveDaysOff - 1)
+        return false;		
+
+    return true;
 }
 
 bool SolutionValidator::haveDoneMinConsecutiveWorkedDay(unsigned int nurseId, unsigned int actualDay)
@@ -61,20 +58,20 @@ bool SolutionValidator::haveDoneMinConsecutiveWorkedDay(unsigned int nurseId, un
     unsigned int minConsecutiveWorkedDay = instance.get_Personne_Nbre_Shift_Consecutif_Min(nurseId);
 
     if (actualDay < minConsecutiveWorkedDay)
-        return false;
-
-	// If the nurse wasn't working yesterday, return true
-    if (!isWorkingThisDay(nurseId, actualDay - 1))
         return true;
 
-    // Iterate over the days preceding 'actualDay' to check if the nurse had the required consecutive worked day
-    unsigned int startDay = actualDay - minConsecutiveWorkedDay;
-    for (unsigned int dayId = startDay; dayId < actualDay; ++dayId)
+    unsigned int nbConsecutiveWorkedDay = 0;
+    int endDay = actualDay - minConsecutiveWorkedDay;
+    int dayId = actualDay - 1;
+
+    while (dayId >= endDay && isWorkingThisDay(nurseId, dayId))
     {
-        // 
-        if (!isWorkingThisDay(nurseId, dayId))
-            return false;
+        ++nbConsecutiveWorkedDay;
+        --dayId;
     }
 
-    return true; // 
+    if (nbConsecutiveWorkedDay != 0 && nbConsecutiveWorkedDay <= minConsecutiveWorkedDay - 1)
+        return false;
+        
+    return true;
 }

@@ -12,37 +12,35 @@
 
 bool MinHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned int dayId)
 {
-	// Si a pas fait le nombre de jours minimum de travail consécutif, ELLE DOIT TRAVAILLE
-	if (!validator.haveDoneMinConsecutiveWorkedDay(nurseId, dayId)) return true;
-
     // Early exit if the nurse is on a day off
-    //if (validator.isOnDayOff(nurseId, dayId)) return false;  // High frequency
+    if (validator.isOnDayOff(nurseId, dayId)) return false;  // High frequency
+
+    // Fait travailler si le nombre de jours minimum de travail consécutif n'est pas atteint
+    if (!validator.haveDoneMinConsecutiveWorkedDay(nurseId, dayId)) return true;
 
     // Early exit if at the end of consecutive days off
     if (!validator.isAtEndOfConsecutiveDayOff(nurseId, dayId)) return false;  // Medium frequency
 
     // Check if the day is a weekend and if the nurse can work this weekend
-    //if (validator.isWeekendDay(dayId) && validator.isAbleToWorkThisWeekend(nurseId)) return false; // Low to Medium frequency
+    if (validator.isWeekendDay(dayId) && validator.isAbleToWorkThisWeekend(nurseId)) return false; // Low to Medium frequency
 
     // Check if the nurse has reached the max worked time
-    //if (validator.isAtMaxWorkedTime(nurseId)) return false;  // Medium frequency
+    if (validator.isAtMaxWorkedTime(nurseId)) return false;  // Medium frequency
 
     // Check if at max consecutive worked days
-    //if (validator.isAtMaxConsecutiveWorkedDay(nurseId, dayId)) return false;  // Medium frequency
+    if (validator.isAtMaxConsecutiveWorkedDay(nurseId, dayId)) return false;  // Medium frequency
 
     return true;
 }
 
 bool MinHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned int dayId, unsigned int shiftId)
 {
-    // Check if the nurse worked the previous day
-    //if (dayId != 0 && validator.isWorkingThisDay(nurseId, dayId - 1))
-        //if (validator.isSuccessionForbidden(shiftId, bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1])) return false;  // Medium frequency
+    // Check if it's not the first day and if the nurse worked the previous day
+    if (dayId != 0 && validator.isWorkingThisDay(nurseId, dayId - 1))
+        if (validator.isSuccessionForbidden(shiftId, bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1])) return false;  // Medium frequency
 
     // Check for the specific shift type's limits
-    //return !validator.isAtMaxWorkedShift(nurseId, shiftId);  // Low frequency, return true if not at max
-
-    return true;
+    return !validator.isAtMaxWorkedShift(nurseId, shiftId);  // Low frequency, return true if not at max
 }
 
 /*****************************************************
@@ -58,8 +56,6 @@ Solution& MinHeuristicAlgorithm::run()
 
         random_device rd;
         mt19937 eng(rd());
-        shuffle(data.nurses.begin(), data.nurses.end(), eng);
-        shuffle(data.shifts.begin(), data.shifts.end(), eng);
 
         while (dayId < nbDay)
         {
@@ -69,6 +65,9 @@ Solution& MinHeuristicAlgorithm::run()
             for (unsigned int nurseId : data.nurses)
                 if (isAvailableThisDay(nurseId, dayId))
                     availableNurses.push_back(nurseId);
+
+            shuffle(availableNurses.begin(), availableNurses.end(), eng);
+            shuffle(data.shifts.begin(), data.shifts.end(), eng);
 
             // Allocate every nurse
             allocateDay(dayId, availableNurses);
@@ -84,7 +83,7 @@ Solution& MinHeuristicAlgorithm::run()
 }
 
 void MinHeuristicAlgorithm::allocateDay(unsigned int dayId, vector<unsigned int>& availableNurses)
-{   
+{
     unsigned int nbShift = instance.get_Nombre_Shift();
 
     for (auto nurseIterator = availableNurses.begin(); nurseIterator != availableNurses.end();)
@@ -94,13 +93,16 @@ void MinHeuristicAlgorithm::allocateDay(unsigned int dayId, vector<unsigned int>
 
         for (unsigned int shiftId : data.shifts)
         {
-            if (allocateShift(nurseId, dayId, shiftId))
+            if (data.missingNursePerShift[dayId][shiftId] > 0)
             {
-                // Affectation réussie, marquer comme décalée
-                shifted = true;
-                // Supprimer l'infirmière de l'ensemble
-                nurseIterator = availableNurses.erase(nurseIterator); // Supprimer et obtenir le nouvel itérateur
-                break; // Sortir de la boucle de shifts
+                if (allocateShift(nurseId, dayId, shiftId))
+                {
+                    // Affectation réussie, marquer comme décalée
+                    shifted = true;
+                    // Supprimer l'infirmière de l'ensemble
+                    nurseIterator = availableNurses.erase(nurseIterator); // Supprimer et obtenir le nouvel itérateur
+                    break; // Sortir de la boucle de shifts
+                }
             }
         }
 

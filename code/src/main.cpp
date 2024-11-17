@@ -2,6 +2,7 @@
 #define NOM_FICHIER_LISTE_FICHIER_DONNEES "data.txt"
 #define NOM_FICHIER_LISTE_SORTIE "sortie.txt"
 
+//#define RELEASE_PERFORMANCE
 #define RELEASE
 //#define MAX_HEURISTIC_ALGORITHM
 //#define MIN_HEURISTIC_ALGORITHM
@@ -120,6 +121,20 @@ void displayArray(const std::vector<int>& array) {
     std::cout << std::endl;
 }
 
+void countMinuteWorked(std::vector<unsigned int>& array) {
+    int totalValue = 0;
+    for (const auto& value : array)
+        totalValue += value;
+    std::cout << totalValue << std::endl << endl;
+}
+
+void countMinuteMaxWorked(Instance* instance) {
+    int totalValue = 0;
+    for (int i = 0; i < instance->get_Nombre_Personne(); ++i)
+        totalValue += instance->get_Personne_Duree_total_Max(i);
+    std::cout << totalValue << std::endl << endl;
+}
+
 #ifdef RELEASE
 
 int Resolution(Instance* instance)
@@ -146,8 +161,34 @@ int Resolution(Instance* instance)
     solution.Verification_Solution(instance);
 
     // Display objective function
-    cout << endl << "Objective function value (of the teacher) : " << objectiveFunctionValue << endl;
-    cout << endl << "Objective function value (with hard contraints weight) : " << algo.getBestSolution().i_valeur_fonction_objectif << endl << endl;
+    cout << endl << "Objective function value (basic) : " << objectiveFunctionValue << endl;
+    cout << endl << "Objective function value (with weights) : " << algo.getBestSolution().i_valeur_fonction_objectif << endl << endl;
+
+    return objectiveFunctionValue;
+}
+#endif
+
+#ifdef RELEASE_PERFORMANCE
+
+int Resolution(Instance* instance)
+{
+    int objectiveFunctionValue = 0;
+
+    GeneticAlgorithm algo(*instance, 25);
+    //set the differents strategies
+    algo.setSelectionStrategy(make_unique<TournamentSelection>());
+    algo.setCrossoverStrategy(make_unique<Column>());
+    algo.setMutationStrategy(make_unique <SwapShiftMutation>());
+    algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
+    Solution solution = algo.run();
+    ObjectiveCalculator objectiveCalculator;
+
+    // Calculate objective function
+    objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
+
+    // Display objective function
+    cout << endl << "Objective function value (basic) : " << objectiveFunctionValue << endl;
+    cout << endl << "Objective function value (with weights) : " << algo.getBestSolution().i_valeur_fonction_objectif << endl << endl;
 
     return objectiveFunctionValue;
 }
@@ -163,6 +204,7 @@ int Resolution(Instance* instance)
 
     Solution& solution = maxAlgo.run();
     ObjectiveCalculator objectiveCalculator;
+	CompleteObjectiveCalculator completeObjectiveCalculator;
 
     // Display the solution
     cout << "Solution : " << endl;
@@ -170,14 +212,19 @@ int Resolution(Instance* instance)
 
     // Calculate objective function
     objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
-    objectiveFunctionValue = maxAlgo.getBestSolution().i_valeur_fonction_objectif;
 
     // Verify solution & objective function
     solution.Verification_Solution(instance);
 
     // Display objective function
+    cout << endl << "Objective function value (basic) : " << objectiveFunctionValue << endl;
+    cout << endl << "Objective function value (with weights) : " << completeObjectiveCalculator.calculateObjectiveFunction(*instance, solution) << endl;
 
-    cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
+    cout << endl << "Minute worked : " << endl;
+    countMinuteWorked(maxAlgo.getSchedulingData().nbMinuteWorked);
+
+    cout << endl << "Max minute worked : " << endl;
+    countMinuteMaxWorked(instance);
 
     return objectiveFunctionValue;
 }
