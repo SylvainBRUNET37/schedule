@@ -39,6 +39,7 @@
     <ClCompile Include="src\solution\Instance.cpp" />
     <ClCompile Include="src\solution\Solution.cpp" />
     <ClCompile Include="src\selection\TournamentSelection.cpp" />
+    <ClCompile Include="src\crossover\UniformCrossover.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\algorithm\GeneticAlgorithm.h" />
@@ -63,6 +64,7 @@
     <ClInclude Include="headers\validator\SolutionValidator.h" />
     <ClInclude Include="headers\solution\NurseSchedulingData.h" />
     <ClInclude Include="headers\algorithm\MinHeuristicAlgorithm.h" />
+    <ClInclude Include="headers\crossover\UniformCrossover.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\data.txt" />
