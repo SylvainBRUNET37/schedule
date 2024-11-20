@@ -9,7 +9,7 @@
 bool SolutionValidator::isAtMaxConsecutiveWorkedDay(unsigned int nurseId, unsigned int actualDay)
 {
     // Get the maximum number of consecutive shifts that the nurse can work
-    unsigned int maxConsecutiveShift = instance.get_Personne_Nbre_Shift_Consecutif_Max(nurseId);
+    unsigned int maxConsecutiveShift = instance->get_Personne_Nbre_Shift_Consecutif_Max(nurseId);
     // Calculate the starting day to check for consecutive work shifts
     unsigned int startDay = actualDay - maxConsecutiveShift;
 
@@ -32,7 +32,7 @@ bool SolutionValidator::isAtMaxConsecutiveWorkedDay(unsigned int nurseId, unsign
 
 bool SolutionValidator::isAtEndOfConsecutiveDayOff(unsigned int nurseId, unsigned int actualDay)
 {
-    unsigned int minConsecutiveDaysOff = instance.get_Personne_Jour_OFF_Consecutif_Min(nurseId);
+    unsigned int minConsecutiveDaysOff = instance->get_Personne_Jour_OFF_Consecutif_Min(nurseId);
 
     if (actualDay < minConsecutiveDaysOff)
         return true;
@@ -55,7 +55,7 @@ bool SolutionValidator::isAtEndOfConsecutiveDayOff(unsigned int nurseId, unsigne
 
 bool SolutionValidator::haveDoneMinConsecutiveWorkedDay(unsigned int nurseId, unsigned int actualDay)
 {
-    unsigned int minConsecutiveWorkedDay = instance.get_Personne_Nbre_Shift_Consecutif_Min(nurseId);
+    unsigned int minConsecutiveWorkedDay = instance->get_Personne_Nbre_Shift_Consecutif_Min(nurseId);
 
     if (actualDay < minConsecutiveWorkedDay)
         return true;

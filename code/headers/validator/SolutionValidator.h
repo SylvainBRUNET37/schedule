@@ -33,7 +33,22 @@ public:
 	SolutionValidator(Instance* instance, Solution* solution, NurseSchedulingData* schedulingData)
 		: instance(instance), solution(solution), schedulingData(schedulingData) {}
 
-	void setSchedulingData(NurseSchedulingData* data) { schedulingData = data; }
+	SolutionValidator(Instance* instance)
+		: instance(instance), solution(nullptr), schedulingData(nullptr) {}
+
+	void setInstance(Instance* newInstance) {
+		instance = newInstance;
+	}
+
+	// Setter pour solution
+	void setSolution(Solution* newSolution) {
+		solution = newSolution;
+	}
+
+	// Setter pour schedulingData
+	void setSchedulingData(NurseSchedulingData* newSchedulingData) {
+		schedulingData = newSchedulingData;
+	}
 
 	/*****************************************************
 	*                  OTHER VERIFICATION                *
@@ -63,14 +78,14 @@ public:
 	{
 		unsigned int nbConstraintsViolated = 0;
 
-		unsigned int nbShift = instance.get_Nombre_Shift();
-		unsigned int nbDay = instance.get_Nombre_Jour();
+		unsigned int nbShift = instance->get_Nombre_Shift();
+		unsigned int nbDay = instance->get_Nombre_Jour();
 
 		for (unsigned int dayId = 0; dayId < nbDay; ++dayId)
 		{
 			for (unsigned int shiftId = 0; shiftId < nbShift; ++shiftId)
 			{
-				if (solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId] == -1)
+				if (solution->v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId] == -1)
 				{
 					nbConstraintsViolated += getNbConstraintsViolatedOnDayOff(nurseId, dayId);
 				}
@@ -96,7 +111,7 @@ public:
 	 * This method verifies if the nurse's shift for the specified day is not marked as -1,
 	 * which indicates that they are not assigned to work.
 	 */
-	bool isWorkingThisDay(unsigned int nurseId, unsigned int dayId) { return (solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId] != -1); }
+	bool isWorkingThisDay(unsigned int nurseId, unsigned int dayId) { return (solution->v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId] != -1); }
 
 	/**
 	 * @brief Checks if the given day is either a Saturday or Sunday.
@@ -131,7 +146,7 @@ public:
 	 */
 	bool isOnDayOff(unsigned int nurseId, unsigned int dayId)
 	{
-		vector<int> nursesDaysOff = instance.get_vector_Personne_Id_Jour_Conges(nurseId);
+		vector<int> nursesDaysOff = instance->get_vector_Personne_Id_Jour_Conges(nurseId);
 		return binary_search(nursesDaysOff.begin(), nursesDaysOff.end(), dayId);
 	}
 
@@ -157,7 +172,7 @@ public:
 	 *
 	 * This method checks the total minutes worked by the nurse against their maximum allowed working time.
 	 */
-	bool isAtMaxWorkedTime(unsigned int nurseId) { return (schedulingData.nbMinuteWorked[nurseId] > instance.get_Personne_Duree_total_Max(nurseId)); }
+	bool isAtMaxWorkedTime(unsigned int nurseId) { return (schedulingData->nbMinuteWorked[nurseId] > instance->get_Personne_Duree_total_Max(nurseId)); }
 
 	/**
 	 * @brief Checks if a nurse has reached the maximum number of shifts for a specific shift type.
@@ -170,7 +185,7 @@ public:
 	 * This method checks the number of shifts left for a specific shift type for the nurse
 	 * to determine if they have met their maximum allocation.
 	 */
-	bool isAtMaxWorkedShift(unsigned int nurseId, unsigned int shiftId) { return (schedulingData.maxShiftsPerType[nurseId][shiftId] == 0); }
+	bool isAtMaxWorkedShift(unsigned int nurseId, unsigned int shiftId) { return (schedulingData->maxShiftsPerType[nurseId][shiftId] == 0); }
 
 	/**
 	 * @brief Checks if a nurse is at the end of the required consecutive days off.
@@ -198,7 +213,7 @@ public:
 	 */
 	bool isAbleToWorkThisWeekend(unsigned int nurseId)
 	{
-		return !(schedulingData.nbWeekendWorked[nurseId] >= instance.get_Personne_Nbre_WE_Max(nurseId));
+		return !(schedulingData->nbWeekendWorked[nurseId] >= instance->get_Personne_Nbre_WE_Max(nurseId));
 	}
 
 	/**
@@ -214,7 +229,7 @@ public:
 	 */
 	bool isSuccessionForbidden(unsigned int previousShift, unsigned int actualShift)
 	{
-		vector<int> prohibitedShift = instance.get_vector_Shift_Suc_Interdit(actualShift);
+		vector<int> prohibitedShift = instance->get_vector_Shift_Suc_Interdit(actualShift);
 		return binary_search(prohibitedShift.begin(), prohibitedShift.end(), previousShift);
 	}
 
@@ -244,10 +259,10 @@ public:
 	 *
 	 * @return `true` if the nurse has worked at least the minimum required time, `false` otherwise.
 	 *
-	 * @note This function uses the `schedulingData.nbMinuteWorked` array for tracking worked minutes
-	 *       and the `instance.get_Personne_Duree_total_Min` method to retrieve the minimum time requirement.
+	 * @note This function uses the `schedulingData->nbMinuteWorked` array for tracking worked minutes
+	 *       and the `instance->get_Personne_Duree_total_Min` method to retrieve the minimum time requirement.
 	 */
-	bool haveDoneMinWorkedTime(unsigned int nurseId) { return schedulingData.nbMinuteWorked[nurseId] >= instance.get_Personne_Duree_total_Min(nurseId);	}
+	bool haveDoneMinWorkedTime(unsigned int nurseId) { return schedulingData->nbMinuteWorked[nurseId] >= instance->get_Personne_Duree_total_Min(nurseId);	}
 };
 
 #endif

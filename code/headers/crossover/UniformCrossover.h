@@ -10,7 +10,7 @@ class UniformCrossover : public CrossoverStrategy
 private:
 	
 public:
-	void execute(Solution& firstChild, Solution& secondChild) override;
+	void execute(Solution* firstChild, Solution* secondChild) override;
 	virtual ~UniformCrossover() = default;
 };
 
