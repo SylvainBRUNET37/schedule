@@ -2,6 +2,7 @@
 #define SOLUTION_VALIDATOR_H
 
 #include <algorithm>
+#include <iostream>
 
 #include "../solution/Instance.hpp"
 #include "../solution/Solution.hpp"
@@ -48,6 +49,7 @@ public:
 	// Setter pour schedulingData
 	void setSchedulingData(NurseSchedulingData* newSchedulingData) {
 		schedulingData = newSchedulingData;
+		
 	}
 
 	/*****************************************************
@@ -62,7 +64,7 @@ public:
 		unsigned int nbMinConsecutiveDayOff = instance->get_Personne_Jour_OFF_Consecutif_Min(nurseId);
 
 		// If the nurse has not reached the minimum number of consecutive worked days, increment the counter
-		if ((consecutiveWorkedShift < nbMinConsecutiveWorkedShift) && (consecutiveWorkedShift != 0) && ((dayId - nbMinConsecutiveWorkedShift) > 0))
+		if ((consecutiveWorkedShift < nbMinConsecutiveWorkedShift) && (consecutiveWorkedShift != 0) && ((dayId - nbMinConsecutiveWorkedShift) >= 0))
 			++nbConstraintsViolated;
 
 		// Verify if the past day is a day off
@@ -100,7 +102,7 @@ public:
 		unsigned int nbMaxConsecutiveWorkedShift = instance->get_Personne_Nbre_Shift_Consecutif_Max(nurseId);
 
 		// If the nurse has exceed the maximum number of consecutive worked days, increment the counter
-		if ((consecutiveWorkedShift < nbMaxConsecutiveWorkedShift) && (consecutiveWorkedShift != 0) && (dayId - nbMaxConsecutiveWorkedShift) > 0)
+		if (consecutiveWorkedShift > instance->get_Personne_Nbre_Shift_Consecutif_Max(nurseId))
 			++nbConstraintsViolated;
 
 		// If the nurse is working on a day off, incrment the counter
@@ -140,8 +142,12 @@ public:
 		unsigned int consecutiveWorkedShift = 0;
 		unsigned int shiftId = 0;
 
-		schedulingData = new NurseSchedulingData;
-
+		if (schedulingData == nullptr)
+		{
+			schedulingData = new NurseSchedulingData();
+			schedulingData->initData(*instance);
+		}
+		
 		unsigned int nbShift = instance->get_Nombre_Shift();
 		unsigned int nbDay = instance->get_Nombre_Jour();
 
@@ -154,15 +160,18 @@ public:
 			}
 			else
 			{
-				nbConstraintsViolated += getNbConstraintsViolatedOnWorkedDay(
-					nurseId, dayId, consecutiveWorkedShift);
+				//nbConstraintsViolated += getNbConstraintsViolatedOnWorkedDay(nurseId, dayId, consecutiveWorkedShift);
 
 				shiftId = solution->v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId];
 
+				// Update nb weekend worked
+				if ((dayId % 7) == 5)
+					schedulingData->nbWeekendWorked[nurseId] += 1;
+				if (((dayId % 7) == 6) && (solution->v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1] == -1))
+					schedulingData->nbWeekendWorked[nurseId] += 1;
+
 				// Update nurse data
-				if (isWeekendDay(dayId))
-					++schedulingData->nbWeekendWorked[dayId];
-				--(schedulingData->maxShiftsPerType[nurseId][shiftId]);
+				schedulingData->maxShiftsPerType[nurseId][shiftId] -= 1;
 				schedulingData->nbMinuteWorked[nurseId] += instance->get_Shift_Duree(shiftId);
 				++consecutiveWorkedShift;
 			}
