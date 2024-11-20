@@ -166,6 +166,14 @@ int Resolution(Instance* instance)
     cout << endl << "Objective function value (basic) : " << objectiveFunctionValue << endl;
     cout << endl << "Objective function value (with weights) : " << algo.getBestSolution().i_valeur_fonction_objectif << endl << endl;
 
+	SolutionValidator solutionValidator(instance);
+    solutionValidator.setSolution(&solution);
+    unsigned int nbContraintes = 0;
+	for (unsigned int nurseId = 0; nurseId < instance->get_Nombre_Personne(); nurseId++)
+        nbContraintes += solutionValidator.getNbConstraintsViolatedForNurse(nurseId);
+
+	cout << "Number of constraints violated : " << nbContraintes << endl;
+
     return objectiveFunctionValue;
 }
 #endif
