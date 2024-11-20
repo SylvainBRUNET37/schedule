@@ -78,6 +78,9 @@
     <ClCompile Include="src\crossover\UniformCrossover.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\crossover\Line.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Instance.hpp">

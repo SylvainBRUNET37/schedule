@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\algorithm\MinHeuristicAlgorithm.cpp" />
+    <ClCompile Include="src\crossover\Line.cpp" />
     <ClCompile Include="src\solution\NurseSchedulingData.cpp" />
     <ClCompile Include="src\validator\SolutionValidator.cpp" />
     <ClCompile Include="src\calculation\LightObjectiveCalculator.cpp" />

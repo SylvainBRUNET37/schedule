@@ -12,9 +12,9 @@ class SolutionValidator
 private:
 	const unsigned int DAYS_IN_WEEK = 7; ///< Number of days in a week.
 
-	Instance& instance;
-	Solution& solution;
-	NurseSchedulingData& schedulingData;
+	Instance* instance;
+	Solution* solution;
+	NurseSchedulingData* schedulingData;
 
 public:
 	/*****************************************************
@@ -30,17 +30,60 @@ public:
 	 * @param solution Reference to the Solution object representing the current schedule.
 	 * @param schedulingData Reference to the NurseSchedulingData object with nurse-specific data.
 	 */
-	SolutionValidator(Instance& instance, Solution& solution, NurseSchedulingData& schedulingData)
+	SolutionValidator(Instance* instance, Solution* solution, NurseSchedulingData* schedulingData)
 		: instance(instance), solution(solution), schedulingData(schedulingData) {}
 
+	void setSchedulingData(NurseSchedulingData* data) { schedulingData = data; }
+
+	/*****************************************************
+	*                  OTHER VERIFICATION                *
+	*****************************************************/
+
+	unsigned int getNbConstraintsViolatedOnDayOff(unsigned int nurseId, unsigned int dayId)
+	{
+		unsigned int nbConstraintsViolated = 0;
 
 
-	void setSchedulingData(NurseSchedulingData& data) { schedulingData = data; }
+		return nbConstraintsViolated;
+	}
 
+	unsigned int getNbConstraintsViolatedOnWorkedDay(unsigned int nurseId, unsigned int dayId, unsigned int shiftId)
+	{
+		unsigned int nbConstraintsViolated = 0;
+
+
+		return nbConstraintsViolated;
+	}
 
 	/*****************************************************
 	*                 GLOBAL VERIFICATION                *
 	*****************************************************/
+
+	unsigned int getNbConstraintsViolatedForNurse(unsigned int nurseId)
+	{
+		unsigned int nbConstraintsViolated = 0;
+
+		unsigned int nbShift = instance.get_Nombre_Shift();
+		unsigned int nbDay = instance.get_Nombre_Jour();
+
+		for (unsigned int dayId = 0; dayId < nbDay; ++dayId)
+		{
+			for (unsigned int shiftId = 0; shiftId < nbShift; ++shiftId)
+			{
+				if (solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId] == -1)
+				{
+					nbConstraintsViolated += getNbConstraintsViolatedOnDayOff(nurseId, dayId);
+				}
+				else
+				{
+					nbConstraintsViolated += getNbConstraintsViolatedOnWorkedDay(nurseId, dayId, shiftId);
+
+				}
+			}
+		}
+
+		return nbConstraintsViolated;
+	}
 
 	/**
 	 * @brief Checks if a nurse is scheduled to work on a specific day.
