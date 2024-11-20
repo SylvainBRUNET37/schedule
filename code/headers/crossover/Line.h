@@ -6,7 +6,7 @@
 class Line : public CrossoverStrategy
 {
 public :
-	void execute(Solution& firstChild, Solution& secondChild) override;
+	void execute(Solution* firstChild, Solution* secondChild) override;
 	virtual ~Line() = default;
 };
 
