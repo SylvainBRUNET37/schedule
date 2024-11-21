@@ -5,15 +5,17 @@
 
 void UniformCrossover::execute(Solution* firstChild, Solution* secondChild)
 {
-    random_device rd;
-    mt19937 gen(rd());
-    bernoulli_distribution dist(0.5);
+	int nbColumns = firstChild->v_v_IdShift_Par_Personne_et_Jour[0].size();
+	int nbLignes = firstChild->v_v_IdShift_Par_Personne_et_Jour.size();
 
-	unsigned int nbNurse = firstChild->v_v_IdShift_Par_Personne_et_Jour.size();
-    unsigned int nbDay = firstChild->v_v_IdShift_Par_Personne_et_Jour[0].size();
+	// Assume that solutions have a vector representation
+	random_device rd;
+	mt19937 eng(rd());
+	uniform_int_distribution<int> dist(0, nbLignes - 1);
 
-    for (size_t nurseId = 0; nurseId < nbNurse; ++nurseId)
-        for (size_t dayId = 0; dayId < nbDay; ++dayId)
-            if (dist(gen) == 0)
-                swap(firstChild->v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId], secondChild->v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId]);
+	int crossoverPoint = dist(eng); // Select random crossover point
+
+	// Perform one-point crossover
+	for (size_t i = crossoverPoint; i < nbLignes; ++i)
+		swap(firstChild->v_v_IdShift_Par_Personne_et_Jour[i], secondChild->v_v_IdShift_Par_Personne_et_Jour[i]);
 }

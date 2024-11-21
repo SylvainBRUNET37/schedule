@@ -23,6 +23,7 @@
 #include "../headers/algorithm/MinHeuristicAlgorithm.h"
 #include "../headers/crossover/UniformCrossover.h"
 #include "../headers/crossover/Line.h"
+#include "../headers/repair/RepairStrategy.h"
 
 using namespace std;
 
@@ -143,10 +144,10 @@ int Resolution(Instance* instance)
 {
     int objectiveFunctionValue = 0;
 
-    GeneticAlgorithm algo(*instance, 100);
+    GeneticAlgorithm algo(*instance, 500);
     //set the differents strategies
     algo.setSelectionStrategy(make_unique<TournamentSelection>());
-    algo.setCrossoverStrategy(make_unique<Line>());
+    algo.setCrossoverStrategy(make_unique<UniformCrossover>());
     algo.setMutationStrategy(make_unique <SwapShiftMutation>());
     algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
     Solution solution = algo.run();
