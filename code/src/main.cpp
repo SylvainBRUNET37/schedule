@@ -144,7 +144,7 @@ int Resolution(Instance* instance)
 {
     int objectiveFunctionValue = 0;
 
-    GeneticAlgorithm algo(*instance, 500);
+    GeneticAlgorithm algo(*instance, 3000);
     //set the differents strategies
     algo.setSelectionStrategy(make_unique<TournamentSelection>());
     algo.setCrossoverStrategy(make_unique<UniformCrossover>());
@@ -166,19 +166,6 @@ int Resolution(Instance* instance)
     // Display objective function
     cout << endl << "Objective function value (basic) : " << objectiveFunctionValue << endl;
     cout << endl << "Objective function value (with weights) : " << algo.getBestSolution().i_valeur_fonction_objectif << endl << endl;
-
-    // Test validator
-    NurseSchedulingData schedulingData;
-	schedulingData.initData(*instance);
-	SolutionValidator solutionValidator(instance);
-    solutionValidator.setSolution(&solution);
-	solutionValidator.setSchedulingData(&schedulingData);
-
-    unsigned int nbContraintes = 0;
-    for (unsigned int nurseId = 0; nurseId < instance->get_Nombre_Personne(); nurseId++)
-        nbContraintes += solutionValidator.getNbConstraintsViolatedForNurse(nurseId);
-
-    cout << "Number of constraints violated : " << nbContraintes << endl;
 
     return objectiveFunctionValue;
 }

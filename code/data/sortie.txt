@@ -627,3 +627,84 @@ Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst3.txt	1.88798	6342
 Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst3.txt	4.8129	5531
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.87839	6949
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	2.06809	7637
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.89485	5932
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.86203	6949
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.91484	6058
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.92291	6539
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.80435	6435
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.86326	5954
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst5.txt	3.52356	12510
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.90806	5711
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.88856	6149
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	2.14229	5838
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.86351	6441
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.96944	5952
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	5.56181	5859
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.95593	9378
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.94555	6740
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.89455	8254
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.96892	9489
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.97019	7551
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	2.0215	7472
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.99015	6739
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.96561	7548
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	2.02898	7345
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.97561	9471
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	2.04204	9170
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	2.21453	8455
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	2.34501	9069
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	5.77868	8556
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	4.09604	9274
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	4.04307	6951
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	4.06019	8082
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	2.06539	7174
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	2.18751	9076
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	2.1163	8660
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	7.53471	32197
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	7.40921	36980
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	7.40999	34656
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	7.3206	17555
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst8.txt	7.44947	34547
