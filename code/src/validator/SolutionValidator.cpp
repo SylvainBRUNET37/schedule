@@ -186,7 +186,7 @@ bool SolutionValidator::haveDoneMinConsecutiveWorkedDay(unsigned int nurseId, un
 {
     unsigned int minConsecutiveWorkedDay = instance->get_Personne_Nbre_Shift_Consecutif_Min(nurseId);
 
-    if (actualDay < minConsecutiveWorkedDay)
+    if (actualDay < minConsecutiveWorkedDay || !isWorkingThisDay(nurseId, actualDay - 1))
         return true;
 
     unsigned int nbConsecutiveWorkedDay = 0;

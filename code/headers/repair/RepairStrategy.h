@@ -2,15 +2,18 @@
 #define REPAIR_STRATEGY_H
 
 #include "../solution/Solution.hpp"
+#include "../validator/SolutionValidator.h"
 
 class RepairStrategy
 {
 private:
+	SolutionValidator validator;
+	Instance& instance;
 
 public:
-	RepairStrategy() {}
+	RepairStrategy(Instance& instance) : validator(&instance), instance(instance) {}
 
-	virtual void execute(Solution& solution) = 0;
+	void execute(Solution& solution);
 };
 
 #endif
