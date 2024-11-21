@@ -15,14 +15,17 @@ bool MinHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned in
 	// Early exit if the nurse is on a day off
 	if (validator.isOnDayOff(nurseId, dayId)) return false;  // High frequency
 
-	// Fait travailler si le nombre de jours minimum de travail consécutif n'est pas atteint
-	if (!validator.haveDoneMinConsecutiveWorkedDay(nurseId, dayId)) return true;
-
 	// Early exit if at the end of consecutive days off
 	if (!validator.isAtEndOfConsecutiveDayOff(nurseId, dayId)) return false;  // Medium frequency
 
+	// Fait travailler si le nombre de jours minimum de travail consécutif n'est pas atteint
+	if (!validator.haveDoneMinConsecutiveWorkedDay(nurseId, dayId)) return true;
+
 	// Check if the day is a weekend and if the nurse can work this weekend
 	if (validator.isWeekendDay(dayId) && validator.isAbleToWorkThisWeekend(nurseId)) return false; // Low to Medium frequency
+
+	// Check if the nurse has reached the max worked time
+	if (validator.isAtMaxWorkedTime(nurseId)) return false;  // Medium frequency
 
 	// Check if at max consecutive worked days
 	if (validator.isAtMaxConsecutiveWorkedDay(nurseId, dayId)) return false;  // Medium frequency
