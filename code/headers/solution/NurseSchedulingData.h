@@ -24,8 +24,9 @@ public:
         nbWeekendWorked.resize(nbNurse, 0);
         maxShiftsPerType.resize(nbNurse, vector<unsigned int>(nbShift, 0));
 
-        // Resize shift vector
+        // Resize shift and day vector
         shifts.resize(nbShift, 0);
+		days.resize(nbDay, 0);
 
         // Initialize shift ids
         for (unsigned int shiftId = 0; shiftId < nbShift; ++shiftId)
@@ -49,6 +50,7 @@ public:
 	
 	// Attributs en public pour les chercher plus vite et pas se faire chier a utiliser des getters et des setters et autres conneries
 	vector<unsigned int> nurses; ///< IDs of all nurses.
+    vector<unsigned int> days; ///< IDs of all days.
 	vector<unsigned int> shifts; ///< IDs of all shift types.
 	vector<vector<unsigned int>> maxShiftsPerType; ///< Maximum shifts allowed per type for each nurse [nurseId][shiftId] (to decrement).
 	vector<unsigned int> nbMinuteWorked; ///< Total minutes worked by each nurse [nurseId] (to increment).

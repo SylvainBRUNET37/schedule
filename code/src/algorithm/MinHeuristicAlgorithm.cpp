@@ -48,30 +48,26 @@ bool MinHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned i
 
 Solution& MinHeuristicAlgorithm::run()
 {
-	for (unsigned int i = 0; i < 1; ++i)
+	unsigned int dayId = 0;
+	unsigned int nbDay = instance.get_Nombre_Jour();
+
+	random_device rd;
+	mt19937 eng(rd());
+
+	for (unsigned int dayId = 0; dayId < nbDay; ++dayId)
 	{
-		unsigned int dayId = 0;
-		unsigned int nbDay = instance.get_Nombre_Jour();
+		vector<unsigned int> availableNurses;
 
-		random_device rd;
-		mt19937 eng(rd());
+		// Insert available nurses
+		for (unsigned int nurseId : data.nurses)
+			if (isAvailableThisDay(nurseId, dayId))
+				availableNurses.push_back(nurseId);
 
-		while (dayId < nbDay)
-		{
-			vector<unsigned int> availableNurses;
+		shuffle(availableNurses.begin(), availableNurses.end(), eng);
+		shuffle(data.shifts.begin(), data.shifts.end(), eng);
 
-			// Insert available nurses
-			for (unsigned int nurseId : data.nurses)
-				if (isAvailableThisDay(nurseId, dayId))
-					availableNurses.push_back(nurseId);
-
-			shuffle(availableNurses.begin(), availableNurses.end(), eng);
-			shuffle(data.shifts.begin(), data.shifts.end(), eng);
-
-			// Allocate every nurse
-			allocateDay(dayId, availableNurses);
-			++dayId;
-		}
+		// Allocate every nurse
+		allocateDay(dayId, availableNurses);
 	}
 
 	CompleteObjectiveCalculator calculator;
