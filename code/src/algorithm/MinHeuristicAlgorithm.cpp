@@ -54,7 +54,9 @@ Solution& MinHeuristicAlgorithm::run()
 	random_device rd;
 	mt19937 eng(rd());
 
-	for (unsigned int dayId = 0; dayId < nbDay; ++dayId)
+	//shuffle(data.days.begin(), data.days.end(), eng);
+
+	for (unsigned int dayId : data.days)
 	{
 		vector<unsigned int> availableNurses;
 
