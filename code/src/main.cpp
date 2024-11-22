@@ -3,7 +3,7 @@
 #define NOM_FICHIER_LISTE_SORTIE "sortie.txt"
 
 //#define RELEASE_PERFORMANCE
-#define RELEASE
+//#define RELEASE
 //#define MAX_HEURISTIC_ALGORITHM
 //#define MIN_HEURISTIC_ALGORITHM
 
@@ -24,6 +24,7 @@
 #include "../headers/crossover/UniformCrossover.h"
 #include "../headers/crossover/Line.h"
 #include "../headers/repair/RepairStrategy.h"
+#include "../headers/algorithm/OtherHeuristicAlgorithm.h"
 
 using namespace std;
 

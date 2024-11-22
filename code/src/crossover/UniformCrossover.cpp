@@ -14,7 +14,7 @@ void UniformCrossover::execute(Solution* firstChild, Solution* secondChild)
     int nbLine = firstChild->v_v_IdShift_Par_Personne_et_Jour.size();
     int crossoverType = dist(eng); // 0 = one-point on line, 1 = one-point on column
 
-    if (crossoverType == 0)
+    if (crossoverType == 600)
     {
         uniform_int_distribution<int> dist(0, nbLine - 1);
 

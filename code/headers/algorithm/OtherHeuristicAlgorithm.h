@@ -1,13 +1,13 @@
-#ifndef MIN_HEURISTIC_AGLORITHM_H
-#define MIN_HEURISTIC_AGLORITHM_H
+#ifndef OTHER_HEURISTIC_AGLORITHM_H
+#define OTHER_HEURISTIC_AGLORITHM_H
 
 #include "ResolutionAlgorithm.h"
 
-class MinHeuristicAlgorithm : public ResolutionAlgorithm
+class OtherHeuristicAlgorithm : public ResolutionAlgorithm
 {
 private:
 
-	/*****************************************************a
+	/*****************************************************
 	*                 GLOBAL VERIFICATION                *
 	*****************************************************/
 
@@ -50,7 +50,7 @@ public:
 	 * Initializes the algorithm with the given instance,
 	 * fills the list of nurses, and fill the solution matrix with -1.
 	 */
-	MinHeuristicAlgorithm(Instance& instance) : ResolutionAlgorithm(instance) {
+	OtherHeuristicAlgorithm(Instance& instance) : ResolutionAlgorithm(instance) {
 		// Initialize the solution: set every nurse's shift assignment for each day to -1 (meaning the nurse is not working that day
 		bestSolution.v_v_IdShift_Par_Personne_et_Jour.resize(instance.get_Nombre_Personne(), vector<int>(instance.get_Nombre_Jour(), -1));
 	}

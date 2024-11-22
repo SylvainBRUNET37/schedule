@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\algorithm\OtherHeuristicAlgorithm.cpp" />
     <ClCompile Include="src\algorithm\MinHeuristicAlgorithm.cpp" />
     <ClCompile Include="src\crossover\BestLineReparator.cpp" />
     <ClCompile Include="src\crossover\Line.cpp" />
@@ -70,6 +71,7 @@
     <ClInclude Include="headers\solution\NurseSchedulingData.h" />
     <ClInclude Include="headers\algorithm\MinHeuristicAlgorithm.h" />
     <ClInclude Include="headers\crossover\UniformCrossover.h" />
+    <ClInclude Include="headers\algorithm\OtherHeuristicAlgorithm.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\data.txt" />
