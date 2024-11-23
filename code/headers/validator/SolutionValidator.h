@@ -139,7 +139,10 @@ public:
 	 *
 	 * This method checks the total minutes worked by the nurse against their maximum allowed working time.
 	 */
-	bool isAtMaxWorkedTime(unsigned int nurseId) { return (schedulingData->nbMinuteWorked[nurseId] > instance->get_Personne_Duree_total_Max(nurseId)); }
+	bool isAtMaxWorkedTime(unsigned int nurseId, unsigned int shiftId) 
+	{ 
+		return ((schedulingData->nbMinuteWorked[nurseId] + instance->get_Shift_Duree(shiftId)) > instance->get_Personne_Duree_total_Max(nurseId)); 
+	}
 
 	/**
 	 * @brief Checks if a nurse has reached the maximum number of shifts for a specific shift type.

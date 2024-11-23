@@ -18,21 +18,29 @@ void UniformCrossover::execute(Solution* firstChild, Solution* secondChild)
     {
         uniform_int_distribution<int> dist(0, nbLine - 1);
 
-        int crossoverPoint = dist(eng); // Select random crossover point
+        int firstCrossoverPoint = dist(eng); // Select random crossover point
+        int secondCrossoverPoint = dist(eng); // Select random crossover point
+
+		if (firstCrossoverPoint > secondCrossoverPoint)
+			swap(firstCrossoverPoint, secondCrossoverPoint);
 
         // Perform one-point crossover on line
-        for (size_t nurseId = crossoverPoint; nurseId < nbLine; ++nurseId)
+        for (size_t nurseId = firstCrossoverPoint; nurseId < secondCrossoverPoint; ++nurseId)
             swap(firstChild->v_v_IdShift_Par_Personne_et_Jour[nurseId], secondChild->v_v_IdShift_Par_Personne_et_Jour[nurseId]);
     }
     else
     {
         uniform_int_distribution<int> dist(0, nbColumn - 1);
 
-        int crossoverPoint = dist(eng); // Select random crossover point
+        int firstCrossoverPoint = dist(eng); // Select random crossover point
+        int secondCrossoverPoint = dist(eng); // Select random crossover point
+
+        if (firstCrossoverPoint > secondCrossoverPoint)
+            swap(firstCrossoverPoint, secondCrossoverPoint);
 
         // Perform one-point crossover on column
 		for (size_t nurseId = 0; nurseId < nbLine; ++nurseId)
-            for (size_t dayId = crossoverPoint; dayId < nbColumn; ++dayId)
+            for (size_t dayId = firstCrossoverPoint; dayId < secondCrossoverPoint; ++dayId)
                 swap(firstChild->v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId], secondChild->v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId]);
     }
 }

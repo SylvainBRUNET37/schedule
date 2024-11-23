@@ -24,9 +24,6 @@ bool OtherHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned 
 	// Check if the day is a weekend and if the nurse can work this weekend
 	if (validator.isWeekendDay(dayId) && validator.isAbleToWorkThisWeekend(nurseId)) return false; // Low to Medium frequency
 
-	// Check if the nurse has reached the max worked time
-	if (validator.isAtMaxWorkedTime(nurseId)) return false;  // Medium frequency
-
 	// Check if at max consecutive worked days
 	if (validator.isAtMaxConsecutiveWorkedDay(nurseId, dayId)) return false;  // Medium frequency
 
@@ -41,6 +38,9 @@ bool OtherHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned
 
 	// Check for the specific shift type's limits
 	if (validator.isAtMaxWorkedShift(nurseId, shiftId)) return false;  // Low frequency, return true if not at max
+
+	// Check if the nurse has reached the max worked time
+	if (validator.isAtMaxWorkedTime(nurseId, shiftId)) return false;  // Medium frequency
 
 	return true;
 }

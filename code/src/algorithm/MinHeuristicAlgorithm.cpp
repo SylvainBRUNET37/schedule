@@ -24,9 +24,6 @@ bool MinHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned in
 	// Check if the day is a weekend and if the nurse can work this weekend
 	if (validator.isWeekendDay(dayId) && validator.isAbleToWorkThisWeekend(nurseId)) return false; // Low to Medium frequency
 
-	// Check if the nurse has reached the max worked time
-	if (validator.isAtMaxWorkedTime(nurseId)) return false;  // Medium frequency
-
 	// Check if at max consecutive worked days
 	if (validator.isAtMaxConsecutiveWorkedDay(nurseId, dayId)) return false;  // Medium frequency
 
@@ -41,6 +38,9 @@ bool MinHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned i
 
 	// Check for the specific shift type's limits
 	if (validator.isAtMaxWorkedShift(nurseId, shiftId)) return false;  // Low frequency, return true if not at max
+
+	// Check if the nurse has reached the max worked time
+	if (validator.isAtMaxWorkedTime(nurseId, shiftId)) return false;  // Medium frequency
 
 	return true;
 }
@@ -69,7 +69,6 @@ Solution& MinHeuristicAlgorithm::run()
 				availableNurses.push_back(nurseId);
 
 		shuffle(availableNurses.begin(), availableNurses.end(), eng);
-		shuffle(data.shifts.begin(), data.shifts.end(), eng);
 
 		// Allocate every nurse
 		allocateDay(dayId, availableNurses);
@@ -84,12 +83,16 @@ Solution& MinHeuristicAlgorithm::run()
 
 void MinHeuristicAlgorithm::allocateDay(unsigned int dayId, vector<unsigned int>& availableNurses)
 {
+	random_device rd;
+	mt19937 eng(rd());
 	unsigned int nbShift = instance.get_Nombre_Shift();
 
 	for (auto nurseIterator = availableNurses.begin(); nurseIterator != availableNurses.end();)
 	{
 		unsigned int nurseId = *nurseIterator;
 		bool shifted = false;
+
+		shuffle(data.shifts.begin(), data.shifts.end(), eng);
 
 		for (unsigned int shiftId : data.shifts)
 		{
