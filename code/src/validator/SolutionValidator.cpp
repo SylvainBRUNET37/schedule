@@ -163,20 +163,20 @@ bool SolutionValidator::isAtEndOfConsecutiveDayOff(unsigned int nurseId, unsigne
 {
     unsigned int minConsecutiveDaysOff = instance->get_Personne_Jour_OFF_Consecutif_Min(nurseId);
 
-    if (actualDay < minConsecutiveDaysOff)
+    if (actualDay == 0)
         return true;
 
     unsigned int nbConsecutiveDayOff = 0;
 	int dayId = actualDay - 1;
     int endDay = actualDay - minConsecutiveDaysOff;
 
-    while (dayId >= endDay && !isWorkingThisDay(nurseId, dayId))
+    while (dayId >= endDay && dayId >= 0 && !isWorkingThisDay(nurseId, dayId))
     {
         ++nbConsecutiveDayOff;
         --dayId;
     }
 
-    if (nbConsecutiveDayOff != 0 && nbConsecutiveDayOff <= minConsecutiveDaysOff - 1)
+    if (nbConsecutiveDayOff != 0 && nbConsecutiveDayOff < minConsecutiveDaysOff)
         return false;		
 
     return true;

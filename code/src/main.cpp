@@ -3,9 +3,9 @@
 #define NOM_FICHIER_LISTE_SORTIE "sortie.txt"
 
 //#define RELEASE_PERFORMANCE
-#define RELEASE
+//#define RELEASE
 //#define MAX_HEURISTIC_ALGORITHM
-//#define MIN_HEURISTIC_ALGORITHM
+#define MIN_HEURISTIC_ALGORITHM
 
 #include <iostream>
 #include <fstream>
