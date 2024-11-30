@@ -19,7 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\crossover\DoublePointCrossover.cpp" />
+    <ClCompile Include="src\crossover\ColumnTwoPointCrossover.cpp" />
+    <ClCompile Include="src\crossover\LineTwoPointCrossover.cpp" />
     <ClCompile Include="src\algorithm\OtherHeuristicAlgorithm.cpp" />
     <ClCompile Include="src\algorithm\MinHeuristicAlgorithm.cpp" />
     <ClCompile Include="src\crossover\BestLineReparator.cpp" />
@@ -47,7 +48,8 @@
     <ClCompile Include="src\crossover\UniformCrossover.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\crossover\LineDoublePointCrossover.h" />
+    <ClInclude Include="headers\crossover\ColumnTwoPointCrossover.h" />
+    <ClInclude Include="headers\crossover\LineTwoPointCrossover.h" />
     <ClInclude Include="headers\algorithm\GeneticAlgorithm.h" />
     <ClInclude Include="headers\algorithm\HeuristicAlgorithm.h" />
     <ClInclude Include="headers\algorithm\ResolutionAlgorithm.h" />

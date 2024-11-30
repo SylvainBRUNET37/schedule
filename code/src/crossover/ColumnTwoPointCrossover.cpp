@@ -21,7 +21,7 @@ void ColumnTwoPointCrossover::execute(Solution* firstChild, Solution* secondChil
 	if (firstCrossoverPoint > secondCrossoverPoint)
 		swap(firstCrossoverPoint, secondCrossoverPoint);
 
-	// Perform two-point crossover on line
+	// Perform two-point crossover on column
 	for (size_t nurseId = 0; nurseId < nbLine; ++nurseId)
 		for (size_t dayId = firstCrossoverPoint; dayId < secondCrossoverPoint; ++dayId)
 			swap(firstChild->v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId], secondChild->v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId]);

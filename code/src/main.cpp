@@ -12,19 +12,29 @@
 #include <chrono>
 #include <algorithm>
 
+// Include crossover strategies
+#include "../headers/crossover/Column.h"
+#include "../headers/crossover/Line.h"
+#include "../headers/crossover/UniformCrossover.h"
+#include "../headers/crossover/LineTwoPointCrossover.h"
+#include "../headers/crossover/ColumnTwoPointCrossover.h"
+
+// Include algorithms
+#include "../headers/algorithm/GeneticAlgorithm.h"
+#include "../headers/algorithm/HeuristicAlgorithm.h"
+#include "../headers/algorithm/MinHeuristicAlgorithm.h"
+#include "../headers/algorithm/OtherHeuristicAlgorithm.h"
+
+// Include solution and instance
 #include "../headers/solution/Instance.hpp"
 #include "../headers/solution/Solution.hpp"
-#include "../headers/algorithm/HeuristicAlgorithm.h"
+
+// Include other things
 #include "../headers/calculation/CompleteObjectiveCalculator.h"
-#include "../headers/algorithm/GeneticAlgorithm.h"
 #include "../headers/selection/TournamentSelection.h"
-#include "../headers/crossover/Column.h"
 #include "../headers/mutation/SwapShiftMutation.h"
-#include "../headers/algorithm/MinHeuristicAlgorithm.h"
-#include "../headers/crossover/UniformCrossover.h"
-#include "../headers/crossover/Line.h"
 #include "../headers/repair/RepairStrategy.h"
-#include "../headers/algorithm/OtherHeuristicAlgorithm.h"
+
 
 using namespace std;
 
@@ -148,7 +158,7 @@ int Resolution(Instance* instance)
     GeneticAlgorithm algo(*instance, 500);
     //set the differents strategies
     algo.setSelectionStrategy(make_unique<TournamentSelection>());
-    algo.setCrossoverStrategy(make_unique<Column>());
+	algo.setCrossoverStrategy(make_unique<Column>()); // Column, LineTwoPointCrossover are working well
     algo.setMutationStrategy(make_unique <SwapShiftMutation>());
     algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
     Solution solution = algo.run();
