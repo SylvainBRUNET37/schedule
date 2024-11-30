@@ -3,9 +3,9 @@
 #define NOM_FICHIER_LISTE_SORTIE "sortie.txt"
 
 //#define RELEASE_PERFORMANCE
-#define RELEASE
+//#define RELEASE
 //#define MAX_HEURISTIC_ALGORITHM
-//#define MIN_HEURISTIC_ALGORITHM
+#define MIN_HEURISTIC_ALGORITHM
 
 #include <iostream>
 #include <fstream>
@@ -264,11 +264,19 @@ int Resolution(Instance* instance)
     objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
     objectiveFunctionValue = minAlgo.getBestSolution().i_valeur_fonction_objectif;
 
+	cout << endl << "Objective function value (before) : " << objectiveFunctionValue << endl << endl;
+
+	// Repair the solution
+	Reparator reparator(instance);
+	reparator.execute(solution, *instance);
+
+    objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
+	minAlgo.getBestSolution().i_valeur_fonction_objectif = objectiveFunctionValue;
+
     // Verify solution & objective function
     solution.Verification_Solution(instance);
 
     // Display objective function
-
     cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
 
     return objectiveFunctionValue;
