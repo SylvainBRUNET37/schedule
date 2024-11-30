@@ -3,9 +3,9 @@
 #define NOM_FICHIER_LISTE_SORTIE "sortie.txt"
 
 //#define RELEASE_PERFORMANCE
-//#define RELEASE
+#define RELEASE
 //#define MAX_HEURISTIC_ALGORITHM
-#define MIN_HEURISTIC_ALGORITHM
+//#define MIN_HEURISTIC_ALGORITHM
 
 #include <iostream>
 #include <fstream>
@@ -148,7 +148,7 @@ int Resolution(Instance* instance)
     GeneticAlgorithm algo(*instance, 250);
     //set the differents strategies
     algo.setSelectionStrategy(make_unique<TournamentSelection>());
-    algo.setCrossoverStrategy(make_unique<UniformCrossover>());
+    algo.setCrossoverStrategy(make_unique<Column>());
     algo.setMutationStrategy(make_unique <SwapShiftMutation>());
     algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
     Solution solution = algo.run();

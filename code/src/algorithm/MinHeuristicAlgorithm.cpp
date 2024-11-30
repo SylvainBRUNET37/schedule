@@ -21,6 +21,24 @@ bool MinHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned in
 	// Check if the day is a weekend and if the nurse can work this weekend
 	if (validator.isWeekendDay(dayId) && validator.isAbleToWorkThisWeekend(nurseId)) return false; // Low to Medium frequency
 
+	// Check min worked days
+	if (dayId != 0 && !validator.isWorkingThisDay(nurseId, dayId - 1))
+	{
+		unsigned int nbDay = instance.get_Nombre_Jour();
+		unsigned int minConsecutiveWorkedDay = instance.get_Personne_Nbre_Shift_Consecutif_Min(nurseId);
+		unsigned int endDay = dayId + minConsecutiveWorkedDay;
+
+		// Restrict the end day to the last day of the schedule
+		if (endDay >= nbDay)
+			endDay = nbDay - 1;
+
+		for (unsigned int nextDay = dayId; nextDay < endDay; ++nextDay)
+		{
+			if (validator.isOnDayOff(nurseId, nextDay) || (validator.isWeekendDay(nextDay) && validator.isAbleToWorkThisWeekend(nurseId)))
+				return false;
+		}
+	}
+
 	// Fait travailler si le nombre de jours minimum de travail consécutif n'est pas atteint
 	//if (!validator.haveDoneMinConsecutiveWorkedDay(nurseId, dayId)) return true;
 
@@ -32,15 +50,38 @@ bool MinHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned in
 
 bool MinHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned int dayId, unsigned int shiftId)
 {
-	// Check if it's not the first day and if the nurse worked the previous day
 	if (dayId != 0 && validator.isWorkingThisDay(nurseId, dayId - 1))
-		if (validator.isSuccessionForbidden(shiftId, bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1])) return false;  // Medium frequency
+	{
+		if (validator.isSuccessionForbidden(shiftId, bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1]) 
+			&& !validator.haveDoneMinConsecutiveWorkedDay(nurseId, dayId))
+		{
+			for (unsigned int testShiftId : data.shifts)
+			{
+				if (!validator.isAtMaxWorkedShift(nurseId, testShiftId))
+				{
+					if (!validator.isSuccessionForbidden(shiftId, testShiftId))
+					{
+						++data.maxShiftsPerType[nurseId][bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId]];
+						bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1] = testShiftId;
+						--data.maxShiftsPerType[nurseId][testShiftId];
+						break;
+						// changer missing nurse si besoin
+					}
+				}
+			}
+		}
+	}
+
+	// Check succession forbidden
+	if (dayId != 0 && validator.isWorkingThisDay(nurseId, dayId - 1))
+		if (validator.isSuccessionForbidden(shiftId, bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1]))
+			return false;
 
 	// Check for the specific shift type's limits
-	if (validator.isAtMaxWorkedShift(nurseId, shiftId)) return false;  // Low frequency, return true if not at max
+	if (validator.isAtMaxWorkedShift(nurseId, shiftId)) return false;	
 
 	// Check if the nurse has reached the max worked time
-	if (validator.isAtMaxWorkedTime(nurseId, shiftId)) return false;  // Medium frequency
+	//if (validator.isAtMaxWorkedTime(nurseId, shiftId)) return false;
 
 	return true;
 }
@@ -56,8 +97,6 @@ Solution& MinHeuristicAlgorithm::run()
 
 	random_device rd;
 	mt19937 eng(rd());
-
-	//shuffle(data.days.begin(), data.days.end(), eng);
 
 	for (unsigned int dayId : data.days)
 	{

@@ -18,11 +18,11 @@ bool OtherHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned 
 	// Early exit if at the end of consecutive days off
 	if (!validator.isAtEndOfConsecutiveDayOff(nurseId, dayId)) return false;  // Medium frequency
 
-	// Fait travailler si le nombre de jours minimum de travail consécutif n'est pas atteint
-	if (!validator.haveDoneMinConsecutiveWorkedDay(nurseId, dayId)) return true;
-
 	// Check if the day is a weekend and if the nurse can work this weekend
 	if (validator.isWeekendDay(dayId) && validator.isAbleToWorkThisWeekend(nurseId)) return false; // Low to Medium frequency
+
+	// Fait travailler si le nombre de jours minimum de travail consécutif n'est pas atteint
+	//if (!validator.haveDoneMinConsecutiveWorkedDay(nurseId, dayId)) return true;
 
 	// Check if at max consecutive worked days
 	if (validator.isAtMaxConsecutiveWorkedDay(nurseId, dayId)) return false;  // Medium frequency
@@ -57,7 +57,7 @@ Solution& OtherHeuristicAlgorithm::run()
 	random_device rd;
 	mt19937 eng(rd());
 
-	//shuffle(data.days.begin(), data.days.end(), eng); (casse tout)
+	//shuffle(data.days.begin(), data.days.end(), eng);
 
 	for (unsigned int dayId : data.days)
 	{
@@ -69,7 +69,6 @@ Solution& OtherHeuristicAlgorithm::run()
 				availableNurses.push_back(nurseId);
 
 		shuffle(availableNurses.begin(), availableNurses.end(), eng);
-		shuffle(data.shifts.begin(), data.shifts.end(), eng);
 
 		// Allocate every nurse
 		allocateDay(dayId, availableNurses);
@@ -84,6 +83,8 @@ Solution& OtherHeuristicAlgorithm::run()
 
 void OtherHeuristicAlgorithm::allocateDay(unsigned int dayId, vector<unsigned int>& availableNurses)
 {
+	random_device rd;
+	mt19937 eng(rd());
 	unsigned int nbShift = instance.get_Nombre_Shift();
 
 	for (auto nurseIterator = availableNurses.begin(); nurseIterator != availableNurses.end();)
@@ -91,18 +92,17 @@ void OtherHeuristicAlgorithm::allocateDay(unsigned int dayId, vector<unsigned in
 		unsigned int nurseId = *nurseIterator;
 		bool shifted = false;
 
+		shuffle(data.shifts.begin(), data.shifts.end(), eng);
+
 		for (unsigned int shiftId : data.shifts)
 		{
-			if (data.missingNursePerShift[dayId][shiftId] > 0)
+			if (allocateShift(nurseId, dayId, shiftId))
 			{
-				if (allocateShift(nurseId, dayId, shiftId))
-				{
-					// Affectation réussie, marquer comme décalée
-					shifted = true;
-					// Supprimer l'infirmière de l'ensemble
-					nurseIterator = availableNurses.erase(nurseIterator); // Supprimer et obtenir le nouvel itérateur
-					break; // Sortir de la boucle de shifts
-				}
+				// Affectation réussie, marquer comme décalée
+				shifted = true;
+				// Supprimer l'infirmière de l'ensemble
+				nurseIterator = availableNurses.erase(nurseIterator); // Supprimer et obtenir le nouvel itérateur
+				break; // Sortir de la boucle de shifts
 			}
 		}
 
