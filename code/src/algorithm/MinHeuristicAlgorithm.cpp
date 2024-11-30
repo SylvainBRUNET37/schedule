@@ -57,7 +57,7 @@ bool MinHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned i
 				{
 					if (!validator.isSuccessionForbidden(shiftId, testShiftId))
 					{
-						++data.maxShiftsPerType[nurseId][bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId]];
+						++data.maxShiftsPerType[nurseId][bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1]];
 						bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1] = testShiftId;
 						--data.maxShiftsPerType[nurseId][testShiftId];
 						break;

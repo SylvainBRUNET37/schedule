@@ -1,43 +1,50 @@
 #include "../../headers/repair/Reparator.h"
 
-void Reparator::execute(Solution& solution, Instance& instance) {
-	int nbIndividus = solution.v_v_IdShift_Par_Personne_et_Jour.size();
-	//for each individual rebuild the line to comply with these 2 constraints :
-	// - total duration for individual too high (we)
-	// - minimum shifts consecutive 
+// for each individual rebuild the line to comply with these constraints :
+//		- minimum shifts consecutive 
+void Reparator::execute(Solution& solution, Instance& instance) 
+{
+	unsigned int nbNurse = instance.get_Nombre_Personne();
+	unsigned int nbDay = instance.get_Nombre_Jour();
 
-	for (int i = 0; i < nbIndividus; i++) {		
-		random_device rd;
-		mt19937 eng(rd());
-		//count nb shifts worked
-		int nbDays = instance.get_Nombre_Jour();
+	random_device rd;
+	mt19937 eng(rd());
+	uniform_int_distribution<int> dist(1, nbDay - 2);
+
+	for (unsigned int nurseId = 0; nurseId < nbNurse; ++nurseId)
+	{
+		// Count nb worked days
+		unsigned int nbMinuteWorked = 0;
+		for (unsigned int dayId = 0; dayId < nbDay; ++dayId)
+			if (solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId] != -1)
+				nbMinuteWorked += instance.get_Shift_Duree(solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId]);
+
+		// Calculate the difference between the number of worked days and the maximum number of working day for the nurse
+		int minuteWorkedDifference = nbMinuteWorked - instance.get_Personne_Duree_total_Max(nurseId);
+
+		// Add days off until the maximum worked time condition is satisfied
+		unsigned int dayId = 0;
+		while (minuteWorkedDifference > 0)
 		{
-			int nbWorkDays = 0;
-			for (int j = 0; j <= nbDays; j++) {
-				if (solution.v_v_IdShift_Par_Personne_et_Jour[i][j] != -1) nbWorkDays++;
-			}
+			// Generate a random day
+			dayId = dist(eng);
 
-			// add days off based on existing we/days of until this condition is satisfied
-			int diff = nbWorkDays - instance.get_Personne_Duree_total_Max(i);
-			if (diff > 0 ) { // loop until no more extras workDays 
-				for (int j = 0; j <= diff; j++) {
-					int randAcces = rand() % solution.v_v_IdShift_Par_Personne_et_Jour[i].size();
-					//if working this day -> advance until day of
-					if (solution.v_v_IdShift_Par_Personne_et_Jour[i][randAcces] != -1) {
-						while (solution.v_v_IdShift_Par_Personne_et_Jour[i][randAcces] == -1) {
-							randAcces++;
-						}
-						solution.v_v_IdShift_Par_Personne_et_Jour[i][randAcces - 1] = -1;
-					}
-					//else advance until day on
-					else {
-						while (solution.v_v_IdShift_Par_Personne_et_Jour[i][randAcces] != -1) {
-							randAcces++;
-						}
-						solution.v_v_IdShift_Par_Personne_et_Jour[i][randAcces] = -1;
-					}
+			// Check if the nurse is working this day. If not, pass
+			if (solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId] != -1)
+			{
+				if (solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1] == -1 && solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId + 1] != -1)
+				{
+					minuteWorkedDifference -= instance.get_Shift_Duree(solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId]);
+					solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId] = -1;
+				}
+				else if (solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1] != -1 && solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId + 1] == -1)
+				{
+					minuteWorkedDifference -= instance.get_Shift_Duree(solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId]);
+					solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId] = -1;
 				}
 			}
 		}
+
+		cout << "Nurse " << nurseId << " : " << minuteWorkedDifference << " minutes worked diff" << endl;
 	}
 }
