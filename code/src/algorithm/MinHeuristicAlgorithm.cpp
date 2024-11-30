@@ -12,13 +12,20 @@
 bool MinHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned int dayId)
 {
 	// Early exit if the nurse is on a day off
-	if (validator.isOnDayOff(nurseId, dayId)) return false;  // High frequency
+	if (validator.isOnDayOff(nurseId, dayId)) return false;
 
 	// Early exit if at the end of consecutive days off
-	if (!validator.isAtEndOfConsecutiveDayOff(nurseId, dayId)) return false;  // Medium frequency
+	if (!validator.isAtEndOfConsecutiveDayOff(nurseId, dayId)) return false;
 
 	// Check if the day is a weekend and if the nurse can work this weekend
-	if (validator.isWeekendDay(dayId) && validator.isAbleToWorkThisWeekend(nurseId)) return false; // Low to Medium frequency
+	if (validator.isWeekendDay(dayId) && !validator.isAbleToWorkThisWeekend(nurseId)) return false; // Low to Medium frequency
+
+	if (nurseId == 4 && dayId == 6)
+		cout << "Nurse " << nurseId << " is available on day " << dayId << endl;
+
+	// If the previous day is saturday and the nurse wasn't working this saturday, do not work this sunday
+	if (dayId != 0 && ((dayId - 1) % 7) == 5 && !validator.isWorkingThisDay(nurseId, dayId - 1))
+		return false;	
 
 	// Check min worked days
 	if (dayId != 0 && !validator.isWorkingThisDay(nurseId, dayId - 1))
@@ -29,11 +36,11 @@ bool MinHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned in
 
 		// Restrict the end day to the last day of the schedule
 		if (endDay >= nbDay)
-			endDay = nbDay - 1;
+			endDay = nbDay;
 
 		for (unsigned int nextDay = dayId; nextDay < endDay; ++nextDay)
 		{
-			if (validator.isOnDayOff(nurseId, nextDay) || (validator.isWeekendDay(nextDay) && validator.isAbleToWorkThisWeekend(nurseId)))
+			if (validator.isOnDayOff(nurseId, nextDay) || (validator.isWeekendDay(nextDay) && !validator.isAbleToWorkThisWeekend(nurseId)))
 				return false;
 		}
 	}
