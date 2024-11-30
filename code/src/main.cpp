@@ -33,7 +33,7 @@
 #include "../headers/calculation/CompleteObjectiveCalculator.h"
 #include "../headers/selection/TournamentSelection.h"
 #include "../headers/mutation/SwapShiftMutation.h"
-#include "../headers/repair/RepairStrategy.h"
+#include "../headers/repair/Reparator.h"
 
 
 using namespace std;

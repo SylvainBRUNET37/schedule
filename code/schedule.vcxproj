@@ -25,7 +25,7 @@
     <ClCompile Include="src\algorithm\MinHeuristicAlgorithm.cpp" />
     <ClCompile Include="src\crossover\BestLineReparator.cpp" />
     <ClCompile Include="src\crossover\Line.cpp" />
-    <ClCompile Include="src\repair\RepairStrategy.cpp" />
+    <ClCompile Include="src\repair\Reparator.cpp" />
     <ClCompile Include="src\solution\NurseSchedulingData.cpp" />
     <ClCompile Include="src\validator\SolutionValidator.cpp" />
     <ClCompile Include="src\calculation\LightObjectiveCalculator.cpp" />
@@ -64,6 +64,7 @@
     <ClInclude Include="headers\mutation\MutationStrategy.h" />
     <ClInclude Include="headers\mutation\SwapShiftMutation.h" />
     <ClInclude Include="headers\repair\RepairStrategy.h" />
+    <ClInclude Include="headers\repair\Reparator.h" />
     <ClInclude Include="headers\selection\SelectionStrategy.h" />
     <ClInclude Include="headers\Solution.hpp" />
     <ClInclude Include="headers\solution\DetailedSolution.h" />
