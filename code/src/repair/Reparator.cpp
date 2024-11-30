@@ -9,7 +9,7 @@ void Reparator::execute(Solution& solution, Instance& instance)
 
 	random_device rd;
 	mt19937 eng(rd());
-	uniform_int_distribution<int> dist(1, nbDay - 2);
+	uniform_int_distribution<int> dist(0, nbDay -1);
 
 	for (unsigned int nurseId = 0; nurseId < nbNurse; ++nurseId)
 	{
@@ -32,19 +32,10 @@ void Reparator::execute(Solution& solution, Instance& instance)
 			// Check if the nurse is working this day. If not, pass
 			if (solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId] != -1)
 			{
-				if (solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1] == -1 && solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId + 1] != -1)
-				{
-					minuteWorkedDifference -= instance.get_Shift_Duree(solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId]);
-					solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId] = -1;
-				}
-				else if (solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1] != -1 && solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId + 1] == -1)
-				{
-					minuteWorkedDifference -= instance.get_Shift_Duree(solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId]);
-					solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId] = -1;
-				}
+				// TO DO :
+				// Checker si c'est possible de mettre un jour de repos, 
+				// tout en respectant la contrainte de minimum de jours travaillés consécutifs
 			}
-		}
-
-		cout << "Nurse " << nurseId << " : " << minuteWorkedDifference << " minutes worked diff" << endl;
+		}	
 	}
 }
