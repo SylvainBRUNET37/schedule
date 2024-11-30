@@ -1,12 +1,12 @@
-#ifndef UNIFORM_CROSSOVER_H
-#define UNIFORM_CROSSOVER_H
+#ifndef LINE_TWO_POINT_CROSSOVER_H
+#define LINE_TWO_POINT_CROSSOVER_H
 
 #include "CrossoverStrategy.h"
 
-class UniformCrossover : public CrossoverStrategy
+class LineTwoPointCrossover : public CrossoverStrategy
 {
 private:
-	
+
 public:
 	void execute(Solution* firstChild, Solution* secondChild) override;
 };

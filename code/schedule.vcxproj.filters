@@ -90,6 +90,9 @@
     <ClCompile Include="src\algorithm\OtherHeuristicAlgorithm.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\crossover\DoublePointCrossover.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Instance.hpp">
@@ -168,6 +171,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\algorithm\OtherHeuristicAlgorithm.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\crossover\LineDoublePointCrossover.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
