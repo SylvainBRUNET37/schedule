@@ -40,7 +40,6 @@
     <ClCompile Include="src\mutation\MutationStrategy.cpp" />
     <ClCompile Include="src\mutation\SwapShiftMutation.cpp" />
     <ClCompile Include="src\selection\SelectionStrategy.cpp" />
-    <ClCompile Include="src\solution\DetailedSolution.cpp" />
     <ClCompile Include="src\solution\Instance.cpp" />
     <ClCompile Include="src\solution\Solution.cpp" />
     <ClCompile Include="src\selection\TournamentSelection.cpp" />
@@ -66,7 +65,6 @@
     <ClInclude Include="headers\repair\Reparator.h" />
     <ClInclude Include="headers\selection\SelectionStrategy.h" />
     <ClInclude Include="headers\Solution.hpp" />
-    <ClInclude Include="headers\solution\DetailedSolution.h" />
     <ClInclude Include="headers\solution\Instance.hpp" />
     <ClInclude Include="headers\solution\Solution.hpp" />
     <ClInclude Include="headers\selection\TournamentSelection.h" />

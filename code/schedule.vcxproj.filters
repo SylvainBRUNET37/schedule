@@ -39,9 +39,6 @@
     <ClCompile Include="src\selection\SelectionStrategy.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\solution\DetailedSolution.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="src\solution\Instance.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -120,9 +117,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\selection\SelectionStrategy.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\solution\DetailedSolution.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\solution\Instance.hpp">
