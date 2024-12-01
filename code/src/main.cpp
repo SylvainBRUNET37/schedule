@@ -2,9 +2,6 @@
 #define NOM_FICHIER_LISTE_FICHIER_DONNEES "data.txt"
 #define NOM_FICHIER_LISTE_SORTIE "sortie.txt"
 
-//#define RELEASE_PERFORMANCE
-#define RELEASE
-
 #include <thread>  
 #include <iostream>
 #include <fstream>
@@ -111,7 +108,6 @@ void displayMatrix(const std::vector<std::vector<int>>& matrix) {
 	}
 }
 
-
 int Resolution(Instance* instance)
 {
 	GeneticAlgorithm algo(*instance, 500);
@@ -131,42 +127,9 @@ int Resolution(Instance* instance)
 	// Run the algorithm
 	Solution solution = algo.run();
 
-	// Display the solution
-	cout << "Solution : " << endl;
-	displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
-
-	// Verify solution & objective function
-	solution.Verification_Solution(instance);
-
-	// Display objective function
-	cout << endl << "Objective function value : " << algo.getBestSolution().i_valeur_fonction_objectif << endl << endl;
-
-	return solution.i_valeur_fonction_objectif;
-}
-
-#ifdef RELEASE_PERFORMANCE
-
-int Resolution(Instance* instance)
-{
-	GeneticAlgorithm algo(*instance, 500);
-	ObjectiveCalculator objectiveCalculator;
-
-	// Create a vecotr with every crossover strategy
-	vector<unique_ptr<CrossoverStrategy>> crossoverStrategies;
-	crossoverStrategies.push_back(make_unique<LineTwoPointCrossover>());
-	crossoverStrategies.push_back(make_unique<Column>());
-
-	// Set the differents strategies
-	algo.setSelectionStrategy(make_unique<TournamentSelection>());
-	algo.setCrossoverStrategies(move(crossoverStrategies));
-	algo.setMutationStrategy(make_unique <SwapShiftMutation>());
-	algo.setObjectiveCalculator(make_unique <ObjectiveCalculator>());
-
-	// Run the algorithm
-	Solution solution = algo.run();
-
+	// Display the best solution
 	cout << endl << "Best solution : " << algo.getBestSolution().i_valeur_fonction_objectif << endl << endl;
 
+	// Return the best solution
 	return solution.i_valeur_fonction_objectif;
 }
-#endif
