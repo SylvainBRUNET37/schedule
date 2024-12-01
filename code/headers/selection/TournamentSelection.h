@@ -3,28 +3,31 @@
 
 #include "SelectionStrategy.h"
 
+/**
+ * @brief Implements a tournament selection strategy for choosing between two solutions.
+ *
+ * The `TournamentSelection` class determines the "better" solution between two
+ * candidates by comparing their objective function values.
+ */
 class TournamentSelection : public SelectionStrategy
 {
 private:
 
 public:
-	TournamentSelection() {}
-
-	/**
-	 * @brief Executes a tournament selection between two solutions.
-	 *
-	 * Compares the objective function values of two solutions and selects
-	 * the one with the higher or equal objective value as the "better" solution.
-	 *
-	 * @param solution1 The first solution to compare.
-	 * @param solution2 The second solution to compare.
-	 *
-	 * @return Solution& A reference to the selected solution with the greater or equal objective function value.
-	 *
-	 * If `solution1` has an objective value greater than or equal to that of `solution2`,
-	 * `solution1` is returned. Otherwise, `solution2` is returned.
-	 */
-	Solution& execute(Solution& solution1, Solution& solution2) override;
+    /**
+     * @brief Executes a tournament selection between two solutions.
+     *
+     * Compares the objective function values of two solutions and selects
+     * the one with the higher or equal objective value as the "better" solution.
+     *
+     * @param solution1 The first solution to compare.
+     * @param solution2 The second solution to compare.
+     * @return Solution& A reference to the selected solution with the greater or equal objective function value.
+     *
+     * If `solution1` has an objective value greater than or equal to that of `solution2`,
+     * `solution1` is returned. Otherwise, `solution2` is returned.
+     */
+    Solution& execute(Solution& solution1, Solution& solution2) override;
 };
 
 #endif
