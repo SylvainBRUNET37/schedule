@@ -9,8 +9,13 @@ class NeighborhoodOperator
 private:
 
 public:
-	// change the solution given in paramter
-	void execute(Solution& solution, Instance& instance);
+	// repair
+
+	void executeMinConsecutiveDayRepair(Solution& solution, Instance& instance, unsigned int nurseId);
+
+	void executeRandomMinConsecutiveDayRepair(Solution& solution, Instance& instance);
+
+	void executeTotalMinConsecutiveDayRepair(Solution& solution, Instance& instance);
 };
 
 #endif
