@@ -64,8 +64,10 @@ void OtherHeuristicAlgorithm::allocateDay(unsigned int dayId, vector<unsigned in
 
 		for (unsigned int shiftId : data.shifts)
 		{
+			// If the number of shifts needed for the shift is greater than 0
 			if (data.missingNursePerShift[dayId][shiftId] > 0)
 			{
+				// If the nurse is available for the shift
 				if (allocateShift(nurseId, dayId, shiftId))
 				{
 					// Affectation réussie, marquer comme décalée
