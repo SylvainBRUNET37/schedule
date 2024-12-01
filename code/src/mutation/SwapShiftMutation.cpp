@@ -4,26 +4,27 @@
 
 void SwapShiftMutation::execute(Solution& solution)
 {
-    // Generate a random number to select a nurse
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<> nurseDistribution(0, solution.v_v_IdShift_Par_Personne_et_Jour.size() - 1);
-    int randomNurseId = nurseDistribution(gen);
+	random_device rd;
+	mt19937 eng(rd());
 
-    // Get the nurse's assignments
-    vector<int>& nurseAssignments = solution.v_v_IdShift_Par_Personne_et_Jour[randomNurseId];
+	// Get the number of columns and lines
+	unsigned int nbNurse = solution.v_v_IdShift_Par_Personne_et_Jour.size();
+	unsigned int nbDay = solution.v_v_IdShift_Par_Personne_et_Jour[0].size();
 
-    // Generate a random number to select a shift
-    uniform_int_distribution<> shiftDistribution(0, nurseAssignments.size() - 1);
-    int shiftId1 = 0;
-    int shiftId2 = 0;
+	// Generate a random nurse
+	uniform_int_distribution<unsigned int> nurseDist(0, nbNurse - 1);
+	unsigned int nurseId = nurseDist(eng);
 
-    // Find the first shift assigned to the nurse
-    shiftId1 = shiftDistribution(gen);
+	// Generate 2 random crossover points
+	uniform_int_distribution<unsigned int> columnDist(0, nbDay - 1);
+	unsigned int firstCrossoverPoint = columnDist(eng);
+	unsigned int secondCrossoverPoint = columnDist(eng);
 
-    // Find the second shift assigned to the nurse
-    shiftId2 = shiftDistribution(gen);
+	// Swap the two points if the first is greater than the second
+	if (firstCrossoverPoint > secondCrossoverPoint)
+		swap(firstCrossoverPoint, secondCrossoverPoint);
 
-    // Swap the shifts
-    swap(nurseAssignments[shiftId1], nurseAssignments[shiftId2]);
+	// Perform two-point crossover on column
+	for (size_t dayId = 0; dayId < nbDay; ++dayId)
+		;
 }

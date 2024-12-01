@@ -3,9 +3,9 @@
 #define NOM_FICHIER_LISTE_SORTIE "sortie.txt"
 
 //#define RELEASE_PERFORMANCE
-//#define RELEASE
+#define RELEASE
 //#define MAX_HEURISTIC_ALGORITHM
-#define MIN_HEURISTIC_ALGORITHM
+//#define MIN_HEURISTIC_ALGORITHM
 //#define OTHER_HEURISTIC_ALGORITHM
 
 #include <iostream>
@@ -157,9 +157,16 @@ int Resolution(Instance* instance)
 	int objectiveFunctionValue = 0;
 
 	GeneticAlgorithm algo(*instance, 500);
+	
+	// Create a vecotr with every crossover strategy
+	vector<unique_ptr<CrossoverStrategy>> crossoverStrategies;
+	crossoverStrategies.push_back(make_unique<LineTwoPointCrossover>());
+	crossoverStrategies.push_back(make_unique<Column>());
+	//crossoverStrategies.push_back(make_unique<UniformCrossover>());
+	
 	//set the differents strategies
 	algo.setSelectionStrategy(make_unique<TournamentSelection>());
-	algo.setCrossoverStrategy(make_unique<Column>()); // Column, LineTwoPointCrossover are working well
+	algo.setCrossoverStrategies(move(crossoverStrategies)); // Column, LineTwoPointCrossover are working well
 	algo.setMutationStrategy(make_unique <SwapShiftMutation>());
 	algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
 	Solution solution = algo.run();
