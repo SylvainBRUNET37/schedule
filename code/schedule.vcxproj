@@ -34,9 +34,7 @@
     <ClCompile Include="src\algorithm\ResolutionAlgorithm.cpp" />
     <ClCompile Include="src\calculation\ObjectiveCalculator.cpp" />
     <ClCompile Include="src\crossover\Column.cpp" />
-    <ClCompile Include="src\crossover\CrossoverStrategy.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\mutation\MutationStrategy.cpp" />
     <ClCompile Include="src\mutation\SwapShiftMutation.cpp" />
     <ClCompile Include="src\selection\SelectionStrategy.cpp" />
     <ClCompile Include="src\solution\Instance.cpp" />

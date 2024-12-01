@@ -30,12 +30,6 @@
     <ClCompile Include="src\calculation\ObjectiveCalculator.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\crossover\CrossoverStrategy.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mutation\MutationStrategy.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="src\selection\SelectionStrategy.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>

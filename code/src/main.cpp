@@ -154,53 +154,34 @@ void countMinuteMaxWorked(Instance* instance) {
 
 int Resolution(Instance* instance)
 {
-	int objectiveFunctionValue = 0;
-
 	GeneticAlgorithm algo(*instance, 500);
-	
+	ObjectiveCalculator objectiveCalculator;
+
 	// Create a vecotr with every crossover strategy
 	vector<unique_ptr<CrossoverStrategy>> crossoverStrategies;
 	crossoverStrategies.push_back(make_unique<LineTwoPointCrossover>());
 	crossoverStrategies.push_back(make_unique<Column>());
-	//crossoverStrategies.push_back(make_unique<UniformCrossover>());
-	
-	//set the differents strategies
+
+	// Set the differents strategies
 	algo.setSelectionStrategy(make_unique<TournamentSelection>());
-	algo.setCrossoverStrategies(move(crossoverStrategies)); // Column, LineTwoPointCrossover are working well
+	algo.setCrossoverStrategies(move(crossoverStrategies));
 	algo.setMutationStrategy(make_unique <SwapShiftMutation>());
 	algo.setObjectiveCalculator(make_unique <ObjectiveCalculator>());
 
-	/*
-		/!\ chrono de 1 minute /!\
-	*/ 
-	Solution solution;
-	using namespace std::chrono;
-	auto start = steady_clock::now(); // Heure de début
-	auto end = start + minutes(1);    // Heure de fin, 1 minute plus tard
-
-	while (steady_clock::now() < end) {
-		solution = algo.run();
-		auto elapsed = duration_cast<seconds>(steady_clock::now() - start).count();
-		std::cout << "\rTemps écoulé : " << elapsed << " secondes" << std::flush;
-	}
-	
-	ObjectiveCalculator objectiveCalculator;
+	// Run the algorithm
+	Solution solution = algo.run();
 
 	// Display the solution
 	cout << "Solution : " << endl;
 	displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
 
-	// Calculate objective function
-	objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
-
 	// Verify solution & objective function
 	solution.Verification_Solution(instance);
 
 	// Display objective function
-	cout << endl << "Objective function value (basic) : " << objectiveFunctionValue << endl;
-	cout << endl << "Objective function value (with weights) : " << algo.getBestSolution().i_valeur_fonction_objectif << endl << endl;
+	cout << endl << "Objective function value : " << algo.getBestSolution().i_valeur_fonction_objectif << endl << endl;
 
-	return objectiveFunctionValue;
+	return solution.i_valeur_fonction_objectif;
 }
 #endif
 
@@ -208,25 +189,26 @@ int Resolution(Instance* instance)
 
 int Resolution(Instance* instance)
 {
-	int objectiveFunctionValue = 0;
-
-	GeneticAlgorithm algo(*instance, 25);
-	//set the differents strategies
-	algo.setSelectionStrategy(make_unique<TournamentSelection>());
-	algo.setCrossoverStrategy(make_unique<Column>());
-	algo.setMutationStrategy(make_unique <SwapShiftMutation>());
-	algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
-	Solution solution = algo.run();
+	GeneticAlgorithm algo(*instance, 500);
 	ObjectiveCalculator objectiveCalculator;
 
-	// Calculate objective function
-	objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
+	// Create a vecotr with every crossover strategy
+	vector<unique_ptr<CrossoverStrategy>> crossoverStrategies;
+	crossoverStrategies.push_back(make_unique<LineTwoPointCrossover>());
+	crossoverStrategies.push_back(make_unique<Column>());
 
-	// Display objective function
-	cout << endl << "Objective function value (basic) : " << objectiveFunctionValue << endl;
-	cout << endl << "Objective function value (with weights) : " << algo.getBestSolution().i_valeur_fonction_objectif << endl << endl;
+	// Set the differents strategies
+	algo.setSelectionStrategy(make_unique<TournamentSelection>());
+	algo.setCrossoverStrategies(move(crossoverStrategies));
+	algo.setMutationStrategy(make_unique <SwapShiftMutation>());
+	algo.setObjectiveCalculator(make_unique <ObjectiveCalculator>());
 
-	return objectiveFunctionValue;
+	// Run the algorithm
+	Solution solution = algo.run();
+
+	cout << endl << "Best solution : " << algo.getBestSolution().i_valeur_fonction_objectif << endl << endl;
+
+	return solution.i_valeur_fonction_objectif;
 }
 #endif
 
