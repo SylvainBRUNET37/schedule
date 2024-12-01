@@ -13,23 +13,24 @@
 
 bool MaxHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned int dayId)
 {
-	// Early exit if the nurse is on a day off
+	// Return false if the nurse is on a day off
 	if (validator.isOnDayOff(nurseId, dayId)) return false;
 
+	// Return false if ????????????
 	if (dayId != 0 && dayId < instance.get_Nombre_Jour() - 1)
 		if (validator.isOnDayOff(nurseId, dayId + 1) && !validator.isWorkingThisDay(nurseId, dayId - 1)) return false;
 
-	// Early exit if at the end of consecutive days off
+	// Return false if at the end of consecutive days off
 	if (!validator.isAtEndOfConsecutiveDayOff(nurseId, dayId)) return false;
 
-	// Check if the day is a weekend and if the nurse can work this weekend
+	// Return false if the day is a weekend and if the nurse cannot work this weekend
 	if (validator.isWeekendDay(dayId) && !validator.isAbleToWorkThisWeekend(nurseId)) return false;
 
-	// If the previous day is saturday and the nurse wasn't working this saturday, do not work this sunday
+	// Return false if the previous day is saturday and the nurse wasn't working this saturday, do not work this sunday
 	if (dayId != 0 && ((dayId - 1) % 7) == 5 && !validator.isWorkingThisDay(nurseId, dayId - 1))
 		return false;
 
-	// Check if at max consecutive worked days
+	// Return false if at max consecutive worked days
 	if (validator.isAtMaxConsecutiveWorkedDay(nurseId, dayId)) return false;
 
 	return true;
@@ -37,14 +38,14 @@ bool MaxHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned in
 
 bool MaxHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned int dayId, unsigned int shiftId)
 {
-	// Check if it's not the first day and if the nurse worked the previous day
+	// Return false if the shift succession is forbidden
 	if (dayId != 0 && validator.isWorkingThisDay(nurseId, dayId - 1))
 		if (validator.isSuccessionForbidden(shiftId, bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1])) return false;  // Medium frequency
 
-	// Check for the specific shift type's limits
+	// Return false if the nurse is at the specific shift type's limits
 	if (validator.isAtMaxWorkedShift(nurseId, shiftId)) return false;
 
-	// Check if the nurse has reached the max worked time
+	// Return false if the nurse has reached the max worked time
 	if (validator.isAtMaxWorkedTime(nurseId, shiftId)) return false;
 
 	return true;

@@ -11,13 +11,13 @@
 
 bool MinHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned int dayId)
 {
-	// Early exit if the nurse is on a day off
+	// Return false if the nurse is on a day off
 	if (validator.isOnDayOff(nurseId, dayId)) return false;
 
-	// Early exit if at the end of consecutive days off
+	// Return false if at the end of consecutive days off
 	if (!validator.isAtEndOfConsecutiveDayOff(nurseId, dayId)) return false;
 
-	// Check if the day is a weekend and if the nurse can work this weekend
+	// Return false if the day is a weekend and if the nurse cannot work this weekend
 	if (validator.isWeekendDay(dayId) && !validator.isAbleToWorkThisWeekend(nurseId)) return false; // Low to Medium frequency
 
 	// If the previous day is saturday and the nurse wasn't working this saturday, do not work this sunday
