@@ -29,12 +29,10 @@
     <ClCompile Include="src\repair\Reparator.cpp" />
     <ClCompile Include="src\solution\NurseSchedulingData.cpp" />
     <ClCompile Include="src\validator\SolutionValidator.cpp" />
-    <ClCompile Include="src\calculation\LightObjectiveCalculator.cpp" />
     <ClCompile Include="src\algorithm\GeneticAlgorithm.cpp" />
     <ClCompile Include="src\algorithm\HeuristicAlgorithm.cpp" />
     <ClCompile Include="src\algorithm\ResolutionAlgorithm.cpp" />
     <ClCompile Include="src\calculation\CompleteObjectiveCalculator.cpp" />
-    <ClCompile Include="src\calculation\HeuristicObjectiveCalculator.cpp" />
     <ClCompile Include="src\calculation\ObjectiveCalculator.cpp" />
     <ClCompile Include="src\crossover\Column.cpp" />
     <ClCompile Include="src\crossover\CrossoverStrategy.cpp" />
@@ -55,7 +53,6 @@
     <ClInclude Include="headers\algorithm\HeuristicAlgorithm.h" />
     <ClInclude Include="headers\algorithm\ResolutionAlgorithm.h" />
     <ClInclude Include="headers\calculation\CompleteObjectiveCalculator.h" />
-    <ClInclude Include="headers\calculation\HeuristicObjectiveCalculator.h" />
     <ClInclude Include="headers\calculation\ObjectiveCalculator.h" />
     <ClInclude Include="headers\crossover\BestLineReparator.h" />
     <ClInclude Include="headers\crossover\Column.h" />
@@ -73,7 +70,6 @@
     <ClInclude Include="headers\solution\Instance.hpp" />
     <ClInclude Include="headers\solution\Solution.hpp" />
     <ClInclude Include="headers\selection\TournamentSelection.h" />
-    <ClInclude Include="headers\calculation\LightObjectiveCalculator.h" />
     <ClInclude Include="headers\validator\SolutionValidator.h" />
     <ClInclude Include="headers\solution\NurseSchedulingData.h" />
     <ClInclude Include="headers\algorithm\MinHeuristicAlgorithm.h" />

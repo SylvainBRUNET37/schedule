@@ -30,9 +30,6 @@
     <ClCompile Include="src\calculation\CompleteObjectiveCalculator.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\calculation\HeuristicObjectiveCalculator.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="src\calculation\ObjectiveCalculator.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -55,9 +52,6 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\selection\TournamentSelection.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\calculation\LightObjectiveCalculator.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\mutation\SwapShiftMutation.cpp">
@@ -119,9 +113,6 @@
     <ClInclude Include="headers\calculation\CompleteObjectiveCalculator.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="headers\calculation\HeuristicObjectiveCalculator.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="headers\calculation\ObjectiveCalculator.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -144,9 +135,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\selection\TournamentSelection.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\calculation\LightObjectiveCalculator.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\mutation\SwapShiftMutation.h">
