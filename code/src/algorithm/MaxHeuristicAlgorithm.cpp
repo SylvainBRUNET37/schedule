@@ -89,7 +89,7 @@ Solution& MaxHeuristicAlgorithm::run()
 	}
 
 	// Repair the solution for the minimum worked consecutive days constraint
-	Reparator reparator(&instance);
+	Reparator reparator;
 	reparator.executeTotalMinConsecutiveDayRepair(bestSolution, instance);
 
 	// Calculate the weighted objective function value of the best solution and return the solution

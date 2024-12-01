@@ -6,7 +6,7 @@
 
 // for each individual rebuild the line to comply with these constraints :
 //		- minimum shifts consecutive 
-void Reparator::execute(Solution& solution, Instance& instance)
+void Reparator::executeMaxTimeWorkedRepair(Solution& solution, Instance& instance)
 {
 	unsigned int nbNurse = instance.get_Nombre_Personne();
 	unsigned int nbDay = instance.get_Nombre_Jour();
@@ -29,7 +29,7 @@ void Reparator::execute(Solution& solution, Instance& instance)
 			dayId = dist(eng);
 	
 			//check days next to a weekend;
-			if (solutionValidator.isWeekendDay(dayId) && ((dayId - 1) >= 0 && (dayId + 1) < nbDay)) {
+			if (isWeekendDay(dayId) && ((dayId - 1) >= 0 && (dayId + 1) < nbDay)) {
 				if (solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1] != -1) {
 					solution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1] = -1;
 				}

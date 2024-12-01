@@ -12,15 +12,31 @@
 class Reparator
 {
 private:
-	SolutionValidator solutionValidator;
-	Instance* instance;
-public:
-	Reparator(Instance* instance) : instance(instance), solutionValidator(instance) {};
-	
+	const unsigned int DAYS_IN_WEEK = 7; ///< Number of days in a week.
 
-	void execute(Solution& solution, Instance& instance);
+public:
+	void executeMaxTimeWorkedRepair(Solution& solution, Instance& instance);
 
 	int nbMinWorked(Solution& solution, Instance& instance, int nurseId);
+
+	/**
+	 * @brief Checks if the given day is either a Saturday or Sunday.
+	 *
+	 * @param dayId The day of the week represented as an integer.
+	 *
+	 * @return true If `dayId` is a Saturday or Sunday.
+	 * @return false If `dayId` is neither.
+	 *
+	 * This function determines if the specified day, represented by the integer `dayId`,
+	 * corresponds to a Saturday or Sunday based on the defined sequences:
+	 * - Saturdays: 5, 12, 19, 26, ...
+	 * - Sundays: 6, 13, 20, 27, ...
+	 */
+	bool isWeekendDay(int dayId) const
+	{
+		return (dayId >= 5 && (dayId + 2) % DAYS_IN_WEEK == 0) ||
+			(dayId >= 6 && (dayId + 1) % DAYS_IN_WEEK == 0);
+	}
 
 	void executeMinConsecutiveDayRepair(Solution& solution, Instance& instance, unsigned int nurseId);
 
