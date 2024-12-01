@@ -32,7 +32,6 @@
     <ClCompile Include="src\algorithm\GeneticAlgorithm.cpp" />
     <ClCompile Include="src\algorithm\HeuristicAlgorithm.cpp" />
     <ClCompile Include="src\algorithm\ResolutionAlgorithm.cpp" />
-    <ClCompile Include="src\calculation\CompleteObjectiveCalculator.cpp" />
     <ClCompile Include="src\calculation\ObjectiveCalculator.cpp" />
     <ClCompile Include="src\crossover\Column.cpp" />
     <ClCompile Include="src\crossover\CrossoverStrategy.cpp" />
@@ -52,7 +51,6 @@
     <ClInclude Include="headers\algorithm\GeneticAlgorithm.h" />
     <ClInclude Include="headers\algorithm\HeuristicAlgorithm.h" />
     <ClInclude Include="headers\algorithm\ResolutionAlgorithm.h" />
-    <ClInclude Include="headers\calculation\CompleteObjectiveCalculator.h" />
     <ClInclude Include="headers\calculation\ObjectiveCalculator.h" />
     <ClInclude Include="headers\crossover\BestLineReparator.h" />
     <ClInclude Include="headers\crossover\Column.h" />

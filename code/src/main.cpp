@@ -31,7 +31,7 @@
 #include "../headers/solution/Solution.hpp"
 
 // Include other things
-#include "../headers/calculation/CompleteObjectiveCalculator.h"
+#include "../headers/calculation/ObjectiveCalculator.h"
 #include "../headers/selection/TournamentSelection.h"
 #include "../headers/mutation/SwapShiftMutation.h"
 #include "../headers/repair/Reparator.h"
@@ -168,7 +168,7 @@ int Resolution(Instance* instance)
 	algo.setSelectionStrategy(make_unique<TournamentSelection>());
 	algo.setCrossoverStrategies(move(crossoverStrategies)); // Column, LineTwoPointCrossover are working well
 	algo.setMutationStrategy(make_unique <SwapShiftMutation>());
-	algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
+	algo.setObjectiveCalculator(make_unique <ObjectiveCalculator>());
 	Solution solution = algo.run();
 	ObjectiveCalculator objectiveCalculator;
 
@@ -201,7 +201,7 @@ int Resolution(Instance* instance)
 	algo.setSelectionStrategy(make_unique<TournamentSelection>());
 	algo.setCrossoverStrategy(make_unique<Column>());
 	algo.setMutationStrategy(make_unique <SwapShiftMutation>());
-	algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
+	algo.setObjectiveCalculator(make_unique <ObjectiveCalculator>());
 	Solution solution = algo.run();
 	ObjectiveCalculator objectiveCalculator;
 
@@ -226,7 +226,7 @@ int Resolution(Instance* instance)
 
 	Solution& solution = maxAlgo.run();
 	ObjectiveCalculator objectiveCalculator;
-	CompleteObjectiveCalculator completeObjectiveCalculator;
+	ObjectiveCalculator completeObjectiveCalculator;
 
 	NeighborhoodOperator neighborhoodOperator;
 	neighborhoodOperator.executeTotalMinConsecutiveDayRepair(solution, *instance);
@@ -243,7 +243,7 @@ int Resolution(Instance* instance)
 
 	// Display objective function
 	cout << endl << "Objective function value (basic) : " << objectiveFunctionValue << endl;
-	cout << endl << "Objective function value (with weights) : " << completeObjectiveCalculator.calculateObjectiveFunction(*instance, solution) << endl;
+	cout << endl << "Objective function value (with weights) : " << completeObjectiveCalculator.calculateWeightedObjectiveFunction(*instance, solution) << endl;
 
 	cout << endl << "Minute worked : " << endl;
 	countMinuteWorked(maxAlgo.getSchedulingData().nbMinuteWorked);

@@ -4,7 +4,7 @@
 #include <functional>
 
 #include "../../headers/algorithm/OtherHeuristicAlgorithm.h"
-#include "../../headers/calculation/CompleteObjectiveCalculator.h"
+#include "../../headers/calculation/ObjectiveCalculator.h"
 #include "../../headers/neighborhood/neighborhoodOperator.h"
 
 /*****************************************************
@@ -88,9 +88,9 @@ Solution& OtherHeuristicAlgorithm::run()
 	NeighborhoodOperator neighborhoodOperator;
 	neighborhoodOperator.executeTotalMinConsecutiveDayRepair(bestSolution, instance);
 
-	CompleteObjectiveCalculator calculator;
+	ObjectiveCalculator calculator;
 
-	bestSolution.i_valeur_fonction_objectif = calculator.calculateObjectiveFunction(instance, bestSolution);
+	bestSolution.i_valeur_fonction_objectif = calculator.calculateWeightedObjectiveFunction(instance, bestSolution);
 
 	return bestSolution;
 }

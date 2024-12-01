@@ -27,9 +27,6 @@
     <ClCompile Include="src\algorithm\ResolutionAlgorithm.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\calculation\CompleteObjectiveCalculator.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="src\calculation\ObjectiveCalculator.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -108,9 +105,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\algorithm\ResolutionAlgorithm.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\calculation\CompleteObjectiveCalculator.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\calculation\ObjectiveCalculator.h">
