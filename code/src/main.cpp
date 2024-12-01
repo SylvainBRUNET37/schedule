@@ -8,6 +8,7 @@
 //#define MIN_HEURISTIC_ALGORITHM
 //#define OTHER_HEURISTIC_ALGORITHM
 
+#include <thread>  
 #include <iostream>
 #include <fstream>
 #include <chrono>
@@ -156,7 +157,7 @@ int Resolution(Instance* instance)
 {
 	int objectiveFunctionValue = 0;
 
-	GeneticAlgorithm algo(*instance, 1000);
+	GeneticAlgorithm algo(*instance, 500);
 	
 	// Create a vecotr with every crossover strategy
 	vector<unique_ptr<CrossoverStrategy>> crossoverStrategies;
@@ -169,7 +170,21 @@ int Resolution(Instance* instance)
 	algo.setCrossoverStrategies(move(crossoverStrategies)); // Column, LineTwoPointCrossover are working well
 	algo.setMutationStrategy(make_unique <SwapShiftMutation>());
 	algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
-	Solution solution = algo.run();
+
+	/*
+		/!\ chrono de 1 minute /!\
+	*/ 
+	Solution solution;
+	using namespace std::chrono;
+	auto start = steady_clock::now(); // Heure de début
+	auto end = start + minutes(1);    // Heure de fin, 1 minute plus tard
+
+	while (steady_clock::now() < end) {
+		solution = algo.run();
+		auto elapsed = duration_cast<seconds>(steady_clock::now() - start).count();
+		std::cout << "\rTemps écoulé : " << elapsed << " secondes" << std::flush;
+	}
+	
 	ObjectiveCalculator objectiveCalculator;
 
 	// Display the solution
