@@ -24,7 +24,7 @@ bool MinHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned in
 	if (dayId != 0 && ((dayId - 1) % 7) == 5 && !validator.isWorkingThisDay(nurseId, dayId - 1))
 		return false;	
 
-	// Check min worked days
+	// Avoid the non respect of min worked days
 	if (dayId != 0 && !validator.isWorkingThisDay(nurseId, dayId - 1))
 	{
 		unsigned int nbDay = instance.get_Nombre_Jour();

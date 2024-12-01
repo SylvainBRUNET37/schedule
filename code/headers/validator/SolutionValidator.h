@@ -99,12 +99,9 @@ public:
 			(dayId >= 6 && (dayId + 1) % DAYS_IN_WEEK == 0);
 	}
 
-	bool isAfterWeekendDay(int dayId) const
+	bool isMonday(int dayId) const
 	{
-		if (dayId == 0)
-			return false;
-
-		return ((dayId % DAYS_IN_WEEK) == 6);
+		return (dayId > 0 && dayId % DAYS_IN_WEEK == 0);
 	}
 
 	/*****************************************************

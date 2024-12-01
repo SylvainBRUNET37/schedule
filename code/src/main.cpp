@@ -5,8 +5,8 @@
 //#define RELEASE_PERFORMANCE
 //#define RELEASE
 //#define MAX_HEURISTIC_ALGORITHM
-//#define MIN_HEURISTIC_ALGORITHM
-#define OTHER_HEURISTIC_ALGORITHM
+#define MIN_HEURISTIC_ALGORITHM
+//#define OTHER_HEURISTIC_ALGORITHM
 
 #include <iostream>
 #include <fstream>
@@ -159,7 +159,7 @@ int Resolution(Instance* instance)
 	GeneticAlgorithm algo(*instance, 500);
 	//set the differents strategies
 	algo.setSelectionStrategy(make_unique<TournamentSelection>());
-	algo.setCrossoverStrategy(make_unique<LineTwoPointCrossover>()); // Column, LineTwoPointCrossover are working well
+	algo.setCrossoverStrategy(make_unique<Column>()); // Column, LineTwoPointCrossover are working well
 	algo.setMutationStrategy(make_unique <SwapShiftMutation>());
 	algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
 	Solution solution = algo.run();
