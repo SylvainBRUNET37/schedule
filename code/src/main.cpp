@@ -5,7 +5,8 @@
 //#define RELEASE_PERFORMANCE
 //#define RELEASE
 //#define MAX_HEURISTIC_ALGORITHM
-#define MIN_HEURISTIC_ALGORITHM
+//#define MIN_HEURISTIC_ALGORITHM
+#define OTHER_HEURISTIC_ALGORITHM
 
 #include <iostream>
 #include <fstream>
@@ -158,7 +159,7 @@ int Resolution(Instance* instance)
 	GeneticAlgorithm algo(*instance, 500);
 	//set the differents strategies
 	algo.setSelectionStrategy(make_unique<TournamentSelection>());
-	algo.setCrossoverStrategy(make_unique<Column>()); // Column, LineTwoPointCrossover are working well
+	algo.setCrossoverStrategy(make_unique<LineTwoPointCrossover>()); // Column, LineTwoPointCrossover are working well
 	algo.setMutationStrategy(make_unique <SwapShiftMutation>());
 	algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
 	Solution solution = algo.run();
@@ -263,6 +264,35 @@ int Resolution(Instance* instance)
 	// Repair the solution
 	//Reparator reparator(instance);
 	//reparator.execute(solution, *instance);
+
+	// Calculate objective function
+	objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
+	objectiveFunctionValue = minAlgo.getBestSolution().i_valeur_fonction_objectif;
+
+	// Verify solution & objective function
+	solution.Verification_Solution(instance);
+
+	cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
+
+	return objectiveFunctionValue;
+}
+
+#endif
+
+#ifdef OTHER_HEURISTIC_ALGORITHM
+
+int Resolution(Instance* instance)
+{
+	int objectiveFunctionValue = 0;
+
+	OtherHeuristicAlgorithm minAlgo(*instance);
+
+	Solution& solution = minAlgo.run();
+	ObjectiveCalculator objectiveCalculator;
+
+	// Display the solution
+	cout << "Solution : " << endl;
+	displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
 
 	// Calculate objective function
 	objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);

@@ -20,9 +20,6 @@ bool MinHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned in
 	// Check if the day is a weekend and if the nurse can work this weekend
 	if (validator.isWeekendDay(dayId) && !validator.isAbleToWorkThisWeekend(nurseId)) return false; // Low to Medium frequency
 
-	if (nurseId == 4 && dayId == 6)
-		cout << "Nurse " << nurseId << " is available on day " << dayId << endl;
-
 	// If the previous day is saturday and the nurse wasn't working this saturday, do not work this sunday
 	if (dayId != 0 && ((dayId - 1) % 7) == 5 && !validator.isWorkingThisDay(nurseId, dayId - 1))
 		return false;	
