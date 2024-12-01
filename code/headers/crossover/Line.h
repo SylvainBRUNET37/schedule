@@ -1,7 +1,9 @@
-#pragma once
+#ifndef LINE_H
+#define LINE_H
 
 #include "../../headers/solution/Solution.hpp"
 #include "CrossoverStrategy.h"
+
 /**
  * @class Line
  * @brief A crossover strategy that operates on the lines of the solutions.
@@ -12,6 +14,8 @@
  */
 class Line : public CrossoverStrategy
 {
+private:
+
 public :
   /**
     * @brief Executes the line-based crossover between two parent solutions.
@@ -25,3 +29,4 @@ public :
 	void execute(Solution* firstChild, Solution* secondChild) override;
 };
 
+#endif

@@ -2,6 +2,7 @@
 #define COLUMN_TWO_POINT_CROSSOVER_H
 
 #include "CrossoverStrategy.h"
+
 /**
  * @class ColumnTwoPointCrossover
  * @brief A crossover strategy that performs two-point crossover on columns.

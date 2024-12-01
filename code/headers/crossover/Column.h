@@ -3,6 +3,7 @@
 
 #include "../../headers/solution/Solution.hpp"
 #include "CrossoverStrategy.h"
+
 /**
  * @class Column
  * @brief A crossover strategy that operates on columns of the solutions.
@@ -12,18 +13,19 @@
  */
 class Column : public CrossoverStrategy
 {
+private:
+
 public:
- /**
-   * @brief Executes the column-based crossover between two solutions.
-   *
-   * This method performs the crossover operation on the columns of
-   * the given child solutions to create new offspring.
-   *
-   * @param firstChild Pointer to the first child solution.
-   * @param secondChild Pointer to the second child solution.
-   */
+	/**
+	  * @brief Executes the column-based crossover between two solutions.
+	  *
+	  * This method performs the crossover operation on the columns of
+	  * the given child solutions to create new offspring.
+	  *
+	  * @param firstChild Pointer to the first child solution.
+	  * @param secondChild Pointer to the second child solution.
+	  */
 	void execute(Solution* firstChild, Solution* secondChild) override;
-	virtual ~Column() = default;
 };
 
 #endif

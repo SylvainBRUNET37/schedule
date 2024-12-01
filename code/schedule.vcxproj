@@ -24,7 +24,6 @@
     <ClCompile Include="src\crossover\LineTwoPointCrossover.cpp" />
     <ClCompile Include="src\algorithm\MaxHeuristicAlgorithm.cpp" />
     <ClCompile Include="src\algorithm\MinHeuristicAlgorithm.cpp" />
-    <ClCompile Include="src\crossover\BestLineReparator.cpp" />
     <ClCompile Include="src\crossover\Line.cpp" />
     <ClCompile Include="src\repair\Reparator.cpp" />
     <ClCompile Include="src\solution\NurseSchedulingData.cpp" />
@@ -49,7 +48,6 @@
     <ClInclude Include="headers\algorithm\HeuristicAlgorithm.h" />
     <ClInclude Include="headers\algorithm\ResolutionAlgorithm.h" />
     <ClInclude Include="headers\calculation\ObjectiveCalculator.h" />
-    <ClInclude Include="headers\crossover\BestLineReparator.h" />
     <ClInclude Include="headers\crossover\Column.h" />
     <ClInclude Include="headers\crossover\CrossoverStrategy.h" />
     <ClInclude Include="headers\crossover\Line.h" />

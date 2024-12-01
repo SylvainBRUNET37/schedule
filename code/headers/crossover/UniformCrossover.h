@@ -2,6 +2,7 @@
 #define UNIFORM_CROSSOVER_H
 
 #include "CrossoverStrategy.h"
+
 /**
  * @class UniformCrossover
  * @brief A crossover strategy that performs uniform crossover between two parent solutions.

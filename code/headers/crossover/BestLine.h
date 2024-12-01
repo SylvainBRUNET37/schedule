@@ -17,35 +17,44 @@
  */
 class BestLine : public CrossoverStrategy
 {
-public: 
-	BestLine(Instance* instance) : validator(instance) {
+private:
 
-	}
- /**
-   * @brief Executes the BestLine crossover between two parent solutions.
-   *
-   * This method performs the crossover by evaluating the parent solutions,
-   * selecting individuals based on constraint violations, and constructing
-   * two child solutions.
-   *
-   * @param firstChild Pointer to the first child solution.
-   * @param secondChild Pointer to the second child solution.
-   */
-	void execute(Solution* firstChild, Solution* secondChild) override;
-	~BestLine();
-
-private :
 	SolutionValidator validator;
- /**
-   * @brief Swaps the lines between the two child solutions at a specific index.
-   *
-   * This helper function swaps the lines between the first and second child
-   * solutions based on the given index.
-   *
-   * @param firstChild Pointer to the first child solution.
-   * @param secondChild Pointer to the second child solution.
-   * @param index The index of the line to swap.
-   */
+
+	/**
+	  * @brief Swaps the lines between the two child solutions at a specific index.
+	  *
+	  * This helper function swaps the lines between the first and second child
+	  * solutions based on the given index.
+	  *
+	  * @param firstChild Pointer to the first child solution.
+	  * @param secondChild Pointer to the second child solution.
+	  * @param index The index of the line to swap.
+	  */
 	void swapLines(Solution* firstChild, Solution* secondChild, int index);
+
+public:
+
+	/**
+	 * @brief Constructor for the BestLine crossover strategy.
+	 *
+	 * Initializes the SolutionValidator with the given instance to validate solutions during crossover.
+	 *
+	 * @param instance Pointer to the Instance object containing scheduling data.
+	 */
+	BestLine(Instance* instance) : validator(instance) {}
+
+	/**
+	  * @brief Executes the BestLine crossover between two parent solutions.
+	  *
+	  * This method performs the crossover by evaluating the parent solutions,
+	  * selecting individuals based on constraint violations, and constructing
+	  * two child solutions.
+	  *
+	  * @param firstChild Pointer to the first child solution.
+	  * @param secondChild Pointer to the second child solution.
+	  */
+	void execute(Solution* firstChild, Solution* secondChild) override;
+
 };
 
