@@ -72,7 +72,7 @@
     <ClCompile Include="src\crossover\BestLineReparator.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\algorithm\OtherHeuristicAlgorithm.cpp">
+    <ClCompile Include="src\algorithm\MaxHeuristicAlgorithm.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\crossover\LineTwoPointCrossover.cpp">
@@ -155,7 +155,7 @@
     <ClInclude Include="headers\crossover\Line.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="headers\algorithm\OtherHeuristicAlgorithm.h">
+    <ClInclude Include="headers\algorithm\MaxHeuristicAlgorithm.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\crossover\LineTwoPointCrossover.h">

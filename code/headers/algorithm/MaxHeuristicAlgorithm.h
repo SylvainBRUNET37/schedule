@@ -1,12 +1,12 @@
-#ifndef OTHER_HEURISTIC_AGLORITHM_H
-#define OTHER_HEURISTIC_AGLORITHM_H
+#ifndef MAX_HEURISTIC_AGLORITHM_H
+#define MAX_HEURISTIC_AGLORITHM_H
 
 #include <algorithm>
 #include <random>
 
 #include "HeuristicAlgorithm.h"
 
-class OtherHeuristicAlgorithm : public HeuristicAlgorithm
+class MaxHeuristicAlgorithm : public HeuristicAlgorithm
 {
 private:
 
@@ -54,7 +54,7 @@ public:
 	 * Initializes the algorithm with the given instance,
 	 * fills the list of nurses, and fill the solution matrix with -1.
 	 */
-	OtherHeuristicAlgorithm(Instance& instance) : HeuristicAlgorithm(instance) {
+	MaxHeuristicAlgorithm(Instance& instance) : HeuristicAlgorithm(instance) {
 		// Initialize the solution: set every nurse's shift assignment for each day to -1 (meaning the nurse is not working that day
 		bestSolution.v_v_IdShift_Par_Personne_et_Jour.resize(instance.get_Nombre_Personne(), vector<int>(instance.get_Nombre_Jour(), -1));
 	}

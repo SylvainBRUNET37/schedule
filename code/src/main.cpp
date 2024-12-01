@@ -24,7 +24,7 @@
 #include "../headers/algorithm/GeneticAlgorithm.h"
 #include "../headers/algorithm/HeuristicAlgorithm.h"
 #include "../headers/algorithm/MinHeuristicAlgorithm.h"
-#include "../headers/algorithm/OtherHeuristicAlgorithm.h"
+#include "../headers/algorithm/MaxHeuristicAlgorithm.h"
 
 // Include solution and instance
 #include "../headers/solution/Instance.hpp"
@@ -291,7 +291,7 @@ int Resolution(Instance* instance)
 {
 	int objectiveFunctionValue = 0;
 
-	OtherHeuristicAlgorithm minAlgo(*instance);
+	MaxHeuristicAlgorithm minAlgo(*instance);
 
 	Solution& solution = minAlgo.run();
 	ObjectiveCalculator objectiveCalculator;

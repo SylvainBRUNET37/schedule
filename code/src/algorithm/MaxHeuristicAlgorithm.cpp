@@ -3,7 +3,7 @@
 #include <iostream>
 #include <functional>
 
-#include "../../headers/algorithm/OtherHeuristicAlgorithm.h"
+#include "../../headers/algorithm/MaxHeuristicAlgorithm.h"
 #include "../../headers/calculation/ObjectiveCalculator.h"
 #include "../../headers/neighborhood/neighborhoodOperator.h"
 
@@ -11,7 +11,7 @@
 *                 GLOBAL VERIFICATION                *
 *****************************************************/
 
-bool OtherHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned int dayId)
+bool MaxHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned int dayId)
 {
 	// Early exit if the nurse is on a day off
 	if (validator.isOnDayOff(nurseId, dayId)) return false;
@@ -38,7 +38,7 @@ bool OtherHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned 
 	return true;
 }
 
-bool OtherHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned int dayId, unsigned int shiftId)
+bool MaxHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned int dayId, unsigned int shiftId)
 {
 	// Check if it's not the first day and if the nurse worked the previous day
 	if (dayId != 0 && validator.isWorkingThisDay(nurseId, dayId - 1))
@@ -53,7 +53,7 @@ bool OtherHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned
 	return true;
 }
 
-Solution& OtherHeuristicAlgorithm::run()
+Solution& MaxHeuristicAlgorithm::run()
 {
 	unsigned int dayId = 0;
 	unsigned int nbDay = instance.get_Nombre_Jour();
