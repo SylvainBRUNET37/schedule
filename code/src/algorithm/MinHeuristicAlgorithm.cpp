@@ -35,11 +35,10 @@ bool MinHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned in
 		if (endDay >= nbDay)
 			endDay = nbDay;
 
+		// Check future days to respect the min worked days
 		for (unsigned int nextDay = dayId; nextDay < endDay; ++nextDay)
-		{
 			if (validator.isOnDayOff(nurseId, nextDay) || (validator.isWeekendDay(nextDay) && !validator.isAbleToWorkThisWeekend(nurseId)))
 				return false;
-		}
 	}
 
 	// Check if at max consecutive worked days
@@ -50,17 +49,22 @@ bool MinHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned in
 
 bool MinHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned int dayId, unsigned int shiftId)
 {
+	// Check if the nurse was working the previous day
 	if (dayId != 0 && validator.isWorkingThisDay(nurseId, dayId - 1))
 	{
+		// If the succession is forbidden and the nurse hasn't done the minimum consecutive worked days, try to repair
 		if (validator.isSuccessionForbidden(shiftId, bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1]) 
 			&& !validator.haveDoneMinConsecutiveWorkedDay(nurseId, dayId))
 		{
+			// Loop through the shifts to find a valid one for the previous day
 			for (unsigned int testShiftId : data.shifts)
 			{
+				// If the shift is not forbidden and the nurse can work it, change the previous day's shift
 				if (!validator.isAtMaxWorkedShift(nurseId, testShiftId))
 				{
 					if (!validator.isSuccessionForbidden(shiftId, testShiftId))
 					{
+						// Change the previous day's shift and update the number of worked shifts
 						++data.maxShiftsPerType[nurseId][bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1]];
 						bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1] = testShiftId;
 						--data.maxShiftsPerType[nurseId][testShiftId];
@@ -70,6 +74,7 @@ bool MinHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned i
 			}
 		}
 
+		// If the succession is forbidden (or still forbidden even after trying to repair), return false
 		if (validator.isSuccessionForbidden(shiftId, bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1]))
 			return false;
 	}

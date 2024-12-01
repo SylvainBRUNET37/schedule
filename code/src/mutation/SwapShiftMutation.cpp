@@ -27,7 +27,7 @@ void SwapShiftMutation::execute(Solution& solution)
 	if (firstCrossoverPoint > secondCrossoverPoint)
 		swap(firstCrossoverPoint, secondCrossoverPoint);
 
-	// Perform the mutation
+	// Rotate the shifts between the two crossover points
 	rotate(nurseSchedule.begin() + firstCrossoverPoint,
 		   nurseSchedule.begin() + firstCrossoverPoint + (secondCrossoverPoint - firstCrossoverPoint) / 2,
 		   nurseSchedule.begin() + secondCrossoverPoint);
