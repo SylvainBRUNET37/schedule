@@ -84,9 +84,6 @@
     <ClCompile Include="src\repair\Reparator.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\neighborhood\neighborhoodOperator.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="src\crossover\BestLine.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -165,9 +162,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\repair\Reparator.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\neighborhood\neighborhoodOperator.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\crossover\BestLine.h">

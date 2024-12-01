@@ -3,7 +3,6 @@
 
 #include "../solution/Solution.hpp"
 #include "../validator/SolutionValidator.h"	
-#include <random>
 
 /*
  * repair a solution line by line so that it comply with 2 constraints
@@ -22,6 +21,12 @@ public:
 	void execute(Solution& solution, Instance& instance);
 
 	int nbMinWorked(Solution& solution, Instance& instance, int nurseId);
+
+	void executeMinConsecutiveDayRepair(Solution& solution, Instance& instance, unsigned int nurseId);
+
+	void executeRandomMinConsecutiveDayRepair(Solution& solution, Instance& instance);
+
+	void executeTotalMinConsecutiveDayRepair(Solution& solution, Instance& instance);
 };
 
 #endif

@@ -5,7 +5,7 @@
 
 #include "../../headers/algorithm/MaxHeuristicAlgorithm.h"
 #include "../../headers/calculation/ObjectiveCalculator.h"
-#include "../../headers/neighborhood/neighborhoodOperator.h"
+#include "../../headers/repair/Reparator.h"
 
 /*****************************************************
 *                 GLOBAL VERIFICATION                *
@@ -29,9 +29,6 @@ bool MaxHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned in
 	if (dayId != 0 && ((dayId - 1) % 7) == 5 && !validator.isWorkingThisDay(nurseId, dayId - 1))
 		return false;
 
-	// Fait travailler si le nombre de jours minimum de travail consécutif n'est pas atteint
-	//if (!validator.haveDoneMinConsecutiveWorkedDay(nurseId, dayId)) return true;
-
 	// Check if at max consecutive worked days
 	if (validator.isAtMaxConsecutiveWorkedDay(nurseId, dayId)) return false;
 
@@ -53,14 +50,17 @@ bool MaxHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned i
 	return true;
 }
 
+/*****************************************************
+*                  ALGORITHM PARTS                   *
+*****************************************************/
+
 Solution& MaxHeuristicAlgorithm::run()
 {
-	unsigned int dayId = 0;
-	unsigned int nbDay = instance.get_Nombre_Jour();
-
+	// Intialize random device and engine
 	random_device rd;
 	mt19937 eng(rd());
 
+	// Loop on each day
 	for (unsigned int dayId : data.days)
 	{
 		vector<unsigned int> availableNurses;
@@ -68,29 +68,32 @@ Solution& MaxHeuristicAlgorithm::run()
 		// Insert available nurses
 		for (unsigned int nurseId : data.nurses)
 		{
-			// Increment the number of weekend worked if the nurse worked past weekend
+			// If it's the first day of the week, check if the nurse worked past weekend
 			if (validator.isMonday(dayId))
 			{
+				// Increment the number of weekend worked if the nurse worked past weekend
 				if (validator.isWorkingThisDay(nurseId, dayId - 1) || validator.isWorkingThisDay(nurseId, dayId - 2))
 					++(data.nbWeekendWorked[nurseId]);
 			}
 
+			// Add to the list of available nurses available nurses
 			if (isAvailableThisDay(nurseId, dayId))
 				availableNurses.push_back(nurseId);
 		}
 
+		// Shuffle the list of available nurses to add randomness
 		shuffle(availableNurses.begin(), availableNurses.end(), eng);
 
 		// Allocate every nurse
 		allocateDay(dayId, availableNurses);
 	}
 
-	NeighborhoodOperator neighborhoodOperator;
-	neighborhoodOperator.executeTotalMinConsecutiveDayRepair(bestSolution, instance);
+	// Repair the solution for the minimum worked consecutive days constraint
+	Reparator reparator(&instance);
+	reparator.executeTotalMinConsecutiveDayRepair(bestSolution, instance);
 
+	// Calculate the weighted objective function value of the best solution and return the solution
 	ObjectiveCalculator calculator;
-
 	bestSolution.i_valeur_fonction_objectif = calculator.calculateWeightedObjectiveFunction(instance, bestSolution);
-
 	return bestSolution;
 }

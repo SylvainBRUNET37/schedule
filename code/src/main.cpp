@@ -35,7 +35,6 @@
 #include "../headers/selection/TournamentSelection.h"
 #include "../headers/mutation/SwapShiftMutation.h"
 #include "../headers/repair/Reparator.h"
-#include "../headers/neighborhood/NeighborhoodOperator.h"
 
 using namespace std;
 

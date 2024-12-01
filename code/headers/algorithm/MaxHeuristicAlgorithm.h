@@ -10,7 +10,6 @@ class MaxHeuristicAlgorithm : public HeuristicAlgorithm
 {
 private:
 
-protected:
 	/*****************************************************
 	*                 GLOBAL VERIFICATION                *
 	*****************************************************/
