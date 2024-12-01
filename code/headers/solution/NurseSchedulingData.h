@@ -3,6 +3,15 @@
 
 #include "Instance.hpp"
 
+/**
+ * @class NurseSchedulingData
+ * @brief This class stores and manages the data related to nurse scheduling.
+ *
+ * It contains various vectors that represent the scheduling data, including the nurses, shifts, days, and the
+ * number of nurses needed for each shift. It also manages the constraints on the maximum shifts a nurse can
+ * work per shift type, and the total minutes and weekends worked by each nurse. This data is used to initialize
+ * and track the scheduling system.
+ */
 class NurseSchedulingData
 {
 private:
@@ -12,37 +21,15 @@ public:
     *                STORAGE INITIALISATION              *
     *****************************************************/
 
-    void initData(Instance& instance)
-    {
-        unsigned int nbNurse = instance.get_Nombre_Personne();
-        unsigned int nbShift = instance.get_Nombre_Shift();
-        unsigned int nbDay = instance.get_Nombre_Jour();
-
-        // Resize vectors that contains every nurse id to the number of nurse
-        nurses.resize(nbNurse, 0);
-        nbMinuteWorked.resize(nbNurse, 0);
-        nbWeekendWorked.resize(nbNurse, 0);
-        maxShiftsPerType.resize(nbNurse, vector<unsigned int>(nbShift, 0));
-
-        // Resize shift and day vector
-        shifts.resize(nbShift, 0);
-		days.resize(nbDay, 0);
-
-        // Initialize shift ids
-        for (unsigned int shiftId = 0; shiftId < nbShift; ++shiftId)
-            shifts[shiftId] = shiftId;
-
-        // Initialize data structures for tracking the work assignments for each nurse
-        for (unsigned int nurseId = 0; nurseId < nbNurse; ++nurseId)
-        {
-            // Fill the vector that contains every nurse id
-            nurses[nurseId] = nurseId;
-
-            // Initialize maximum shifts for each nurse per shift type
-            for (unsigned int shiftId = 0; shiftId < nbShift; ++shiftId)
-                maxShiftsPerType[nurseId][shiftId] = instance.get_Personne_Shift_Nbre_Max(nurseId, shiftId);
-        }
-    }
+    /**
+	 * @brief Initializes the scheduling data for nurses.
+	 *
+	 * This function sets up the necessary data structures for the nurse scheduling system by resizing vectors
+	 * for storing nurse, shift, and day data, and initializing constraints for each nurse's shift assignments.
+	 *
+	 * @param instance The instance containing the relevant data, such as the number of nurses, shifts, and days.
+	 */
+	void initData(Instance& instance);
 
     /*****************************************************
     *                     NURSE DATA                     *

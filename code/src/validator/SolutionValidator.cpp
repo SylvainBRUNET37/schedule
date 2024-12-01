@@ -91,6 +91,7 @@ unsigned int SolutionValidator::getNbConstraintsViolatedForNurse(unsigned int nu
     unsigned int consecutiveWorkedShift = 0;
     unsigned int shiftId = 0;
 
+	// Initialize the scheduling data if it has not been done yet
     if (schedulingData == nullptr)
     {
         schedulingData = new NurseSchedulingData();
@@ -104,16 +105,19 @@ unsigned int SolutionValidator::getNbConstraintsViolatedForNurse(unsigned int nu
     {
         if (solution->v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId] == -1)
         {
+            // Add the number of constraints violated for this day off
             nbConstraintsViolated += getNbConstraintsViolatedOnDayOff(nurseId, dayId, consecutiveWorkedShift);
             consecutiveWorkedShift = 0;
         }
         else
         {
+			// Add the number of constraints violated for this worked day
             nbConstraintsViolated += getNbConstraintsViolatedOnWorkedDay(nurseId, dayId, consecutiveWorkedShift);
 
+			// Get the shift ID
             shiftId = solution->v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId];
 
-            // Update nb weekend worked
+            // Update the number of weekend worked
             if ((dayId % 7) == 5)
                 schedulingData->nbWeekendWorked[nurseId] += 1;
             if (((dayId % 7) == 6) && (solution->v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1] == -1))
@@ -126,6 +130,7 @@ unsigned int SolutionValidator::getNbConstraintsViolatedForNurse(unsigned int nu
         }
     }
 
+	// Add "data related" constraints
     nbConstraintsViolated += getNbContraintsViolatedWithData(nurseId);
 
     return nbConstraintsViolated;
@@ -143,6 +148,7 @@ bool SolutionValidator::isAtMaxConsecutiveWorkedDay(unsigned int nurseId, unsign
     unsigned int startDay = actualDay - maxConsecutiveShift;
 
     unsigned int nbShiftWorkedConsecutive = 0;
+
     // Iterate over the range of days from 'startDay' to 'actualDay'
     for (unsigned int dayId = startDay; dayId < actualDay; ++dayId)
     {
@@ -163,6 +169,7 @@ bool SolutionValidator::isAtEndOfConsecutiveDayOff(unsigned int nurseId, unsigne
 {
     unsigned int minConsecutiveDaysOff = instance->get_Personne_Jour_OFF_Consecutif_Min(nurseId);
 
+	// Return true if it's the first day of the schedule
     if (actualDay == 0)
         return true;
 
@@ -170,12 +177,14 @@ bool SolutionValidator::isAtEndOfConsecutiveDayOff(unsigned int nurseId, unsigne
 	int dayId = actualDay - 1;
     int endDay = actualDay - minConsecutiveDaysOff;
 
+	// Count the number of consecutive days off
     while (dayId >= endDay && dayId >= 0 && !isWorkingThisDay(nurseId, dayId))
     {
         ++nbConsecutiveDayOff;
         --dayId;
     }
 
+	// If the nurse has not reached the minimum number of consecutive days off, return false
     if (nbConsecutiveDayOff != 0 && nbConsecutiveDayOff < minConsecutiveDaysOff)
         return false;		
 
@@ -186,6 +195,7 @@ bool SolutionValidator::haveDoneMinConsecutiveWorkedDay(unsigned int nurseId, un
 {
     unsigned int minConsecutiveWorkedDay = instance->get_Personne_Nbre_Shift_Consecutif_Min(nurseId);
 
+	// Return true if if the day is too close to the beginning of the schedule, and if the nurse hasn't worked the previous day
     if (actualDay < minConsecutiveWorkedDay || !isWorkingThisDay(nurseId, actualDay - 1))
         return true;
 
@@ -193,12 +203,14 @@ bool SolutionValidator::haveDoneMinConsecutiveWorkedDay(unsigned int nurseId, un
     int endDay = actualDay - minConsecutiveWorkedDay;
     int dayId = actualDay - 1;
 
+	// Count the number of consecutive worked days
     while (dayId >= endDay && isWorkingThisDay(nurseId, dayId))
     {
         ++nbConsecutiveWorkedDay;
         --dayId;
     }
 
+	// If the nurse has not worked the minimum number of consecutive days, return false
     if (nbConsecutiveWorkedDay != 0 && nbConsecutiveWorkedDay <= minConsecutiveWorkedDay - 1)
         return false;
         
