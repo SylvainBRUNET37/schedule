@@ -5,6 +5,7 @@
 
 #include "../../headers/algorithm/OtherHeuristicAlgorithm.h"
 #include "../../headers/calculation/CompleteObjectiveCalculator.h"
+#include "../../headers/neighborhood/neighborhoodOperator.h"
 
 /*****************************************************
 *                 GLOBAL VERIFICATION                *
@@ -15,18 +16,24 @@ bool OtherHeuristicAlgorithm::isAvailableThisDay(unsigned int nurseId, unsigned 
 	// Early exit if the nurse is on a day off
 	if (validator.isOnDayOff(nurseId, dayId)) return false;
 
+	if (dayId != 0 && dayId < instance.get_Nombre_Jour() - 1)
+		if (validator.isOnDayOff(nurseId, dayId + 1) && !validator.isWorkingThisDay(nurseId, dayId - 1)) return false;
+
 	// Early exit if at the end of consecutive days off
 	if (!validator.isAtEndOfConsecutiveDayOff(nurseId, dayId)) return false;
 
 	// Check if the day is a weekend and if the nurse can work this weekend
 	if (validator.isWeekendDay(dayId) && !validator.isAbleToWorkThisWeekend(nurseId)) return false;
 
-	// Check if at max consecutive worked days
-	if (validator.isAtMaxConsecutiveWorkedDay(nurseId, dayId)) return false;
-
 	// If the previous day is saturday and the nurse wasn't working this saturday, do not work this sunday
 	if (dayId != 0 && ((dayId - 1) % 7) == 5 && !validator.isWorkingThisDay(nurseId, dayId - 1))
 		return false;
+
+	// Fait travailler si le nombre de jours minimum de travail consécutif n'est pas atteint
+	//if (!validator.haveDoneMinConsecutiveWorkedDay(nurseId, dayId)) return true;
+
+	// Check if at max consecutive worked days
+	if (validator.isAtMaxConsecutiveWorkedDay(nurseId, dayId)) return false;
 
 	return true;
 }
@@ -38,7 +45,7 @@ bool OtherHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned
 		if (validator.isSuccessionForbidden(shiftId, bestSolution.v_v_IdShift_Par_Personne_et_Jour[nurseId][dayId - 1])) return false;  // Medium frequency
 
 	// Check for the specific shift type's limits
-	if (validator.isAtMaxWorkedShift(nurseId, shiftId)) return false;  // Low frequency, return true if not at max
+	if (validator.isAtMaxWorkedShift(nurseId, shiftId)) return false;
 
 	// Check if the nurse has reached the max worked time
 	if (validator.isAtMaxWorkedTime(nurseId, shiftId)) return false;
@@ -46,41 +53,44 @@ bool OtherHeuristicAlgorithm::isAvailableForShift(unsigned int nurseId, unsigned
 	return true;
 }
 
-
-/////////////////////////////////////////
-
-void OtherHeuristicAlgorithm::allocateDay(unsigned int dayId, vector<unsigned int>& availableNurses)
+Solution& OtherHeuristicAlgorithm::run()
 {
+	unsigned int dayId = 0;
+	unsigned int nbDay = instance.get_Nombre_Jour();
+
 	random_device rd;
 	mt19937 eng(rd());
-	unsigned int nbShift = instance.get_Nombre_Shift();
 
-	for (auto nurseIterator = availableNurses.begin(); nurseIterator != availableNurses.end();)
+	for (unsigned int dayId : data.days)
 	{
-		unsigned int nurseId = *nurseIterator;
-		bool shifted = false;
+		vector<unsigned int> availableNurses;
 
-		shuffle(data.shifts.begin(), data.shifts.end(), eng);
-
-		for (unsigned int shiftId : data.shifts)
+		// Insert available nurses
+		for (unsigned int nurseId : data.nurses)
 		{
-			if (data.missingNursePerShift[dayId][shiftId] > 0)
+			// Increment the number of weekend worked if the nurse worked past weekend
+			if (validator.isMonday(dayId))
 			{
-				if (allocateShift(nurseId, dayId, shiftId))
-				{
-					// Affectation réussie, marquer comme décalée
-					shifted = true;
-					// Supprimer l'infirmière de l'ensemble
-					nurseIterator = availableNurses.erase(nurseIterator); // Supprimer et obtenir le nouvel itérateur
-					break; // Sortir de la boucle de shifts
-				}
+				if (validator.isWorkingThisDay(nurseId, dayId - 1) || validator.isWorkingThisDay(nurseId, dayId - 2))
+					++(data.nbWeekendWorked[nurseId]);
 			}
+
+			if (isAvailableThisDay(nurseId, dayId))
+				availableNurses.push_back(nurseId);
 		}
 
-		if (!shifted)
-			++nurseIterator; // Passer à l'infirmière suivante si aucune affectation n'a eu lieu
+		shuffle(availableNurses.begin(), availableNurses.end(), eng);
 
-		if (availableNurses.empty())
-			return; // Sortir si plus d'infirmières disponibles
+		// Allocate every nurse
+		allocateDay(dayId, availableNurses);
 	}
+
+	NeighborhoodOperator neighborhoodOperator;
+	neighborhoodOperator.executeTotalMinConsecutiveDayRepair(bestSolution, instance);
+
+	CompleteObjectiveCalculator calculator;
+
+	bestSolution.i_valeur_fonction_objectif = calculator.calculateObjectiveFunction(instance, bestSolution);
+
+	return bestSolution;
 }

@@ -35,7 +35,7 @@
 #include "../headers/selection/TournamentSelection.h"
 #include "../headers/mutation/SwapShiftMutation.h"
 #include "../headers/repair/Reparator.h"
-
+#include "../headers/neighborhood/NeighborhoodOperator.h"
 
 using namespace std;
 
@@ -156,7 +156,7 @@ int Resolution(Instance* instance)
 {
 	int objectiveFunctionValue = 0;
 
-	GeneticAlgorithm algo(*instance, 500);
+	GeneticAlgorithm algo(*instance, 1000);
 	
 	// Create a vecotr with every crossover strategy
 	vector<unique_ptr<CrossoverStrategy>> crossoverStrategies;
@@ -228,6 +228,9 @@ int Resolution(Instance* instance)
 	ObjectiveCalculator objectiveCalculator;
 	CompleteObjectiveCalculator completeObjectiveCalculator;
 
+	NeighborhoodOperator neighborhoodOperator;
+	neighborhoodOperator.executeTotalMinConsecutiveDayRepair(solution, *instance);
+
 	// Display the solution
 	cout << "Solution : " << endl;
 	displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
@@ -267,10 +270,6 @@ int Resolution(Instance* instance)
 	// Display the solution
 	cout << "Solution : " << endl;
 	displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
-
-	// Repair the solution
-	//Reparator reparator(instance);
-	//reparator.execute(solution, *instance);
 
 	// Calculate objective function
 	objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);

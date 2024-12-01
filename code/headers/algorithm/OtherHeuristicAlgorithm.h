@@ -59,15 +59,7 @@ public:
 		bestSolution.v_v_IdShift_Par_Personne_et_Jour.resize(instance.get_Nombre_Personne(), vector<int>(instance.get_Nombre_Jour(), -1));
 	}
 
-	/**
-	 * @brief Allocates shifts for a specific day.
-	 *
-	 * @param dayId The ID of the day for which shifts are being allocated.
-	 *
-	 * Assigns nurses to shifts based on requirements for the day.
-	 * Continues allocating until all shifts are filled or no more nurses are available.
-	 */
-	void allocateDay(unsigned int dayId, vector<unsigned int>& availableNurses) override;
+	Solution& run() override;
 };
 
 #endif
