@@ -4,9 +4,6 @@
 
 //#define RELEASE_PERFORMANCE
 #define RELEASE
-//#define MAX_HEURISTIC_ALGORITHM
-//#define MIN_HEURISTIC_ALGORITHM
-//#define OTHER_HEURISTIC_ALGORITHM
 
 #include <thread>  
 #include <iostream>
@@ -114,43 +111,6 @@ void displayMatrix(const std::vector<std::vector<int>>& matrix) {
 	}
 }
 
-void displayMatrixAlenvers(const std::vector<std::vector<int>>& matrix) {
-	if (matrix.empty()) return; // Vérifier si la matrice est vide
-
-	// Obtenez le nombre de lignes et de colonnes
-	unsigned int rowCount = matrix.size();
-	unsigned int colCount = matrix[0].size();
-
-	// Parcourez les colonnes de la matrice originale pour les afficher comme des lignes
-	for (unsigned int col = 0; col < colCount; ++col) {
-		for (unsigned int row = 0; row < rowCount; ++row) {
-			std::cout << matrix[row][col] << " "; // Afficher l'élément transposé
-		}
-		std::cout << std::endl; // Nouvelle ligne après chaque ligne transposée
-	}
-}
-
-void displayArray(const std::vector<int>& array) {
-	for (const auto& value : array)
-		std::cout << value << " ";
-	std::cout << std::endl;
-}
-
-void countMinuteWorked(std::vector<unsigned int>& array) {
-	int totalValue = 0;
-	for (const auto& value : array)
-		totalValue += value;
-	std::cout << totalValue << std::endl << endl;
-}
-
-void countMinuteMaxWorked(Instance* instance) {
-	int totalValue = 0;
-	for (int i = 0; i < instance->get_Nombre_Personne(); ++i)
-		totalValue += instance->get_Personne_Duree_total_Max(i);
-	std::cout << totalValue << std::endl << endl;
-}
-
-#ifdef RELEASE
 
 int Resolution(Instance* instance)
 {
@@ -183,7 +143,6 @@ int Resolution(Instance* instance)
 
 	return solution.i_valeur_fonction_objectif;
 }
-#endif
 
 #ifdef RELEASE_PERFORMANCE
 
@@ -210,102 +169,4 @@ int Resolution(Instance* instance)
 
 	return solution.i_valeur_fonction_objectif;
 }
-#endif
-
-#ifdef MAX_HEURISTIC_ALGORITHM
-
-int Resolution(Instance* instance)
-{
-	int objectiveFunctionValue = 0;
-
-	HeuristicAlgorithm maxAlgo(*instance);
-
-	Solution& solution = maxAlgo.run();
-	ObjectiveCalculator objectiveCalculator;
-	CompleteObjectiveCalculator completeObjectiveCalculator;
-
-	NeighborhoodOperator neighborhoodOperator;
-	neighborhoodOperator.executeTotalMinConsecutiveDayRepair(solution, *instance);
-
-	// Display the solution
-	cout << "Solution : " << endl;
-	displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
-
-	// Calculate objective function
-	objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
-
-	// Verify solution & objective function
-	solution.Verification_Solution(instance);
-
-	// Display objective function
-	cout << endl << "Objective function value (basic) : " << objectiveFunctionValue << endl;
-	cout << endl << "Objective function value (with weights) : " << completeObjectiveCalculator.calculateObjectiveFunction(*instance, solution) << endl;
-
-	cout << endl << "Minute worked : " << endl;
-	countMinuteWorked(maxAlgo.getSchedulingData().nbMinuteWorked);
-
-	cout << endl << "Max minute worked : " << endl;
-	countMinuteMaxWorked(instance);
-
-	return objectiveFunctionValue;
-}
-
-#endif
-
-#ifdef MIN_HEURISTIC_ALGORITHM
-
-int Resolution(Instance* instance)
-{
-	int objectiveFunctionValue = 0;
-
-	MinHeuristicAlgorithm minAlgo(*instance);
-
-	Solution& solution = minAlgo.run();
-	ObjectiveCalculator objectiveCalculator;
-
-	// Display the solution
-	cout << "Solution : " << endl;
-	displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
-
-	// Calculate objective function
-	objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
-	objectiveFunctionValue = minAlgo.getBestSolution().i_valeur_fonction_objectif;
-
-	// Verify solution & objective function
-	solution.Verification_Solution(instance);
-
-	cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
-
-	return objectiveFunctionValue;
-}
-
-#endif
-
-#ifdef OTHER_HEURISTIC_ALGORITHM
-
-int Resolution(Instance* instance)
-{
-	int objectiveFunctionValue = 0;
-
-	OtherHeuristicAlgorithm minAlgo(*instance);
-
-	Solution& solution = minAlgo.run();
-	ObjectiveCalculator objectiveCalculator;
-
-	// Display the solution
-	cout << "Solution : " << endl;
-	displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
-
-	// Calculate objective function
-	objectiveFunctionValue = objectiveCalculator.calculateObjectiveFunction(*instance, solution);
-	objectiveFunctionValue = minAlgo.getBestSolution().i_valeur_fonction_objectif;
-
-	// Verify solution & objective function
-	solution.Verification_Solution(instance);
-
-	cout << endl << "Objective function value : " << objectiveFunctionValue << endl << endl;
-
-	return objectiveFunctionValue;
-}
-
 #endif

@@ -1276,3 +1276,21 @@ Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst3.txt	1.78091	5146
 Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst3.txt	1.78222	4926
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.81572	5033
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	1.12351	1322
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.81589	5128
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst2.txt	2.40045	3598
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst3.txt	1.80903	5245
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst4.txt	2.56074	4265
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst10.txt	23.259	65073
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst18.txt	60.6972	1405721
