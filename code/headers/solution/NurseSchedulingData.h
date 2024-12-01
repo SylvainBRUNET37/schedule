@@ -35,7 +35,8 @@ public:
     *                     NURSE DATA                     *
     *****************************************************/
 	
-	// Attributs en public pour les chercher plus vite et pas se faire chier a utiliser des getters et des setters et autres conneries
+	// Public attributes for faster and easier access to the data
+
 	vector<unsigned int> nurses; ///< IDs of all nurses.
     vector<unsigned int> days; ///< IDs of all days.
 	vector<unsigned int> shifts; ///< IDs of all shift types.

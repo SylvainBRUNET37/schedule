@@ -30,9 +30,6 @@
     <ClCompile Include="src\calculation\ObjectiveCalculator.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\selection\SelectionStrategy.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="src\solution\Instance.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -49,9 +46,6 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\validator\SolutionValidator.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\solution\NurseSchedulingData.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\algorithm\MinHeuristicAlgorithm.cpp">
@@ -79,6 +73,9 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\crossover\BestLine.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\solution\NurseSchedulingData.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

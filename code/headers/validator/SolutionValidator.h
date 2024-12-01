@@ -8,6 +8,15 @@
 #include "../solution/Solution.hpp"
 #include "../solution/NurseSchedulingData.h"
 
+/**
+ * @class SolutionValidator
+ * @brief This class is responsible for validating the nurse scheduling solution against various constraints.
+ *
+ * The SolutionValidator checks whether the current solution (nurse schedule) adheres to the scheduling constraints.
+ * It performs validation based on the provided instance data (e.g., number of shifts, days off, maximum work time) and the
+ * specific nurse scheduling data. The solution is validated for hard constraints such as maximum consecutive workdays,
+ * shift types, and day-offs, ensuring the scheduling is feasible and within the limits.
+ */
 class SolutionValidator
 {
 private:

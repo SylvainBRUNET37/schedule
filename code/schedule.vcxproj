@@ -36,7 +36,6 @@
     <ClCompile Include="src\crossover\Column.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mutation\SwapShiftMutation.cpp" />
-    <ClCompile Include="src\selection\SelectionStrategy.cpp" />
     <ClCompile Include="src\solution\Instance.cpp" />
     <ClCompile Include="src\solution\Solution.cpp" />
     <ClCompile Include="src\selection\TournamentSelection.cpp" />
