@@ -20,6 +20,8 @@ public:
 	
 
 	void execute(Solution& solution, Instance& instance);
+
+	int nbMinWorked(Solution& solution, Instance& instance, int nurseId);
 };
 
 #endif
