@@ -156,7 +156,7 @@ int Resolution(Instance* instance)
 {
 	int objectiveFunctionValue = 0;
 
-	GeneticAlgorithm algo(*instance, 10000);
+	GeneticAlgorithm algo(*instance, 1000);
 	
 	// Create a vecotr with every crossover strategy
 	vector<unique_ptr<CrossoverStrategy>> crossoverStrategies;
