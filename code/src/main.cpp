@@ -8,6 +8,7 @@
 //#define MIN_HEURISTIC_ALGORITHM
 //#define OTHER_HEURISTIC_ALGORITHM
 
+#include <thread>  
 #include <iostream>
 #include <fstream>
 #include <chrono>
@@ -24,17 +25,18 @@
 #include "../headers/algorithm/GeneticAlgorithm.h"
 #include "../headers/algorithm/HeuristicAlgorithm.h"
 #include "../headers/algorithm/MinHeuristicAlgorithm.h"
-#include "../headers/algorithm/MaxHeuristicAlgorithm.h"
+#include "../headers/algorithm/OtherHeuristicAlgorithm.h"
 
 // Include solution and instance
 #include "../headers/solution/Instance.hpp"
 #include "../headers/solution/Solution.hpp"
 
 // Include other things
-#include "../headers/calculation/ObjectiveCalculator.h"
+#include "../headers/calculation/CompleteObjectiveCalculator.h"
 #include "../headers/selection/TournamentSelection.h"
 #include "../headers/mutation/SwapShiftMutation.h"
 #include "../headers/repair/Reparator.h"
+#include "../headers/neighborhood/NeighborhoodOperator.h"
 
 using namespace std;
 
@@ -155,7 +157,7 @@ int Resolution(Instance* instance)
 {
 	int objectiveFunctionValue = 0;
 
-	GeneticAlgorithm algo(*instance, 1000);
+	GeneticAlgorithm algo(*instance, 500);
 	
 	// Create a vecotr with every crossover strategy
 	vector<unique_ptr<CrossoverStrategy>> crossoverStrategies;
@@ -167,8 +169,22 @@ int Resolution(Instance* instance)
 	algo.setSelectionStrategy(make_unique<TournamentSelection>());
 	algo.setCrossoverStrategies(move(crossoverStrategies)); // Column, LineTwoPointCrossover are working well
 	algo.setMutationStrategy(make_unique <SwapShiftMutation>());
-	algo.setObjectiveCalculator(make_unique <ObjectiveCalculator>());
-	Solution solution = algo.run();
+	algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
+
+	/*
+		/!\ chrono de 1 minute /!\
+	*/ 
+	Solution solution;
+	using namespace std::chrono;
+	auto start = steady_clock::now(); // Heure de début
+	auto end = start + minutes(1);    // Heure de fin, 1 minute plus tard
+
+	while (steady_clock::now() < end) {
+		solution = algo.run();
+		auto elapsed = duration_cast<seconds>(steady_clock::now() - start).count();
+		std::cout << "\rTemps écoulé : " << elapsed << " secondes" << std::flush;
+	}
+	
 	ObjectiveCalculator objectiveCalculator;
 
 	// Display the solution
@@ -200,7 +216,7 @@ int Resolution(Instance* instance)
 	algo.setSelectionStrategy(make_unique<TournamentSelection>());
 	algo.setCrossoverStrategy(make_unique<Column>());
 	algo.setMutationStrategy(make_unique <SwapShiftMutation>());
-	algo.setObjectiveCalculator(make_unique <ObjectiveCalculator>());
+	algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
 	Solution solution = algo.run();
 	ObjectiveCalculator objectiveCalculator;
 
@@ -225,7 +241,7 @@ int Resolution(Instance* instance)
 
 	Solution& solution = maxAlgo.run();
 	ObjectiveCalculator objectiveCalculator;
-	ObjectiveCalculator completeObjectiveCalculator;
+	CompleteObjectiveCalculator completeObjectiveCalculator;
 
 	NeighborhoodOperator neighborhoodOperator;
 	neighborhoodOperator.executeTotalMinConsecutiveDayRepair(solution, *instance);
@@ -242,7 +258,7 @@ int Resolution(Instance* instance)
 
 	// Display objective function
 	cout << endl << "Objective function value (basic) : " << objectiveFunctionValue << endl;
-	cout << endl << "Objective function value (with weights) : " << completeObjectiveCalculator.calculateWeightedObjectiveFunction(*instance, solution) << endl;
+	cout << endl << "Objective function value (with weights) : " << completeObjectiveCalculator.calculateObjectiveFunction(*instance, solution) << endl;
 
 	cout << endl << "Minute worked : " << endl;
 	countMinuteWorked(maxAlgo.getSchedulingData().nbMinuteWorked);
@@ -290,7 +306,7 @@ int Resolution(Instance* instance)
 {
 	int objectiveFunctionValue = 0;
 
-	MaxHeuristicAlgorithm minAlgo(*instance);
+	OtherHeuristicAlgorithm minAlgo(*instance);
 
 	Solution& solution = minAlgo.run();
 	ObjectiveCalculator objectiveCalculator;
