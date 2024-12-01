@@ -1129,3 +1129,5 @@ Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst1.txt	0.93916	1627
 Fichier donnees	 Tps de resolution 	 Best solution
 ./data/Inst1.txt	1.0469	1522
+Fichier donnees	 Tps de resolution 	 Best solution
+./data/Inst1.txt	0.988028	1530
