@@ -25,18 +25,17 @@
 #include "../headers/algorithm/GeneticAlgorithm.h"
 #include "../headers/algorithm/HeuristicAlgorithm.h"
 #include "../headers/algorithm/MinHeuristicAlgorithm.h"
-#include "../headers/algorithm/OtherHeuristicAlgorithm.h"
+#include "../headers/algorithm/MaxHeuristicAlgorithm.h"
 
 // Include solution and instance
 #include "../headers/solution/Instance.hpp"
 #include "../headers/solution/Solution.hpp"
 
 // Include other things
-#include "../headers/calculation/CompleteObjectiveCalculator.h"
+#include "../headers/calculation/ObjectiveCalculator.h"
 #include "../headers/selection/TournamentSelection.h"
 #include "../headers/mutation/SwapShiftMutation.h"
 #include "../headers/repair/Reparator.h"
-#include "../headers/neighborhood/NeighborhoodOperator.h"
 
 using namespace std;
 
@@ -169,7 +168,7 @@ int Resolution(Instance* instance)
 	algo.setSelectionStrategy(make_unique<TournamentSelection>());
 	algo.setCrossoverStrategies(move(crossoverStrategies)); // Column, LineTwoPointCrossover are working well
 	algo.setMutationStrategy(make_unique <SwapShiftMutation>());
-	algo.setObjectiveCalculator(make_unique <CompleteObjectiveCalculator>());
+	algo.setObjectiveCalculator(make_unique <ObjectiveCalculator>());
 
 	/*
 		/!\ chrono de 1 minute /!\
