@@ -99,7 +99,7 @@ int main(int argc, const char* argv[])
 	return 0;
 }
 
-void displayMatrix(const std::vector<std::vector<int>>& matrix) {
+static void displayMatrix(const std::vector<std::vector<int>>& matrix) {
 	for (const auto& row : matrix) { // Parcourir chaque ligne
 		for (int value : row) {       // Parcourir chaque élément de la ligne
 			std::cout << value << " "; // Afficher l'élément
@@ -126,6 +126,8 @@ int Resolution(Instance* instance)
 
 	// Run the algorithm
 	Solution solution = algo.run();
+
+	displayMatrix(solution.v_v_IdShift_Par_Personne_et_Jour);
 
 	// Display the best solution
 	cout << endl << "Best solution : " << algo.getBestSolution().i_valeur_fonction_objectif << endl << endl;
