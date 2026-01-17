@@ -4,7 +4,7 @@ The goal of the project is to assign each person to shifts over the planning hor
 
 ## Learnings
 
-- Problem analysis and modeling
+- Problem solving and analysis
 - Solving constrained optimization problems
 - Genetic algorithm implementation
 - Solution architecture design
